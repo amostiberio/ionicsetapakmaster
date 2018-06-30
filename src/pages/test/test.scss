@@ -1,0 +1,47 @@
+page-test {
+    .full-card-info{
+        margin: 0px auto !important;    
+        width: 100% !important;
+        height: 100px !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        // text-align: center !important;
+        background-color: #488aff;
+        padding-top: 15px;    
+        }
+    .profpic{
+        width: 100% !important;  
+        height : 100% !important;  
+        max-width: 100px !important;  //any size
+        max-height: 75px !important; //any size 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+
+    }
+    .headerprofile{
+        background-color: #488aff !important;
+        border-top-color: transparent;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-radius: 0px !important;
+        height:100px !important;
+
+    }
+    .full-card{
+        margin: 0px auto !important;    
+        width: 100% !important;
+        height: 50px !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        padding-top: 15px;    
+
+    }
+    h4, h6{
+       color:white !important;
+    }
+    .positionbottomright{
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+    }
+}

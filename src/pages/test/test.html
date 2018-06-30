@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color= "navbar">
+    <ion-title>
+       <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <div>
+            <ion-list-header class="headerprofile">
+                    <ion-avatar item-start (click)="updateProfileImage()">
+                      <img class="profpic" src="{{alamatprofpict}}">
+                    </ion-avatar>
+                    <h4>{{nama}}</h4>
+                    <h4>{{email}}</h4>
+                    <h6 (click)="editProfile()" class="positionbottomright">Edit Profile</h6>
+                  </ion-list-header>
+      
+    </div>
+  
+    <div padding-top>
+        <ion-card class ="full-card">
+        </ion-card>
+    </div>
+    
+  <button ion-button (click) = "loadToken()">
+    Check Token
+  </button>
+  <button ion-button (click) = "loadLoggedIn()">
+    Check Logged in
+  </button>
+  <button ion-button (click) = "logout()">
+    LogOut
+  </button>
+</ion-content>

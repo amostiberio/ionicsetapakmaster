@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color= "navbar">
+    <ion-title>
+       <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <div>
+        <ion-card class ="full-card">
+                <ion-grid >
+                <ion-row >
+                    <ion-col >
+                        <button class ="button-login" ion-button (click) = "navigateToLoginPage()">
+                            Login
+                          </button>
+                    </ion-col>
+                    <ion-col>
+                        <button class ="button-signup" ion-button (click) = "navigateToSignupPage()">
+                            Signup
+                          </button>
+                    </ion-col>
+                </ion-row>
+                </ion-grid>
+        </ion-card>
+    </div>
+    <div text-center padding-top>
+        <h4 color= "navbar" text-center>You need to login or register to open My Account</h4>
+    </div>
+  
+<!--   
+  <button ion-button (click) = "navigateToLoginPage()">
+    Login
+  </button>
+  <button ion-button (click) = "navigateToSignupPage()">
+    Signup
+  </button>
+  <button ion-button (click) = "loadToken()">
+    Check Token
+  </button>
+  <button ion-button (click) = "loadLoggedIn()">
+    Check Logged in
+  </button>
+  <button ion-button (click) = "logout()">
+    LogOut
+  </button> -->
+</ion-content>
