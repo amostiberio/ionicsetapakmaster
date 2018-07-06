@@ -82,7 +82,8 @@ export class ProfileAccountPage {
       'This will log you out of this application.').then((yes) => {
         if (yes) {
           this.userData.logout();
-          this.app.getRootNav().setRoot(TabsPage)
+          this.navCtrl.setRoot(TabsPage)
+          //this.navCtrl.setRoot(TabsPage,{opentab:3})
           this.showAlert('Logout Sukses')         
         }
       });

@@ -16,7 +16,7 @@ import { Storage } from '@ionic/storage';
 export class TabsPage {
   HAS_LOGGED_IN = 'hasLoggedIn';  
   userLoggedIn : any ;
-  
+  numberTab :any;
   // tab1Root = HomePage;
   // tab2Root = MybookingPage;
   // tab3Root = NotificationPage;
@@ -28,12 +28,22 @@ export class TabsPage {
   tab4Root : any = MyaccountPage
   tab5Root : any = ProfileAccountPage
     
-  constructor(public storage: Storage, public userData : UserData) {
+  constructor(public navParams: NavParams,
+    public storage: Storage,
+    public userData : UserData,
+    public navCtrl: NavController) {
     // check logged in to select the ion tabs
     this.userData.hasLoggedIn().then((value)=>{
       this.userLoggedIn = value;
       console.log('sudah login ', this.userLoggedIn)
     }); 
+    // let data = this.navParams.get('opentab');
+    // // if (data != null) {
+    // //   this.numberTab = data;
+    // //   //this.navCtrl.parent.select(this.numberTab)      
+    // // }
+    
+
       
   }
   
