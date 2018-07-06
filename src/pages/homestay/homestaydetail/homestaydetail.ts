@@ -117,7 +117,7 @@ export class HomestaydetailPage {
   pesanHomestay(idHomestay){    
     if(this.userLoggedIn == true ){    
       if(this.dataPemandu.user_id == this.currentUserId) {
-        this.showAlert("Tidak bisa memesan Homestay milik sendiri");          
+        this.showAlert("Tidak bisa memesan layanan Homestay milik sendiri");          
       }else{
         this.app.getRootNav().push('HomestaypesanPage',{datahomestay: this.datahomestay}); 
       }       

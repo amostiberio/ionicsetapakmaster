@@ -4,12 +4,14 @@ import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { NgForm } from '@angular/forms';
 
+
 @IonicPage()
 @Component({
-  selector: 'page-homestaypesan',
-  templateUrl: 'homestaypesan.html',
+  selector: 'page-jasapesan',
+  templateUrl: 'jasapesan.html',
 })
-export class HomestaypesanPage {
+export class JasapesanPage {
+
   token: string;
   BASE_URL = 'http://setapakbogor.site/';
   userLoggedIn: any;
@@ -17,17 +19,14 @@ export class HomestaypesanPage {
   submitted = false;
 
   dataAlamatCategory: any;
-  datahomestay:any;
+  datajasa:any;
   idAlamatCategory:any; 
   today:any = new Date();
-  tommorrow:any = new Date(Date.now() + (1 * 24 * 60 * 60 * 1000)).toISOString();
-  minDateCI: string = this.today.toISOString();
+  tommorrow:any = new Date(Date.now() + (1 * 24 * 60 * 60 * 1000));
+  minDateCI: string = this.tommorrow.toISOString();
   maxDateCI: string = '2020-12-31'
-  minDateCO: string = this.tommorrow
-  maxDateCO: string = '2020-12-31'
   selectedDateCheckIn: any;
-  selectedDateCheckOut: any;
-
+  
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
@@ -39,10 +38,7 @@ export class HomestaypesanPage {
     public toastCtrl : ToastController,
     public app:App,
     public loadCtrl: LoadingController) {
-      this.datahomestay = this.navParams.data.datahomestay;
-  }
-
-  ionViewWillEnter() {    
+      this.datajasa = this.navParams.data.dataJasa;
   }
   
   ionViewDidLoad() {
@@ -53,18 +49,18 @@ export class HomestaypesanPage {
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     });    
-    console.log('ionViewDidLoad HomestaypesanPage');
+    console.log('ionViewDidLoad JasapesanPage');
   }
   getReadyData(){
     return new Promise((resolve) => {        
-          this.idAlamatCategory = this.datahomestay.alamatcategory_id; 
-          this.getDataHomestay(this.datahomestay.homestay_id);         
+          this.idAlamatCategory = this.datajasa.alamatcategory_id; 
+          this.getDataJasa(this.datajasa.jasa_id);         
           resolve(true);
     });
   }
 
-  getDataHomestay(idHomestay){    
-    this.http.get(this.userData.BASE_URL+"api/homestay/"+idHomestay,this.options).subscribe(data => {
+  getDataJasa(idHomestay){    
+    this.http.get(this.userData.BASE_URL+"api/jasa/"+idHomestay,this.options).subscribe(data => {
       let response = data.json();
       if(response.status==200) {
          this.dataAlamatCategory = response.dataAlamatCategory        
@@ -76,14 +72,10 @@ export class HomestaypesanPage {
 
 
   continuePesan() {
-    if(this.selectedDateCheckIn == null || this.selectedDateCheckOut == null ){
-      this.showAlert("Isi Check In dan Check Out");   
-    }else if(this.selectedDateCheckIn == this.selectedDateCheckOut){
-      this.showAlert("Tanggal Check In tidak boleh sama dengan Check Out");
-    }else if (this.selectedDateCheckIn > this.selectedDateCheckOut){
-      this.showAlert("Tanggal Check Out tidak boleh sebelum Check In");
+    if(this.selectedDateCheckIn == null){
+      this.showAlert("Pilih Jadwal Pemesanan");   
     }else{
-      this.app.getRootNav().push('HomestayreviewpesananPage',{checkin: this.selectedDateCheckIn, checkout:this.selectedDateCheckOut, token: this.token, datahomestay:this.datahomestay});
+      this.app.getRootNav().push('JasareviewpesananPage',{tanggalbooking: this.selectedDateCheckIn, token: this.token, datajasa:this.datajasa});
     }
       
   }
@@ -100,6 +92,5 @@ export class HomestaypesanPage {
     });
     toast.present();
   }
-
 
 }

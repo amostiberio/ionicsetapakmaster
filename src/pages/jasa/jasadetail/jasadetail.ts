@@ -101,9 +101,9 @@ export class JasadetailPage {
   pesanJasa(idJasa){    
     if(this.userLoggedIn == true ){    
       if(this.dataPemandu.user_id == this.currentUserId) {
-        this.showAlert("Tidak bisa memesan Homestay milik sendiri");          
+        this.showAlert("Tidak bisa memesan layanan Jasa milik sendiri");          
       }else{
-        this.app.getRootNav().push('HomestaypesanPage',{dataJasa: this.newDataJasa}); 
+        this.app.getRootNav().push('JasapesanPage',{dataJasa: this.newDataJasa}); 
       }       
     }else{     
       this.showAlert("Harus Login Terlebih Dahulu");       
