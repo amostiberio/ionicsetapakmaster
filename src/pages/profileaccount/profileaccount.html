@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar color= "navbar">
+    <ion-title>
+       <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <!-- <div class="center">
+            <ion-list-header class="headerprofile"  align-items-center>
+              <ion-row class="center">
+                  <ion-avatar item-start (click)="updateProfileImage()">
+                      <img class="profpic" src="assets/imgs/logo/usericon.png">
+                    </ion-avatar>
+              </ion-row>
+              <ion-row>
+                  <h4>{{nama}}</h4>
+              </ion-row>
+            </ion-list-header>
+      
+    </div> -->
+    <div class="headerprofile">       
+          <ion-row justify-content-center align-items-center>
+              <ion-avatar item-start (click)="updateProfileImage()">
+                <img class="profpic" src="assets/imgs/logo/usericon.png" *ngIf="!urlprofpict">
+                <img class="profpic" src="{{urlprofpict}}" *ngIf="urlprofpict">
+              </ion-avatar>
+          </ion-row>
+          <ion-row justify-content-center align-items-center>
+              <h5 class="namaprofile">{{nama}}</h5>
+          </ion-row>      
+    </div>
+  <div padding-bottom>
+      <ion-card class="full-card">
+          <ion-card-header class="nopaddingbottom">
+            <h6>Email</h6>
+          </ion-card-header>
+          <ion-card-content class="nopaddingbottom">
+            {{email}}
+          </ion-card-content>
+
+          <ion-card-header class="nopaddingbottom">
+          <h6>Nomor Handphone</h6>
+          </ion-card-header>
+          <ion-card-content class="nopaddingbottom">
+            {{nohp}}
+          </ion-card-content>
+          <button class="buttoncenter" ion-item (click)="editProfile()" >
+            <h6><b>EDIT PROFILE</b></h6>
+          </button>         
+      </ion-card>
+  </div>
+
+<div padding-bottom>
+      <ion-card class="full-card">          
+          <button  ion-item (click)="navChangePassword()" >
+            <h5><b>Change Password</b></h5>
+            <ion-icon color= "navbar" name="arrow-dropright" item-right></ion-icon>
+
+          </button>         
+      </ion-card>
+</div>
+
+<div >
+             
+        <ion-item class="logoutdiv">
+            <ion-icon name='power' item-start></ion-icon>
+            <button ion-button (click)="logout()" item-end>
+            Logout
+            </button>
+        </ion-item>       
+   
+</div>
+
+  
+  <!-- <button ion-button (click) = "loadToken()">
+    Check Token
+  </button>
+  <button ion-button (click) = "loadUserData()">
+      Check User Data
+    </button>
+  <button ion-button (click) = "loadLoggedIn()">
+    Check Logged in
+  </button>
+  <button ion-button (click) = "logout()">
+    LogOut
+  </button>  -->
+</ion-content>

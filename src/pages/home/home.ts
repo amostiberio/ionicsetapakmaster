@@ -8,9 +8,10 @@ import { UserData } from '../../providers/user-data';
   selector: 'page-home',
   templateUrl: 'home.html',
 })
+
 export class HomePage {
   @ViewChild('slider') slider: Slides;
-
+  nama: string;
   slides = [
     {
       title: 'Dream\'s Adventure',
@@ -43,6 +44,22 @@ export class HomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
+  ionViewWillEnter(){
+    this.checkLoggin();    
+  }
+
+  checkLoggin() {
+    this.userData.hasLoggedIn().then((value) => {
+      if(value == true){
+        this.userData.getName().then((nama) => {
+          this.nama = nama;
+        })
+      }else{
+        this.nama = null;
+      }
+    });
+  }
+
   navigateToLoginPage2(): void {
     //this.navCtrl.push('LoginPage')
     this.app.getRootNav().push('LoginPage')
@@ -50,6 +67,16 @@ export class HomePage {
   navigateToSearchHomestay(): void {
     //this.navCtrl.push('LoginPage')
     this.app.getRootNav().push('HomestaysearchPage')
+  }
+
+  navigateToSearchJasa(): void {
+    //this.navCtrl.push('LoginPage')
+    this.app.getRootNav().push('JasasearchPage')
+  }
+  
+  openmyaccount(): void {
+    //this.navCtrl.push('LoginPage')
+    this.navCtrl.parent.select(3)
   }
   
 }

@@ -1,0 +1,106 @@
+
+<ion-header>
+
+  <ion-navbar  color="primary">
+    <ion-title >
+      <span class="firstline">{{cobaDataHomestay?.nama_homestay}}</span>
+      <span class="twoline">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div>
+        <ion-slides pager>
+            <ion-slide *ngFor="let data of dataPictures" class="text-center slider-item" [ngStyle]="{'background-image': 'url(' + BASE_URL+data?.directory +')'}">        
+            <div class="slide-text">
+              <!-- <h2>asd</h2>
+              <p>asd</p>  -->
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div> 
+
+<div padding-bottom>
+    <ion-card class ="full-card" >                     
+            <ion-grid padding-left>
+              <ion-row>                                        
+                    <h2 class="firstlinenamecard"><b>{{datahomestay?.nama_homestay}}</b></h2>                            
+              </ion-row>
+              <ion-row>              
+                    <a class="twolinenamecard">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                             
+              </ion-row>
+            </ion-grid>
+    </ion-card>
+</div>
+
+<div padding-bottom>
+    <ion-card class ="full-card">
+        <ion-grid padding-left>
+            <ion-row>                                        
+               <h2 ion-text color="dark"> <b>Fasilitas</b></h2>
+            </ion-row>
+            <ion-row>              
+                <ul class="highlight" >
+                    <li *ngIf="dataFasilitas?.ac == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
+                      <span ion-text color="navbar">Pendingin Ruangan AC</span>
+                    </li>
+                    <li *ngIf="dataFasilitas?.parking == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
+                      <span ion-text color="navbar">Tempat Parkir</span>
+                    </li>
+                    <li *ngIf="dataFasilitas?.bathroom == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
+                      <span ion-text color="navbar">Bathroom</span>
+                    </li> 
+                    <li *ngIf="dataFasilitas?.bedroom == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
+                      <span ion-text color="navbar">Ruang Tidur</span>
+                    </li>
+                    <li *ngIf="dataFasilitas?.wifi == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
+                      <span ion-text color="navbar">Koneksi Wifi</span>
+                    </li> 
+                </ul>                  
+            </ion-row>
+          </ion-grid>                 
+    </ion-card>
+</div>
+
+<div padding-bottom>
+    <ion-card class ="full-card">
+        <ion-grid padding-left>
+            <ion-row>                                        
+               <h2 ion-text color="dark"> <b>Deskripsi</b></h2>
+            </ion-row>
+            <ion-row>             
+                <h5 class="">{{datahomestay?.deskripsi}}</h5>                                         
+            </ion-row>
+          </ion-grid>                  
+    </ion-card>
+</div>  
+
+<div padding-bottom>
+    <ion-card class ="full-card">
+        <ion-grid padding-left>
+            <ion-row>                                        
+               <h2 ion-text color="dark"> <b>Pemandu</b></h2>
+            </ion-row>
+            <ion-row>             
+                <ion-item>
+                    <ion-avatar item-start>
+                      <img src="{{BASE_URL+dataPemandu?.photo}}">
+                    </ion-avatar>
+                    <h5 (click)='navProfileCompany()'><b>{{dataPemandu?.nama_company}}</b></h5>
+                    <h6>{{dataPemandu?.deskripsi}}</h6>                   
+                  </ion-item>                                        
+            </ion-row>
+          </ion-grid>                  
+    </ion-card>
+</div>  
+  
+</ion-content>
+
+<ion-footer>
+    <button ion-button large full no-margin color="navbar" (click)='pesanHomestay(datahomestay?.homestay_id)' >
+      Pesan Homestay
+    </button>
+</ion-footer>

@@ -12,22 +12,25 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FileOpener } from '@ionic-native/file-opener';
 import { Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+
+
 //page
 import { MybookingPage } from '../pages/mybooking/mybooking';
 import { NotificationPage } from '../pages/notification/notification';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { TabsPage } from '../pages/tabs/tabs';
-
-import { TestPage } from '../pages/test/test';
 import { MyApp } from './app.component';
+import { ProfileAccountPage } from '../pages/profileaccount/profileaccount';
 
 //provider
 import { UserData } from '../providers/user-data';
+
 import { AlertService } from '../providers/util/alert.service';
 
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
+import { HomestayData } from '../providers/homestay-data/homestay-data';
 
 //component module
 // import { ComponentsModule } from './../components/components.module';
@@ -49,7 +52,7 @@ export function getAuthHttp(http, Storage) {
     HomePage,
     MyaccountPage,    
     TabsPage,
-    TestPage
+    ProfileAccountPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,7 @@ export function getAuthHttp(http, Storage) {
     HomePage,
     MyaccountPage,
     TabsPage,
-    TestPage
+    ProfileAccountPage
   ],
   providers: [
     StatusBar,
@@ -75,7 +78,7 @@ export function getAuthHttp(http, Storage) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserData,
     AlertService,
-    Transfer,    
+    Transfer,  
     FileChooser,
     FileOpener,  
     File,
@@ -83,7 +86,8 @@ export function getAuthHttp(http, Storage) {
       provide: AuthHttp,
       useFactory: getAuthHttp,
       deps: [Http, Storage]
-    }
+    },
+    HomestayData
   ]
 })
 export class AppModule {}

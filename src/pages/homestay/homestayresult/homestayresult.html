@@ -7,24 +7,31 @@
 <ion-header >
 
   <ion-navbar color= "navbar">
-    <ion-title>homestayresult</ion-title>
+    <ion-title>
+      <span class="firstline">Search Result</span>
+      <span class="twoline">{{namakecamatan}}, {{namakabupaten}}, {{namaprovinsi}}</span>
+   </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-card *ngFor="let card of cards">
-        <img [src]="card.imageUrl" (click)="cardTapped(card)" />
+    <ion-card *ngFor="let data of datahomestay" tappable>
+        <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
+        <img src="{{BASE_URL+data?.mainphoto}}" (click)="homestaydetail(data)"/>
         <ion-card-content>
-          <h2 class="card-title">
-            {{card.title}}
-          </h2>
-          <p>
-            {{card.description}}
-          </p>
+            <h2 >            
+              <b>{{data.nama_homestay}}</b>            
+            </h2>
+            <h6>            
+              Rp {{data.harga_perhari}}/day           
+            </h6>
+          <!-- <p>
+            {{data.deskripsi}}
+          </p> -->
         </ion-card-content>
-        <ion-row no-padding>
+        <!-- <ion-row no-padding>
           <ion-col>
             <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
               <ion-icon name='star'></ion-icon>
@@ -43,6 +50,7 @@
               Share
             </button>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
       </ion-card>
+      
 </ion-content>

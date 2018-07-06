@@ -48,4 +48,22 @@ export class AlertService {
       return confirm.present();
     });
   }
+
+  presentAlertOnlyConfirm(title: string, message: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const confirm = this.alertCtrl.create({
+        title,
+        message,
+        buttons: [{
+          text: 'Okay',
+          handler: () => {
+            confirm.dismiss().then(() => resolve(true));
+            return false;
+          }
+        }]
+      });
+
+      return confirm.present();
+    });
+  }
 }

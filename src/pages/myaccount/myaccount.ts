@@ -41,6 +41,12 @@ export class MyaccountPage {
     })
   }
 
+  loadUserData() {
+    this.storage.get('user_data').then((val) => {
+      console.log('Your yser data is ', val)
+    })
+  }
+
   loadLoggedIn() {
     this.storage.get(this.HAS_LOGGED_IN).then((val) => {
       console.log('Your Logged Status is ', val)

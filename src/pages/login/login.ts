@@ -61,13 +61,12 @@ export class LoginPage {
 
       this.http.post(this.userData.BASE_URL+"api/user/login",input,this.options).subscribe(data => {
         let response = data.json();
-        loading.dismiss();
-        
+        loading.dismiss();        
         if(response.status == 200) {             
            this.userData.login(response.data);
            this.userData.setToken(response.token);   
-            this.navCtrl.setRoot(TabsPage); //mulai dari awal tabspagenya
-            this.navCtrl.popToRoot(); //ngilangin history back page yang numpuk
+           this.navCtrl.setRoot(TabsPage); //mulai dari awal tabspagenya
+           this.navCtrl.popToRoot(); //ngilangin history back page yang numpuk
           this.showAlert(response.message);
         } else {
           //this.showData(response.status); 

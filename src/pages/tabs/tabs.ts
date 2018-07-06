@@ -4,7 +4,7 @@ import { MybookingPage } from '../mybooking/mybooking';
 import { NotificationPage } from '../notification/notification';
 import { HomePage } from '../home/home';
 import { MyaccountPage } from '../myaccount/myaccount';
-import { TestPage } from '../test/test'
+import { ProfileAccountPage } from '../profileaccount/profileaccount';
 import { UserData } from '../../providers/user-data';
 
 import { Storage } from '@ionic/storage';
@@ -26,7 +26,7 @@ export class TabsPage {
   tab2Root : any = MybookingPage
   tab3Root : any = NotificationPage
   tab4Root : any = MyaccountPage
-  tab5Root : any = TestPage
+  tab5Root : any = ProfileAccountPage
     
   constructor(public storage: Storage, public userData : UserData) {
     // check logged in to select the ion tabs

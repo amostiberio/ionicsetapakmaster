@@ -6,9 +6,7 @@ import { AuthHttp } from 'angular2-jwt';
 @Injectable()
 export class UserData {
   HAS_LOGGED_IN = 'hasLoggedIn';
-  BASE_URL = 'http://setapakbogor.site/';  
-  //BASE_URL = 'http://localhost:3000/api/'; 
-  BASE_URL_DATABASE = 'https://majora.rapidplex.com:2083/cpsess2482158361/viewer/home/setapakb/setapakbogorapi' 
+  BASE_URL = 'http://setapakbogor.site/';     
   data:any;
   idUser: any;
   token: string;
@@ -84,7 +82,7 @@ export class UserData {
   updateProfilePict(picture) {
     this.storage.get('user_data').then((value) => {
       let data = value;
-      data.picture = picture;
+      data.photo = picture;
       this.storage.set('user_data', data);
     });
   }
@@ -112,9 +110,11 @@ export class UserData {
   
   getProfilePict() {
     return this.storage.get('user_data').then((value) => {
-      return this.BASE_URL_DATABASE + value.photo.slice( 1 );
+      //return this.BASE_URL + value.photo.slice( 1 );
+      return this.BASE_URL + value.photo;
     });
   };
+  
   getToken() {
     return this.storage.get('token').then((value) => {
       return value;

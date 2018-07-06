@@ -1,0 +1,50 @@
+<ion-header >
+
+  <ion-navbar color= "navbar">
+    <ion-title>
+      <span class="firstline">Search Result</span>
+      <span class="twoline">{{namakecamatan}}, {{namakabupaten}}, {{namaprovinsi}}</span>
+   </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-card *ngFor="let data of datajasa" tappable>
+      <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
+      <img src="{{BASE_URL+data?.mainphoto}}" (click)="jasadetail(data)"/>
+      <ion-card-content>
+          <h2 >            
+            <b>{{data.nama_jasa}}</b>            
+          </h2>
+          <h6>            
+            Rp {{data.harga_jasa}}/day           
+          </h6>
+        <!-- <p>
+          {{data.deskripsi}}
+        </p> -->
+      </ion-card-content>
+      <!-- <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
+            <ion-icon name='star'></ion-icon>
+            Favorite
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button clear small color="danger" icon-left (click)="listen(card)">
+            <ion-icon name='musical-notes'></ion-icon>
+            Listen
+          </button>
+        </ion-col>
+        <ion-col text-right>
+          <button ion-button clear small color="danger" icon-left (click)="share(card)">
+            <ion-icon name='share-alt'></ion-icon>
+            Share
+          </button>
+        </ion-col>
+      </ion-row> -->
+    </ion-card>
+</ion-content>

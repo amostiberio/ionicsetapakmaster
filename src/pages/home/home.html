@@ -1,10 +1,11 @@
-<ion-header>
+< <ion-header>
     <ion-navbar color= "navbar">
       <ion-title>
          <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
       </ion-title>
     </ion-navbar>
-</ion-header>
+</ion-header> 
+
 <ion-content >
 <div>
     <ion-slides autoplay="2500" loop="true">
@@ -15,17 +16,18 @@
 </div>
 
 <div>
-    <ion-card class ="full-card">
+    <ion-card class ="full-card">               
             <ion-grid>
             <ion-row>
                 <ion-col>
                         <ion-icon name="person" color ="primary"></ion-icon>
-                        <a text-center >Login or Register</a>
+                        <a (click) ="openmyaccount()" *ngIf="!nama" text-center >Login or Register </a> 
+                        <a (click) ="openmyaccount()" *ngIf="nama" text-center >{{nama}} </a>         
                 </ion-col>
-                <ion-col>
+                <!-- <ion-col>
                         <ion-icon name="person" color ="primary"></ion-icon>
                         <a text-center >Point</a>
-                </ion-col>
+                </ion-col> -->
             </ion-row>
             </ion-grid>
     </ion-card>
@@ -48,7 +50,7 @@
                </ion-col>               
           </ion-row>
       </ion-card>
-      <ion-card class="categories-card">        
+      <ion-card (click)="navigateToSearchJasa()" class="categories-card">        
           <ion-row >
               <ion-col text-center>
                   <img class ="center" src="assets/imgs/logo/conversation.png"  />
@@ -60,21 +62,48 @@
 <h4 text-center>Artikel</h4>
 <ion-scroll scrollX style="min-height:150px !important;">
                 <ion-card class="myCard">
-                        <img class="image-full" src="https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg"/>
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-1.jpg"/>
                         <div class="myOverlay">
-                                <div class="card-title">San Francisco</div>
+                                <div class="card-title">Curug Cibaliung</div>
                         </div>
                 </ion-card>
                 <ion-card class="myCard">
-                        <img class="image-full" src="https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg"/>
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-2.jpg"/>
                         <div class="myOverlay">
-                                <div class="card-title">San Francisco</div>
+                                <div class="card-title">Rumah Pohon Jonggol</div>
                         </div>
                 </ion-card>
                 <ion-card class="myCard">
-                        <img class="image-full" src="https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg"/>
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-3.jpg"/>
                         <div class="myOverlay">
-                                <div class="card-title">San Francisco </div>
+                                <div class="card-title">Goa Agung Garunggang</div>
+                        </div>
+                </ion-card>
+                <ion-card class="myCard">
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-4.jpg"/>
+                        <div class="myOverlaySeeMore">                                        
+                                <div class="text-card-title">See More Artikel</div>
+                        </div>
+                </ion-card>        
+</ion-scroll>
+<h4 text-center>Populer</h4>
+<ion-scroll scrollX style="min-height:150px !important;">
+                <ion-card class="myCard">
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-1.jpg"/>
+                        <div class="myOverlay">
+                                <div class="card-title">Curug Cibaliung</div>
+                        </div>
+                </ion-card>
+                <ion-card class="myCard">
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-2.jpg"/>
+                        <div class="myOverlay">
+                                <div class="card-title">Rumah Pohon Jonggol</div>
+                        </div>
+                </ion-card>
+                <ion-card class="myCard">
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-3.jpg"/>
+                        <div class="myOverlay">
+                                <div class="card-title">Goa Agung Garunggang</div>
                         </div>
                 </ion-card>
                 <ion-card class="myCard">
@@ -83,36 +112,6 @@
                                 <div class="text-card-title">See More Artikel</div>
                         </div>
                 </ion-card>
-
-                              
-
-</ion-scroll>
-<h4 text-center>Populer</h4>
-<ion-scroll scrollX style="min-height:150px !important;">
-                <ion-card class="myCard">
-                                <img class="image-full" src="https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg"/>
-                                <div class="myOverlay">
-                                        <div class="card-title">San Francisco</div>
-                                </div>
-                        </ion-card>
-                        <ion-card class="myCard">
-                                <img class="image-full" src="https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg"/>
-                                <div class="myOverlay">
-                                        <div class="card-title">San Francisco</div>
-                                </div>
-                        </ion-card>
-                        <ion-card class="myCard">
-                                <img class="image-full" src="https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg"/>
-                                <div class="myOverlay">
-                                        <div class="card-title">San Francisco </div>
-                                </div>
-                        </ion-card>
-                        <ion-card class="myCard">
-                                <img class="image-full" src="https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/11/1397210130748/Spring-Lamb.-Image-shot-2-011.jpg"/>
-                                <div class="myOverlaySeeMore">                                        
-                                        <div class="text-card-title">See More Artikel</div>
-                                </div>
-                        </ion-card>
 </ion-scroll>
       
  </ion-content>

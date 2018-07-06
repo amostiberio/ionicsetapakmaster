@@ -8,14 +8,14 @@ import { AlertService } from '../../providers/util/alert.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-test',
-  templateUrl: 'test.html',
+  selector: 'page-profileaccount',
+  templateUrl: 'profileaccount.html',
 })
-export class TestPage {
+export class ProfileAccountPage {
   nama: string;
   email: string;
   nohp: string;
-  alamatprofpict : string;
+  urlprofpict : string;
 
   HAS_LOGGED_IN = 'hasLoggedIn';
   constructor(public navCtrl: NavController, 
@@ -43,8 +43,8 @@ export class TestPage {
     });
   }
   profpict() {
-    this.userData.getProfilePict().then((alamatprofpict) => {
-      this.alamatprofpict = alamatprofpict; //ngilangin titik (.) diawal     
+    this.userData.getProfilePict().then((profpict) => {
+      this.urlprofpict = profpict;    
     });
   }
 
@@ -61,8 +61,13 @@ export class TestPage {
   }
 
   loadToken() {
-    this.storage.get('user_data').then((val) => {
+    this.storage.get('token').then((val) => {
       console.log('Your Token is ', val)
+    })
+  }
+  loadUserData() {
+    this.storage.get('user_data').then((val) => {
+      console.log('Your userdata is ', val)
     })
   }
 
@@ -90,10 +95,13 @@ export class TestPage {
   }
 
   editProfile(){
-    this.navCtrl.push('LoginPage');
+    this.app.getRootNav().push('EditprofilePage')
   }
   updateProfileImage(){
     
+  }
+  navChangePassword(){
+    this.app.getRootNav().push('EditpasswordPage')
   }
 
   showAlert(message){
