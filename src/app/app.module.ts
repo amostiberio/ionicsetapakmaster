@@ -13,6 +13,7 @@ import { FileOpener } from '@ionic-native/file-opener';
 import { Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
+import { MyApp } from './app.component';
 
 //page
 import { MybookingPage } from '../pages/mybooking/mybooking';
@@ -20,14 +21,11 @@ import { NotificationPage } from '../pages/notification/notification';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { TabsPage } from '../pages/tabs/tabs';
-import { MyApp } from './app.component';
 import { ProfileAccountPage } from '../pages/profileaccount/profileaccount';
 
 //provider
 import { UserData } from '../providers/user-data';
-
 import { AlertService } from '../providers/util/alert.service';
-
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
 import { HomestayData } from '../providers/homestay-data/homestay-data';

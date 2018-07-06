@@ -60,20 +60,18 @@ export class HomePage {
     });
   }
 
-  navigateToLoginPage2(): void {
-    //this.navCtrl.push('LoginPage')
+  navigateToLoginPage2(): void {  
     this.app.getRootNav().push('LoginPage')
   }
-  navigateToSearchHomestay(): void {
-    //this.navCtrl.push('LoginPage')
+  navigateToSearchHomestay(): void {    
     this.app.getRootNav().push('HomestaysearchPage')
   }
-
-  navigateToSearchJasa(): void {
-    //this.navCtrl.push('LoginPage')
+  navigateToSearchJasa(): void {   
     this.app.getRootNav().push('JasasearchPage')
   }
-  
+  navigateToSearchProduk():void{
+    this.app.getRootNav().push('ProduksearchPage')
+  }
   openmyaccount(): void {
     //this.navCtrl.push('LoginPage')
     this.navCtrl.parent.select(3)
