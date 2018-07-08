@@ -42,17 +42,18 @@ export class HomestaypesanPage {
       this.datahomestay = this.navParams.data.datahomestay;
   }
 
-  ionViewWillEnter() {    
-  }
-  
-  ionViewDidLoad() {
+  ionViewWillEnter() { 
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
       this.loading.present()
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
-    });    
+    });      
+  }
+  
+  ionViewDidLoad() {
+     
     console.log('ionViewDidLoad HomestaypesanPage');
   }
   getReadyData(){

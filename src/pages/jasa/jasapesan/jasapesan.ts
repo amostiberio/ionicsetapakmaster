@@ -41,7 +41,7 @@ export class JasapesanPage {
       this.datajasa = this.navParams.data.dataJasa;
   }
   
-  ionViewDidLoad() {
+  ionViewWillEnter(){
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
@@ -49,6 +49,9 @@ export class JasapesanPage {
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     });    
+  } 
+  ionViewDidLoad() {
+   
     console.log('ionViewDidLoad JasapesanPage');
   }
   getReadyData(){

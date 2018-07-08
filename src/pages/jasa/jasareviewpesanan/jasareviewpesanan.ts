@@ -42,8 +42,7 @@ export class JasareviewpesananPage {
   }
 
   
-  
-  ionViewDidLoad() {
+  ionViewWillEnter() {   
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
@@ -51,6 +50,9 @@ export class JasareviewpesananPage {
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     });   
+  }
+
+  ionViewDidLoad() {
     console.log('ionViewDidLoad JasareviewpesananPage');
   }
 

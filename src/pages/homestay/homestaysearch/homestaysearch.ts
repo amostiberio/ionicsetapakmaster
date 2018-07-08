@@ -48,12 +48,13 @@ export class HomestaysearchPage {
     public userData: UserData) {
   }
   ionViewDidLoad() {
+    this.getKecamatan();    
     console.log('ionViewDidLoad HomestaysearchPage');
   }
 
   ionViewWillEnter() {    
     //this.getProvinsi();
-    this.getKecamatan();    
+    
   }
 
   getProvinsi(){    

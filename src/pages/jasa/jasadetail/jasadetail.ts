@@ -41,15 +41,16 @@ export class JasadetailPage {
     
   }
 
- 
-  ionViewDidLoad() {
-      this.loading = this.loadCtrl.create({
+  ionViewWillEnter(){
+    this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
       this.loading.present()
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     });
+  }
+  ionViewDidLoad() {
     console.log('ionViewDidLoad HomestaydetailPage');
   }
 

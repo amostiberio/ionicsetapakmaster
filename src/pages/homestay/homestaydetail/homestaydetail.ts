@@ -45,15 +45,16 @@ export class HomestaydetailPage {
     this.datahomestay = this.navParams.data;
     
   }
-
-  ionViewDidLoad() {
-      this.loading = this.loadCtrl.create({
+  ionViewWillEnter() {    
+    this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
       this.loading.present()
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     });
+  }
+  ionViewDidLoad() {
     console.log('ionViewDidLoad HomestaydetailPage');
   }
 
@@ -74,15 +75,7 @@ export class HomestaydetailPage {
     });
   }
 
-  ionViewWillEnter() {      
-  }
-    //this.loading.present();
-    
-
-     //pictures (banyak)
-    //this.getFasilitas(this.datahomestay.fasilitas_id);
-    //this.getAlamatCategory(this.idAlamatCategory);
-    // this.getPemandu(this.datahomestay.pemandu_id);
+  
     
     
   
