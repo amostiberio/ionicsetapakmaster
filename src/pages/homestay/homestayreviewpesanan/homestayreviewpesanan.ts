@@ -106,6 +106,7 @@ export class HomestayreviewpesananPage {
     let input = JSON.stringify({
       check_in: this.checkin,
       check_out: this.checkout,
+      total_harga:this.totalharga,
       token: this.token
     });          
     this.http.post(this.userData.BASE_URL+"api/transaksiHomestay/user/pesanHomestay/"+this.datahomestay.homestay_id,input,this.options).subscribe(data => {

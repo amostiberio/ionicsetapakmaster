@@ -45,6 +45,7 @@ export class HomestaydetailPage {
     this.datahomestay = this.navParams.data;
     
   }
+  
   ionViewWillEnter() {    
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
@@ -57,7 +58,10 @@ export class HomestaydetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomestaydetailPage');
   }
-
+  coba(){
+     //this.app.getRootNav().pop();
+     this.app.getRootNav().push('HomestaydetailPage');
+    }
   getReadyData(){
     return new Promise((resolve) => {        
           this.idAlamatCategory = this.datahomestay.alamatcategory_id; 

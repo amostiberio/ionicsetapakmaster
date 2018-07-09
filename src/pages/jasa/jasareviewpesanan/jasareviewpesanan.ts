@@ -91,6 +91,7 @@ export class JasareviewpesananPage {
     this.loading.present();
     let input = JSON.stringify({
       tanggal_booking: this.tanggalbooking,
+      total_harga :this.totalharga,
       token: this.token
     });          
     this.http.post(this.userData.BASE_URL+"api/transaksiJasa/user/pesanJasa/"+this.datajasa.jasa_id,input,this.options).subscribe(data => {

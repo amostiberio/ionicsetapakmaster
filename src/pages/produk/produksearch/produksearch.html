@@ -4,15 +4,60 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>produksearch,</ion-title>
+<ion-header >
+  <ion-navbar color= "navbar">
+      <ion-title *ngIf="!isSearchbarOpened">
+          <span *ngIf="newparametersearchkey == null" class="firstline">All Produk</span>
+          <span *ngIf="newparametersearchkey" class="firstline">Produk Search</span>
+          <span *ngIf="newparametersearchkey" class="twoline">{{newparametersearchkey}}</span>
+      </ion-title>
+      
+      <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton ="true" (search)= "onSearch($event)" (ionCancel)="isSearchbarOpened=false" >
+      </ion-searchbar>
+      <ion-buttons end>
+          <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened = true">
+            <ion-icon name="search"></ion-icon>
+          </button>
+      </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
+    <ion-card *ngFor="let data of dataProduk" tappable>
+        <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
+        <img src="{{BASE_URL+data?.mainphoto}}" (click)="produkDetail(data)"/>
+        <ion-card-content>
+            <h2 >            
+              <b>{{data.nama_barang}}</b>            
+            </h2>
+            <h6>            
+              Rp {{data.harga}}           
+            </h6>
+          <!-- <p>
+            {{data.deskripsi}}
+          </p> -->
+        </ion-card-content>
+        <!-- <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-left (click)="listen(card)">
+              <ion-icon name='musical-notes'></ion-icon>
+              Listen
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-left (click)="share(card)">
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>
+        </ion-row> -->
+      </ion-card>
+      
 </ion-content>

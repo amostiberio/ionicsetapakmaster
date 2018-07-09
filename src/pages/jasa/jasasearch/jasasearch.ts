@@ -49,11 +49,12 @@ export class JasasearchPage {
   }
 
   ionViewDidLoad() {
+    this.getKecamatan();    
     console.log('ionViewDidLoad JasasearchPage');
   }
   ionViewWillEnter() {    
     //this.getProvinsi();
-    this.getKecamatan();    
+    
   }
 
   getKecamatan(){   

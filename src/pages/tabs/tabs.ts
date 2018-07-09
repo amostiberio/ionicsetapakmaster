@@ -37,10 +37,10 @@ export class TabsPage {
       this.userLoggedIn = value;
       console.log('sudah login ', this.userLoggedIn)
     }); 
-    let data = this.navParams.get('opentab');
-    if (data != null) {
-      this.numberTab = data;             
-    }    
+    // let data = this.navParams.get('opentab');
+    // if (data != null) {
+    //   this.numberTab = data;             
+    // }    
   }
 
   

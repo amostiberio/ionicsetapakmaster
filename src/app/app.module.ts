@@ -31,7 +31,6 @@ import { File } from '@ionic-native/file';
 import { HomestayData } from '../providers/homestay-data/homestay-data';
 
 //component module
-// import { ComponentsModule } from './../components/components.module';
 
 //set the auth http for API
 export function getAuthHttp(http, Storage) {
@@ -50,7 +49,8 @@ export function getAuthHttp(http, Storage) {
     HomePage,
     MyaccountPage,    
     TabsPage,
-    ProfileAccountPage
+    ProfileAccountPage,
+    
   ],
   imports: [
     BrowserModule,
@@ -60,6 +60,7 @@ export function getAuthHttp(http, Storage) {
     IonicStorageModule.forRoot(),    
     FormsModule
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,

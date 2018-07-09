@@ -85,6 +85,10 @@ export class JasadetailPage {
    });
   }
 
+  bro(){
+    const index = this.navCtrl.getActive().index;
+    this.navCtrl.remove(index-1);
+  }
   
 
   getJasaPhoto(idJasa){

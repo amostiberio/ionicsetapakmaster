@@ -75,7 +75,7 @@ export class HomestaypesanPage {
    });
   }
 
-
+  
   continuePesan() {
     if(this.selectedDateCheckIn == null || this.selectedDateCheckOut == null ){
       this.showAlert("Isi Check In dan Check Out");   

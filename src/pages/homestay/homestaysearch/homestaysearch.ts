@@ -157,7 +157,9 @@ export class HomestaysearchPage {
         let response = data.json();       
          if(response.status==200) {          
           this.app.getRootNav().push('HomestayresultPage',{datahomestay: response.data, provinsi: this.namaProvinsi, kabupaten: this.namaKabupaten, kecamatan: this.namaKecamatan});
-         }
+         
+
+        }
         this.showAlert(response.message);
      }, err => { 
         this.loading.dismiss();
