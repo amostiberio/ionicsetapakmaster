@@ -19,7 +19,7 @@ export class HomestaydetailPage {
   BASE_URL = 'http://setapakbogor.site/';
   userLoggedIn: any;
   loading:any;
-  datahomestay: any;
+  idhomestay: any;
   currentUserId: any;  
   idAlamatCategory :any;
   dataAlamatCategory: any;
@@ -29,8 +29,11 @@ export class HomestaydetailPage {
   namaProvinsi:any;
   namaKabupaten:any;
   namaKecamatan:any;
-  cobaDataHomestay:any;
-
+  newDataHomestay:any;
+  tipeProduk:any = 'Homestay'
+  averageReview :any;
+  jumlahReview:any;
+  jumlahDiskusi:any;
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
@@ -42,7 +45,7 @@ export class HomestaydetailPage {
     public toastCtrl : ToastController,
     public app:App,
     public loadCtrl: LoadingController) {
-    this.datahomestay = this.navParams.data;
+    this.idhomestay = this.navParams.data;
     
   }
   
@@ -64,9 +67,11 @@ export class HomestaydetailPage {
     }
   getReadyData(){
     return new Promise((resolve) => {        
-          this.idAlamatCategory = this.datahomestay.alamatcategory_id; 
-          this.getDataHomestay(this.datahomestay.homestay_id);
-          this.getHomestayPhoto(this.datahomestay.homestay_id);
+          //this.idAlamatCategory = this.datahomestay.alamatcategory_id; 
+          this.getDataHomestay(this.idhomestay);
+          this.getHomestayPhoto(this.idhomestay);
+          this.getAverageReview(this.idhomestay);
+          this.getCountDiskusi(this.idhomestay);
           this.userData.hasLoggedIn().then((value)=>{
             this.userLoggedIn = value;
             if(this.userLoggedIn == true)  {
@@ -79,15 +84,11 @@ export class HomestaydetailPage {
     });
   }
 
-  
-    
-    
-  
   getDataHomestay(idHomestay){    
     this.http.get(this.userData.BASE_URL+"api/homestay/"+idHomestay,this.options).subscribe(data => {
       let response = data.json();
-      if(response.status==200) {
-         this.cobaDataHomestay = response.datahomestay 
+      if(response.status==200) {         
+         this.newDataHomestay = response.datahomestay 
          this.dataAlamatCategory = response.dataAlamatCategory
          this.dataFasilitas = response.dataFasilitas
          this.dataPemandu = response.dataPemandu
@@ -111,12 +112,51 @@ export class HomestaydetailPage {
    });
   }  
 
+  getAverageReview(idHomestay){
+    let input = JSON.stringify({     
+      produk_id: idHomestay,
+      tipe_produk: this.tipeProduk
+    });    
+    this.http.post(this.userData.BASE_URL+"api/review/average",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+         this.averageReview = response.average
+         this.jumlahReview = response.jumlah
+      }else if(response.status==204) {
+        this.averageReview = 0;
+        this.jumlahReview = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+
+  getCountDiskusi(idHomestay){
+    let input = JSON.stringify({     
+      produk_id: idHomestay,
+      tipe_produk: this.tipeProduk
+    });    
+    this.http.post(this.userData.BASE_URL+"api/diskusi/count",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+         this.jumlahDiskusi = response.jumlah
+      }else if(response.status==204) {
+        this.jumlahDiskusi = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+  
+
   pesanHomestay(idHomestay){    
     if(this.userLoggedIn == true ){    
       if(this.dataPemandu.user_id == this.currentUserId) {
         this.showAlert("Tidak bisa memesan layanan Homestay milik sendiri");          
       }else{
-        this.app.getRootNav().push('HomestaypesanPage',{datahomestay: this.datahomestay}); 
+        this.app.getRootNav().push('HomestaypesanPage',{datahomestay: this.newDataHomestay}); 
       }       
     }else{     
       this.showAlert("Harus Login Terlebih Dahulu");       
@@ -134,7 +174,12 @@ export class HomestaydetailPage {
     });
     toast.present();
   }
-
+  navDiskusiprodukPage(){
+    this.app.getRootNav().push('DiskusiprodukPage',{id: this.newDataHomestay.homestay_id ,tipeproduk: this.tipeProduk, userPemanduId:this.dataPemandu.user_id}); 
+  }
+  navReviewPage(){
+    this.app.getRootNav().push('ReviewprodukPage',{id: this.newDataHomestay.homestay_id,tipeproduk: this.tipeProduk, average :this.averageReview, jumlahreview:this.jumlahReview, nama: this.newDataHomestay.nama_homestay}); 
+  }
   navProfileCompany(){
     //urusan emiel bikin profile company
     //this.app.getRootNav().push('PemanduPage');

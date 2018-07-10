@@ -14,7 +14,7 @@ export class JasadetailPage {
   BASE_URL = 'http://setapakbogor.site/';
   userLoggedIn: any;
   loading:any;
-  datajasa: any;
+  idJasa: any;
   currentUserId: any; 
   newDataJasa:any; 
   idAlamatCategory :any;
@@ -24,7 +24,10 @@ export class JasadetailPage {
   namaProvinsi:any;
   namaKabupaten:any;
   namaKecamatan:any;
-  
+  tipeProduk:any = 'Jasa'
+  averageReview :any;
+  jumlahReview:any;
+  jumlahDiskusi:any;
 
   headers = new Headers({ 
     'Content-Type': 'application/json'});
@@ -37,7 +40,7 @@ export class JasadetailPage {
     public toastCtrl : ToastController,
     public app:App,
     public loadCtrl: LoadingController) {
-    this.datajasa = this.navParams.data;
+    this.idJasa = this.navParams.data;
     
   }
 
@@ -56,9 +59,11 @@ export class JasadetailPage {
 
   getReadyData(){
     return new Promise((resolve) => {        
-          this.idAlamatCategory = this.datajasa.alamatcategory_id; 
-          this.getDataJasa(this.datajasa.jasa_id);
-          this.getJasaPhoto(this.datajasa.jasa_id);
+          //this.idAlamatCategory = this.datajasa.alamatcategory_id; 
+          this.getDataJasa(this.idJasa);
+          this.getJasaPhoto(this.idJasa);
+          this.getAverageReview(this.idJasa);
+          this.getCountDiskusi(this.idJasa);
           this.userData.hasLoggedIn().then((value)=>{
             this.userLoggedIn = value;
             if(this.userLoggedIn == true)  {
@@ -85,10 +90,7 @@ export class JasadetailPage {
    });
   }
 
-  bro(){
-    const index = this.navCtrl.getActive().index;
-    this.navCtrl.remove(index-1);
-  }
+ 
   
 
   getJasaPhoto(idJasa){
@@ -102,7 +104,43 @@ export class JasadetailPage {
       this.showError(err);
    });
   }  
+  getAverageReview(idJasa){
+    let input = JSON.stringify({     
+      produk_id: idJasa,
+      tipe_produk: this.tipeProduk
+    });    
+    this.http.post(this.userData.BASE_URL+"api/review/average",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+         this.averageReview = response.average
+         this.jumlahReview = response.jumlah
+      }else if(response.status==204) {
+        this.averageReview = 0;
+        this.jumlahReview = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
+  }  
 
+  getCountDiskusi(idJasa){
+    let input = JSON.stringify({     
+      produk_id: idJasa,
+      tipe_produk: this.tipeProduk
+    });    
+    this.http.post(this.userData.BASE_URL+"api/diskusi/count",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+         this.jumlahDiskusi = response.jumlah
+      }else if(response.status==204) {
+        this.jumlahDiskusi = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
+  }
   pesanJasa(idJasa){    
     if(this.userLoggedIn == true ){    
       if(this.dataPemandu.user_id == this.currentUserId) {
@@ -131,4 +169,12 @@ export class JasadetailPage {
     //this.app.getRootNav().push('PemanduPage');
   }
 
+  navDiskusiprodukPage(){
+    this.app.getRootNav().push('DiskusiprodukPage',{id: this.newDataJasa.jasa_id ,tipeproduk:this.tipeProduk, userPemanduId:this.dataPemandu.user_id}); 
+  }
+
+  navReviewPage(){
+    this.app.getRootNav().push('ReviewprodukPage',{id: this.newDataJasa.jasa_id,tipeproduk: this.tipeProduk, average :this.averageReview, jumlahreview:this.jumlahReview, nama: this.newDataJasa.nama_jasa}); 
+
+  }
 }

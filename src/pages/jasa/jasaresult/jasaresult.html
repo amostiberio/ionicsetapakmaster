@@ -14,7 +14,7 @@
 <ion-content padding>
   <ion-card *ngFor="let data of datajasa" tappable>
       <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
-      <img src="{{BASE_URL+data?.mainphoto}}" (click)="jasadetail(data)"/>
+      <img src="{{BASE_URL+data?.mainphoto}}" (click)="jasadetail(data.jasa_id)"/>
       <ion-card-content>
           <h2 >            
             <b>{{data.nama_jasa}}</b>            

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../../providers/user-data';
 import { AuthHttp } from 'angular2-jwt';
 import { NgForm } from '@angular/forms';
 

@@ -56,6 +56,7 @@ export class HomestaysearchPage {
     //this.getProvinsi();
     
   }
+  
 
   getProvinsi(){    
     this.http.get(this.userData.BASE_URL+"api/alamat/provinsi",this.options).subscribe(data => {

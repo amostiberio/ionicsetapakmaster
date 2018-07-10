@@ -4,7 +4,7 @@ import { MybookingPage } from '../mybooking/mybooking';
 import { NotificationPage } from '../notification/notification';
 import { HomePage } from '../home/home';
 import { MyaccountPage } from '../myaccount/myaccount';
-import { ProfileAccountPage } from '../profileaccount/profileaccount';
+import { ProfileAccountPage } from '../profile/profileaccount/profileaccount';
 import { UserData } from '../../providers/user-data';
 
 import { Storage } from '@ionic/storage';

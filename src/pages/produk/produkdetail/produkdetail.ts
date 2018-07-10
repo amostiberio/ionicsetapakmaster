@@ -21,7 +21,7 @@ export class ProdukdetailPage {
   userLoggedIn: any;
   loading:any;
 
-  dataproduk: any;
+  idProduk: any;
   currentUserId: any;  
   idAlamatCategory :any;
   dataAlamatCategory: any;
@@ -31,7 +31,10 @@ export class ProdukdetailPage {
   namaKabupaten:any;
   namaKecamatan:any;
   newDataProduk:any;
-
+  tipeProduk:any = 'Produk'
+  averageReview :any;
+  jumlahReview:any;
+  jumlahDiskusi:any;
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
@@ -43,7 +46,7 @@ export class ProdukdetailPage {
     public toastCtrl : ToastController,
     public app:App,
     public loadCtrl: LoadingController) {
-      this.dataproduk = this.navParams.data;
+      this.idProduk = this.navParams.data;
       
   }
   ionViewWillEnter() {    
@@ -58,14 +61,13 @@ export class ProdukdetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProdukdetailPage');
   }
-  coba(){
-     //this.app.getRootNav().pop();
-     this.app.getRootNav().push('HomestaydetailPage');
-    }
   getReadyData(){
     return new Promise((resolve) => {        
-          this.getDataProduk(this.dataproduk.barang_id);
-          this.getHomestayPhoto(this.dataproduk.barang_id);
+          this.getDataProduk(this.idProduk);
+          this.getHomestayPhoto(this.idProduk);
+          this.getAverageReview(this.idProduk);
+          this.getCountDiskusi(this.idProduk);
+
           this.userData.hasLoggedIn().then((value)=>{
             this.userLoggedIn = value;
             if(this.userLoggedIn == true)  {
@@ -73,7 +75,9 @@ export class ProdukdetailPage {
                 this.currentUserId = value;
               });
             }   
-          });  
+          });
+          
+  
           resolve(true);
     });
   }
@@ -99,8 +103,7 @@ export class ProdukdetailPage {
       let response = data.json();
       if(response.status==200) {
          this.dataAlamatCategory = response.data
-
-         console.log('alamatcategorydata',this.dataAlamatCategory);
+         //console.log('alamatcategorydata',this.dataAlamatCategory);
       }
    }, err => { 
       this.showError(err);
@@ -116,7 +119,45 @@ export class ProdukdetailPage {
    }, err => { 
       this.showError(err);
    });
+  }
+
+  getAverageReview(idBarang){
+    let input = JSON.stringify({     
+      produk_id: idBarang,
+      tipe_produk: this.tipeProduk
+    });    
+    this.http.post(this.userData.BASE_URL+"api/review/average",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+         this.averageReview = response.average
+         this.jumlahReview = response.jumlah
+      }else if(response.status==204) {
+        this.averageReview = 0;
+        this.jumlahReview = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
   }  
+
+  getCountDiskusi(idBarang){
+    let input = JSON.stringify({     
+      produk_id: idBarang,
+      tipe_produk: this.tipeProduk
+    });
+    this.http.post(this.userData.BASE_URL+"api/diskusi/count",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+         this.jumlahDiskusi = response.jumlah
+      }else if(response.status==204) {
+        this.jumlahDiskusi = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
+  }
 
   pesanBarang(idBarang){    
     if(this.userLoggedIn == true ){    
@@ -146,4 +187,10 @@ export class ProdukdetailPage {
     
   }
 
+  navDiskusiprodukPage(){
+    this.app.getRootNav().push('DiskusiprodukPage',{id: this.newDataProduk.barang_id,tipeproduk: this.tipeProduk, userPemanduId:this.dataPemandu.user_id}); 
+  }
+  navReviewPage(){
+    this.app.getRootNav().push('ReviewprodukPage',{id: this.newDataProduk.barang_id, tipeproduk: this.tipeProduk, average :this.averageReview, jumlahreview:this.jumlahReview,nama: this.newDataProduk.nama_barang}); 
+  }
 }

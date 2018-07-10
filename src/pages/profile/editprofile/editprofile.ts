@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, ActionSheetController } from 'ionic-angular';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../../providers/user-data';
 import { AuthHttp } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 import { Http,Headers, RequestOptions } from '@angular/http';

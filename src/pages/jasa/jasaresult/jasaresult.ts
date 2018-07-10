@@ -36,7 +36,7 @@ export class JasaresultPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad JasaresultPage');
   }
-  jasadetail(data) {   
-    this.app.getRootNav().push('JasadetailPage',data);
+  jasadetail(idJasa) {   
+    this.app.getRootNav().push('JasadetailPage',idJasa);
   }
 }

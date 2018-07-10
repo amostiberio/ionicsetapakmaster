@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App, ToastController } from 'ionic-angular';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../../providers/user-data';
 import { Storage } from '@ionic/storage';
-import { TabsPage } from '../tabs/tabs'
-import { AlertService } from '../../providers/util/alert.service';
+import { TabsPage } from '../../tabs/tabs'
+import { AlertService } from '../../../providers/util/alert.service';
 
 
 @IonicPage()

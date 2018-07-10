@@ -1,5 +1,5 @@
 
-<ion-header>
+  <ion-header>
 
     <ion-navbar  color="primary">
       <ion-title >
@@ -23,8 +23,8 @@
           </ion-slides>
         </div> 
   
-  <div padding-bottom>
-      <ion-card class ="full-card" >                     
+<div>
+      <ion-card class ="full-card-homenamecard" >                     
               <ion-grid padding-left>
                 <ion-row>                                        
                       <h2 class="firstlinenamecard"><b>{{newDataProduk?.nama_barang}}</b></h2>                            
@@ -35,6 +35,37 @@
               </ion-grid>
       </ion-card>
   </div>
+<div padding-bottom>
+    <ion-card class ="full-card" >                     
+            <ion-grid padding-left>
+              <ion-row> 
+                <ion-col text-center (click)="navReviewPage()">
+                    <ion-icon *ngIf= "averageReview >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>                   
+                </ion-col>
+                <ion-col text-center (click)="navDiskusiprodukPage()" >
+                    <img class ="centerlogobutton" src="assets/imgs/logo/diskusi.png"  />                  
+                </ion-col>                                                     
+              </ion-row>
+              <ion-row> 
+                <ion-col text-center (click)="navReviewPage()">
+                    <a class="centerlogobuttonword" ><b>{{jumlahReview}} Review</b></a>                   
+                </ion-col> 
+                <ion-col text-center (click)="navDiskusiprodukPage()">
+                    <a class="centerlogobuttonword"><b>{{jumlahDiskusi}} Diskusi</b></a>                  
+                </ion-col>                                                                     
+              </ion-row>
+            </ion-grid>
+    </ion-card>
+</div>
   
   <div padding-bottom>
       <ion-card class ="full-card">

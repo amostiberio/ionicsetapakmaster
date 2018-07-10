@@ -21,7 +21,7 @@ import { NotificationPage } from '../pages/notification/notification';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { TabsPage } from '../pages/tabs/tabs';
-import { ProfileAccountPage } from '../pages/profileaccount/profileaccount';
+import { ProfileAccountPage } from '../pages/profile/profileaccount/profileaccount';
 
 //provider
 import { UserData } from '../providers/user-data';

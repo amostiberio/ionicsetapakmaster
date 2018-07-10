@@ -3,7 +3,7 @@
 
   <ion-navbar  color="primary">
     <ion-title >
-      <span class="firstline">{{cobaDataHomestay?.nama_homestay}}</span>
+      <span class="firstline">{{newDataHomestay?.nama_homestay}}</span>
       <span class="twoline">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</span>
     </ion-title>
   </ion-navbar>
@@ -23,16 +23,49 @@
         </ion-slides>
       </div> 
 
-<div padding-bottom>
+<div>
     <ion-card class ="full-card" >                     
             <ion-grid padding-left>
               <ion-row>                                        
-                    <h2 class="firstlinenamecard"><b>{{datahomestay?.nama_homestay}}</b></h2>                            
+                    <h2 class="firstlinenamecard"><b>{{newDataHomestay?.nama_homestay}}</b></h2>                            
               </ion-row>
               <ion-row>              
                     <a class="twolinenamecard">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                             
               </ion-row>
             </ion-grid>
+    </ion-card>
+</div>
+
+<div padding-bottom>
+    <ion-card class ="full-card" >
+          <ion-grid padding-left>
+            <ion-row> 
+              <ion-col text-center (click)="navReviewPage()">
+                  <ion-icon *ngIf= "averageReview >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>                   
+              </ion-col>
+              <ion-col text-center (click)="navDiskusiprodukPage()" >
+                  <img class ="centerlogobutton" src="assets/imgs/logo/diskusi.png"  />                  
+              </ion-col>                                                     
+            </ion-row>
+            <ion-row> 
+              <ion-col text-center (click)="navReviewPage()">
+                  <a class="centerlogobuttonword" ><b>{{jumlahReview}} Review</b></a>                   
+              </ion-col> 
+              <ion-col text-center (click)="navDiskusiprodukPage()">
+                  <a class="centerlogobuttonword"><b>{{jumlahDiskusi}} Diskusi</b></a>                  
+              </ion-col>                                                                     
+            </ion-row>
+          </ion-grid>                     
+            
     </ion-card>
 </div>
 
@@ -72,7 +105,7 @@
                <h2 ion-text color="dark"> <b>Deskripsi</b></h2>
             </ion-row>
             <ion-row>             
-                <h5 class="">{{datahomestay?.deskripsi}}</h5>                                         
+                <h5 class="">{{newDataHomestay?.deskripsi}}</h5>                                         
             </ion-row>
           </ion-grid>                  
     </ion-card>
@@ -100,7 +133,7 @@
 </ion-content>
 
 <ion-footer>
-    <button ion-button large full no-margin color="navbar" (click)='pesanHomestay(datahomestay?.homestay_id)' >
+    <button ion-button large full no-margin color="navbar" (click)='pesanHomestay(newDataHomestay?.homestay_id)' >
       Pesan Homestay
     </button>
 </ion-footer>

@@ -7,7 +7,7 @@
 <ion-header >
   <ion-navbar color= "navbar">
       <ion-title>
-          <span class="twoline">Homestay Search</span>
+          <span class="firstline">Homestay Search</span>
       </ion-title>
   </ion-navbar>
 </ion-header>
@@ -53,8 +53,20 @@
       <ion-item>
           <ion-label stacked color="primary">Rentang Harga</ion-label>
           <ion-range [(ngModel)]="knobValues" name="knobValues" dualKnobs="true" [(ngModel)]="knobValues" min="0" max="1500000" step="100000" pin="true" snaps="true" #valuesknob="ngModel"></ion-range>
+        {{knobValues.upper}}
       </ion-item>
-           
+      <ion-item>
+          <ion-row>
+            <ion-col>
+                <h6 class="leftflex"  leftflex stacked color="primary"> {{knobValues.lower}}</h6>
+               
+            </ion-col>
+            <ion-col >
+                <h6 class="rightflex" stacked color="primary"> {{knobValues.upper}}</h6>               
+            </ion-col>
+          </ion-row>          
+      </ion-item>
+      
   </ion-card>
 
   <button ion-button icon-start block no-margin color="primary" class="round" (click)="homestayResult(searchForm)" tappable >
