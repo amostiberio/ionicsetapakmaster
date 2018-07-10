@@ -85,7 +85,7 @@ onSearch(event){
   if(this.searchkey != null && this.searchkey != ''){
     this.app.getRootNav().push('ProduksearchPage',{searchkey: this.searchkey}).then(()=>{
       //let index = 1;
-      const index = this.navCtrl.getActive().index-1;
+      const index = this.navCtrl.getActive().index-1;      
       this.navCtrl.remove(index); 
       //remove page sebelumnya,
       //bisabuat fungsi filter juga

@@ -15,6 +15,9 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { MyApp } from './app.component';
 
+//General
+import { PopoverPage } from '../pages/popover/popover';
+
 //page
 import { MybookingPage } from '../pages/mybooking/mybooking';
 import { NotificationPage } from '../pages/notification/notification';
@@ -50,6 +53,7 @@ export function getAuthHttp(http, Storage) {
     MyaccountPage,    
     TabsPage,
     ProfileAccountPage,
+    PopoverPage,
     
   ],
   imports: [
@@ -69,7 +73,8 @@ export function getAuthHttp(http, Storage) {
     HomePage,
     MyaccountPage,
     TabsPage,
-    ProfileAccountPage
+    ProfileAccountPage,
+    PopoverPage,
   ],
   providers: [
     StatusBar,

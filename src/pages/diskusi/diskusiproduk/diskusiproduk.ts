@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, App, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, App, LoadingController, PopoverController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
-
+import { PopoverPage } from '../../popover/popover'
 /**
  * Generated class for the DiskusiprodukPage page.
  *
@@ -27,7 +27,7 @@ export class DiskusiprodukPage {
   dataDiskusi :any;
   currentUserId :any;
   userPemanduId:any;
-
+  token:any;
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
@@ -39,7 +39,8 @@ export class DiskusiprodukPage {
     public userData: UserData,
     public toastCtrl : ToastController,
     public app:App,
-    public loadCtrl: LoadingController) {
+    public loadCtrl: LoadingController,
+    public popoverCtrl: PopoverController) {
     this.idProduk = this.navParams.data.id
     this.tipeProduk = this.navParams.data.tipeproduk
     this.userPemanduId = this.navParams.data.userPemanduId
@@ -48,6 +49,7 @@ export class DiskusiprodukPage {
  
   ionViewDidLoad() {
     console.log('ionViewDidLoad DiskusiprodukPage');
+    console.log('index', this.navCtrl.getActive().index)
   }
 
   ionViewWillEnter() {    
@@ -60,6 +62,7 @@ export class DiskusiprodukPage {
     });
   }
 
+  
   getReadyData(){
     return new Promise((resolve) => {        
           this.getDataDiskusi(this.idProduk);          
@@ -68,6 +71,9 @@ export class DiskusiprodukPage {
             if(this.userLoggedIn == true)  {
               this.userData.getId().then((value) => {
                 this.currentUserId = value;
+              });
+              this.userData.getToken().then((value) => {
+                this.token = value;
               });
             }   
           });
@@ -126,8 +132,15 @@ navCommentProduk(datadiskusi){
 
 }
 
-
-
+presentPopover(myEvent,diskusi_id) {
+  myEvent.preventDefault(); // use this to prevent default event behavior
+  myEvent.stopPropagation();
+  console.log(diskusi_id)
+  let popover = this.popoverCtrl.create(PopoverPage,{id: this.idProduk,tipeproduk:this.tipeProduk,userPemanduId:this.userPemanduId,token: this.token, diskusi_id: diskusi_id, index:this.navCtrl.getActive().index});
+  popover.present({
+    ev: myEvent
+  });
+}
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

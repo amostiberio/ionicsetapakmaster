@@ -16,16 +16,27 @@ page-diskusiproduk {
       }
 
     .pemandu{
-        font-size: 13px;
+        font-size: 10px;
         background-color:#07c23f !important;
         color: white !important;
     }
     .wisatawan{
-        font-size: 13px;
+        font-size: 10px;
         background-color: #488aff !important;
         color: white !important;
     }
     .tanggal{
         font-size: 13px;
+    }
+    .paddingleftword{
+        padding-left: 4px;
+    }
+    .moreicon{
+        float: right !important;
+        font-size:20px !important;
+        padding-bottom: 0px !important;
+    }
+    .paddingbottomzero{
+        padding-bottom: 0px !important;
     }
 }

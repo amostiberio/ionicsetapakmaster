@@ -72,11 +72,11 @@
                     </ion-avatar>                   
                     <ion-row *ngIf = "userPemanduId == data?.user_id">                     
                             <h5 class="pemandu"><b>Pemandu</b></h5>                            
-                            <h5><b>{{(data?.nama_user.length>25)? (data?.nama_user | slice:0:25)+'..':(data?.nama_user) }}</b></h5>
+                            <h5 class="paddingleftword"><b>{{(data?.nama_user.length>25)? (data?.nama_user | slice:0:25)+'..':(data?.nama_user) }}</b></h5>
                     </ion-row> 
                     <ion-row *ngIf = "userPemanduId != data?.user_id">      
                           <h5 class="wisatawan"><b>Wisatawan</b></h5>             
-                          <h5><b>{{(data?.nama_user.length>25)? (data?.nama_user | slice:0:25)+'..':(data?.nama_user) }}</b></h5>
+                          <h5 class="paddingleftword"><b>{{(data?.nama_user.length>25)? (data?.nama_user | slice:0:25)+'..':(data?.nama_user) }}</b></h5>
                     </ion-row>                  
                      <ion-row>
                           <h6>{{(data?.isi_comment.length>30)? (data?.isi_comment | slice:0:30)+'..':(data?.isi_comment) }}</h6>  
