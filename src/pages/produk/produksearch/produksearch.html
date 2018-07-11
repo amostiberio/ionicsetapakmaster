@@ -28,15 +28,28 @@
         <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
         <img src="{{BASE_URL+data?.mainphoto}}" (click)="produkDetail(data.barang_id)"/>
         <ion-card-content>
-            <h2 >            
-              <b>{{data.nama_barang}}</b>            
-            </h2>
-            <h6>            
-              Rp {{data.harga}}           
+            <h2>            
+              <b>{{data?.nama_barang}}</b>            
+            </h2>            
+                <ion-icon *ngIf= "data?.averageReview >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon><h6>({{data?.jumlahReview}})</h6></ion-icon>                
+            <h6 class = "fontblue">            
+              Rp {{data?.harga}}        
             </h6>
-          <!-- <p>
-            {{data.deskripsi}}
-          </p> -->
+            <h6>            
+                {{data?.pemandu?.nama_company}}        
+            </h6>            
+                <ion-icon name="pin" class="mapsizefont"></ion-icon>
+                <ion-icon class="mapsizefont" *ngFor="let alamat of data?.dataAlamatCategory" ><h6>{{alamat?.kabupaten}} </h6></ion-icon>            
         </ion-card-content>
         <!-- <ion-row no-padding>
           <ion-col>

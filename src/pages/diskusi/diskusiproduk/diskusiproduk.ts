@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, App, LoadingController, PopoverController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
-import { PopoverPage } from '../../popover/popover'
+import { PopoverdiskusiPage } from '../../popover/popoverdiskusi'
 /**
  * Generated class for the DiskusiprodukPage page.
  *
@@ -28,6 +28,7 @@ export class DiskusiprodukPage {
   currentUserId :any;
   userPemanduId:any;
   token:any;
+  deleteIndex:any;
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
@@ -44,15 +45,21 @@ export class DiskusiprodukPage {
     this.idProduk = this.navParams.data.id
     this.tipeProduk = this.navParams.data.tipeproduk
     this.userPemanduId = this.navParams.data.userPemanduId
-    console.log(this.userPemanduId)
+    this.deleteIndex = this.navParams.data.delete
+    
   }
  
   ionViewDidLoad() {
     console.log('ionViewDidLoad DiskusiprodukPage');
-    console.log('index', this.navCtrl.getActive().index)
+    if(this.deleteIndex == 'pagebefore'){
+        let index = this.navCtrl.getActive().index
+        this.navCtrl.remove(index); //delete page before
+    }
+    //console.log('index', this.navCtrl.getActive().index)
   }
 
-  ionViewWillEnter() {    
+  ionViewWillEnter() {   
+    console.log(this.navCtrl.getActive().index) 
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
@@ -136,7 +143,7 @@ presentPopover(myEvent,diskusi_id) {
   myEvent.preventDefault(); // use this to prevent default event behavior
   myEvent.stopPropagation();
   console.log(diskusi_id)
-  let popover = this.popoverCtrl.create(PopoverPage,{id: this.idProduk,tipeproduk:this.tipeProduk,userPemanduId:this.userPemanduId,token: this.token, diskusi_id: diskusi_id, index:this.navCtrl.getActive().index});
+  let popover = this.popoverCtrl.create(PopoverdiskusiPage ,{id: this.idProduk,tipeproduk:this.tipeProduk,userPemanduId:this.userPemanduId,token: this.token, diskusi_id: diskusi_id, index:this.navCtrl.getActive().index});
   popover.present({
     ev: myEvent
   });

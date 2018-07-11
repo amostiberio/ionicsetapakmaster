@@ -12,7 +12,7 @@ import { Http,Headers,RequestOptions } from '@angular/http';
     </ion-list>
   `
 })
-export class PopoverPage {
+export class PopoverdiskusiPage {
   BASE_URL = 'http://setapakbogor.site/';
   role : string;
   token:any;
@@ -67,7 +67,7 @@ export class PopoverPage {
             let response = data.json();       
             if(response.status == 200) {
                 let currentIndex = this.navCtrl.getActive().index;
-                this.app.getRootNav().push('DiskusiprodukPage',{id: this.idProduk ,tipeproduk: this.tipeProduk, userPemanduId:this.userPemanduId}).then(()=>{
+                this.app.getRootNav().push('DiskusiprodukPage',{id: this.idProduk ,tipeproduk: this.tipeProduk, userPemanduId:this.userPemanduId,delete:'pagebefore'}).then(()=>{
                 //let index = 4;                           
                 this.navCtrl.remove(this.currentIndexPage-1); 
                 this.close()

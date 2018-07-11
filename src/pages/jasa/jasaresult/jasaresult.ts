@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, LoadingController, ToastController } from 'ionic-angular';
+import { Http,Headers,RequestOptions } from '@angular/http';
+import { UserData } from '../../../providers/user-data';
 
-/**
- * Generated class for the JasaresultPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -22,10 +19,19 @@ export class JasaresultPage {
   namaprovinsi:any;
   namakabupaten:any;
   namakecamatan:any;
+  tipeProduk:any = 'Jasa'
+
+  headers = new Headers({ 
+    'Content-Type': 'application/json'});
+  options = new RequestOptions({ headers: this.headers});
+  
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public app : App,
+    public http: Http,    
+    public userData: UserData,
+    public toastCtrl : ToastController,
+    public app:App,
     public loadCtrl: LoadingController) {      
     this.datajasa = this.navParams.data.datajasa;
     this.namaprovinsi = this.navParams.data.provinsi;
@@ -33,6 +39,75 @@ export class JasaresultPage {
     this.namakecamatan = this.navParams.data.kecamatan;
   }
 
+  ionViewWillEnter() { 
+    console.log('ionViewDidLoad ProduksearchPage');
+    this.loading = this.loadCtrl.create({
+      content: 'Tunggu sebentar...'
+      });
+      this.loading.present()
+      this.getReadyData().then((x) => {
+        if (x) this.loading.dismiss();
+    }); 
+    
+  }
+  
+  getReadyData(){
+    return new Promise((resolve) => {
+      for(var i = 0;i<this.datajasa.length;i++){           
+        this.getDataJasa(this.datajasa[i].jasa_id,i)
+        this.getAverageReview(this.datajasa[i].jasa_id,i);
+        //console.log('datahomestay',this.datahomestay)
+      } 
+      //console.log('datahomestay',this.datahomestay)     
+      resolve(true);
+    });
+  }
+
+  getDataJasa(idJasa,i){    
+    this.http.get(this.userData.BASE_URL+"api/jasa/"+idJasa,this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status==200) {
+          this.datajasa[i].dataAlamatCategory = response.dataAlamatCategory
+          this.datajasa[i].dataPemandu = response.dataPemandu
+         //console.log("dataalamatcategory",this.dataAlamatCategory)   
+      }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+
+  getAverageReview(idHomestay,i){
+    let input = JSON.stringify({     
+      produk_id: idHomestay,
+      tipe_produk: this.tipeProduk
+    });    
+    this.http.post(this.userData.BASE_URL+"api/review/average",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+        this.datajasa[i].averageReview = response.average
+        this.datajasa[i].jumlahReview = response.jumlah
+      }else if(response.status==204) {
+        this.datajasa[i].averageReview = 0;
+        this.datajasa[i].jumlahReview = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+
+  showError(err: any){  
+    err.status==0? 
+    this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):
+    this.showAlert("Tidak dapat menyambungkan ke server. Mohon muat kembali halaman ini");
+  }
+  showAlert(message: string){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad JasaresultPage');
   }

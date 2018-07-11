@@ -19,9 +19,23 @@
           <h2 >            
             <b>{{data.nama_jasa}}</b>            
           </h2>
+            <ion-icon *ngIf= "data?.averageReview >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon><h6>({{data?.jumlahReview}})</h6></ion-icon> 
+          <h6 class = "fontblue">            
+            Rp {{data.harga_jasa}} / plan            
+          </h6>          
           <h6>            
-            Rp {{data.harga_jasa}}/day           
-          </h6>
+            {{data?.pemandu?.nama_company}}        
+          </h6> 
         <!-- <p>
           {{data.deskripsi}}
         </p> -->

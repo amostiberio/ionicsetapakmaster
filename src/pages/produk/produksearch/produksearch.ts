@@ -27,6 +27,7 @@ export class ProduksearchPage {
   searchkey:any;
   isSearchbarOpened = false;
   newparametersearchkey:any;
+  tipeProduk:any = 'Produk'
 
   headers = new Headers({ 
     'Content-Type': 'application/json'});
@@ -44,26 +45,30 @@ export class ProduksearchPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProduksearchPage');
+    
   }
+  
   ionViewWillEnter() { 
+    console.log('ionViewDidLoad ProduksearchPage');
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
       this.loading.present()
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
-    });      
+    }); 
+    
   }
   
   getReadyData(){
     return new Promise((resolve) => {       
-          this.getDataProduk(this.newparametersearchkey);         
+          this.getSearchProduk(this.newparametersearchkey)
+         
           resolve(true);
     });
   }
 
-  getDataProduk(keyword){
+  getSearchProduk(keyword){
     let input = JSON.stringify({
       keyword: keyword
     });
@@ -71,12 +76,68 @@ export class ProduksearchPage {
       let response = data.json();       
       if(response.status==200) {          
         this.dataProduk = response.data;
-        //console.log('dataproduk',this.dataProduk);
+        //get all data yang terkait
+        for(var i = 0;i<this.dataProduk.length;i++){           
+          this.getDataProduk(this.dataProduk[i].barang_id,i)
+          this.getAverageReview(this.dataProduk[i].barang_id,i)          
+          
+        }
+        
+        
       }
       this.showAlert(response.message);
    }, err => { 
       this.showError(err);
    });       
+   
+  }
+
+  getDataProduk(idBarang,i){   
+
+    console.log('id barang', idBarang)
+    console.log('nomor i', i)
+    this.http.get(this.userData.BASE_URL+"api/barang/"+idBarang,this.options).subscribe(data => {
+      let response = data.json();
+      //console.log(data.json());
+      if(response.status==200) {                   
+         this.dataProduk[i].pemandu = response.dataPemandu
+         this.getAlamatCategory(this.dataProduk[i].pemandu.alamatcategory_id,i);         
+      }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+
+  getAverageReview(idBarang,i){
+    let input = JSON.stringify({     
+      produk_id: idBarang,
+      tipe_produk: this.tipeProduk
+    });    
+    this.http.post(this.userData.BASE_URL+"api/review/average",input,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(data.json());
+      if(response.status==200) {
+         this.dataProduk[i].averageReview = response.average
+         this.dataProduk[i].jumlahReview = response.jumlah
+      }else if(response.status==204) {
+        this.dataProduk[i].averageReview = 0;
+        this.dataProduk[i].jumlahReview = 0
+     }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+
+  getAlamatCategory(idAlamat,i){    
+    this.http.get(this.userData.BASE_URL+"api/alamat/category/"+idAlamat,this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status==200) {
+        this.dataProduk[i].dataAlamatCategory = response.data
+         //console.log('alamatcategorydata',this.dataAlamatCategory);
+      }
+   }, err => { 
+      this.showError(err);
+   });
   }
 
 onSearch(event){

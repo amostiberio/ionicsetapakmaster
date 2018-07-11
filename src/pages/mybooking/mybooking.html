@@ -1,22 +1,31 @@
 
 
-<ion-header>
-  <ion-navbar no-border-bottom color= "navbar">
+<ion-header >
+  <ion-navbar no-border-bottom color= "navbar" no-shadow>
     <ion-title>
       <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
     </ion-title>
   </ion-navbar>
 
-  <ion-toolbar no-border-top>
+  <ion-toolbar class="paddingtoptoolbar" no-border-top>
     <ion-segment [(ngModel)]="myBooking">
       <ion-segment-button value="homestay">
-        Homestay
+          <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Homestay</span>
+          </div>
       </ion-segment-button>
       <ion-segment-button value="produk">
-        Produk
+          <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Produk</span>
+          </div>          
       </ion-segment-button>
       <ion-segment-button value="jasa">
-        Jasa
+          <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Jasa</span>
+          </div>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
