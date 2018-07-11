@@ -8,56 +8,75 @@
   </ion-navbar>
 
   <ion-toolbar class="paddingtoptoolbar" no-border-top>
-    <ion-segment [(ngModel)]="myBooking">
-      <ion-segment-button value="homestay">
+    <ion-segment [(ngModel)]="myBooking" *ngIf="this.userLoggedIn == true ;else otherSegment ">
+      <ion-segment-button value="homestay" (ionSelect)="selectedSegment($event.value)">
           <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
           <div style="margin-top: -28px !important; ">
             <span class = "fontsizesmall">Homestay</span>
           </div>
       </ion-segment-button>
-      <ion-segment-button value="produk">
+      <ion-segment-button value="produk" (ionSelect)="selectedSegment($event.value)">
           <img class ="logosegment" src="assets/imgs/logo/box.png"  />
           <div style="margin-top: -28px !important; ">
             <span class = "fontsizesmall">Produk</span>
           </div>          
       </ion-segment-button>
-      <ion-segment-button value="jasa">
+      <ion-segment-button value="jasa" (ionSelect)="selectedSegment($event.value)">
           <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
           <div style="margin-top: -28px !important; ">
             <span class = "fontsizesmall">Jasa</span>
           </div>
       </ion-segment-button>
     </ion-segment>
+
+    <ng-template #otherSegment>
+        <ion-segment [(ngModel)]="myBooking">
+            <ion-segment-button value="homestaynotloggin">
+                <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+                <div style="margin-top: -28px !important; ">
+                  <span class = "fontsizesmall">Homestay</span>
+                </div>
+            </ion-segment-button>
+            <ion-segment-button value="produknotloggin">
+                <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+                <div style="margin-top: -28px !important; ">
+                  <span class = "fontsizesmall">Produk</span>
+                </div>          
+            </ion-segment-button>
+            <ion-segment-button value="jasanotloggin">
+                <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
+                <div style="margin-top: -28px !important; ">
+                  <span class = "fontsizesmall">Jasa</span>
+                </div>
+            </ion-segment-button>
+        </ion-segment>
+      </ng-template> 
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div [ngSwitch]="myBooking">
     <ion-list *ngSwitchCase="'homestay'">
-      <ion-item tappable>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
-        <h2>Ruby</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-puppy-2.jpg">
-        </ion-thumbnail>
-        <h2>Oscar</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-puppy-4.jpg">
-        </ion-thumbnail>
-        <h2>Zoey</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-puppy-3.jpg">
-        </ion-thumbnail>
-        <h2>Otto</h2>
-      </ion-item>
+        <ion-card class ="full-card" *ngFor="let data of dataTransaksiHomestay">
+            <ion-grid>                
+                <ion-row>             
+                    <ion-item>
+                        <ion-avatar item-start>
+                          <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                        </ion-avatar>
+                        <h6 class="fontketcard">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
+                        <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
+                        <h6 *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
+                        <h6 *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
+                        <h6 *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
+                        <h6 *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
+                        <h6 *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
+                        <h6 *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                        
+                      </ion-item>                                        
+                </ion-row>
+              </ion-grid>                  
+        </ion-card> 
     </ion-list>
 
     <ion-list *ngSwitchCase="'produk'">
@@ -90,5 +109,17 @@
     <div *ngSwitchCase="'jasa'">
 
     </div>
+
+    <div *ngSwitchCase="'homestaynotloggin'">
+        kamu harus login
+    </div>
+    <div *ngSwitchCase="'produknotloggin'">
+        kamu harus login
+    </div>
+    <div *ngSwitchCase="'jasanotloggin'">
+        kamu harus login
+    </div>
+    
+
   </div>
 </ion-content>

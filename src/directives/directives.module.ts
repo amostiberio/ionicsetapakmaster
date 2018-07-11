@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { UserDirective } from './user/user';
+import { RippleEffectDirective  } from './user/ripple';
 @NgModule({
-	declarations: [UserDirective],
+	declarations: [RippleEffectDirective ],
 	imports: [],
-	exports: [UserDirective]
+	exports: [RippleEffectDirective ]
 })
 export class DirectivesModule {}

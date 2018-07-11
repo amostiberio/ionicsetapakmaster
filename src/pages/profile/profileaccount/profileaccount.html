@@ -54,23 +54,24 @@
 <div padding-bottom>
       <ion-card class="full-card">          
           <button  ion-item (click)="navChangePassword()" >
+            <ion-icon color= "navbar" name="md-lock" item-left></ion-icon>
             <h5><b>Change Password</b></h5>
-            <ion-icon color= "navbar" name="arrow-dropright" item-right></ion-icon>
-
+            <ion-icon color= "navbar" name="ios-arrow-forward-outline" item-right></ion-icon>
           </button>         
       </ion-card>
 </div>
 
-<div >
-             
-        <ion-item class="logoutdiv">
-            <ion-icon name='power' item-start></ion-icon>
-            <button ion-button (click)="logout()" item-end>
-            Logout
-            </button>
-        </ion-item>       
-   
+<div padding-bottom>
+    <ion-card class="full-card">          
+        <button  ion-item (click)="logout()" >
+          <ion-icon color= "navbar" name="power" item-left></ion-icon>
+          <h5><b>Logout</b></h5>
+          <ion-icon color= "navbar" name="ios-arrow-forward-outline" item-right></ion-icon>
+        </button>         
+    </ion-card>
 </div>
+
+
 
   
   <!-- <button ion-button (click) = "loadToken()">

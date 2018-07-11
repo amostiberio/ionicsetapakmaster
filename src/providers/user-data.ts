@@ -79,6 +79,7 @@ export class UserData {
       return value;
     });
   }
+  
   updateProfilePict(picture) {
     this.storage.get('user_data').then((value) => {
       let data = value;
@@ -86,11 +87,7 @@ export class UserData {
       this.storage.set('user_data', data);
     });
   }
-  getUsername() {
-    return this.storage.get('user_data').then((value) => {
-      return value.name;
-    });
-  };
+  
   getName() {
     return this.storage.get('user_data').then((value) => {
       return value.nama;
@@ -119,23 +116,13 @@ export class UserData {
     return this.storage.get('token').then((value) => {
       return value;
     });
-  };
-  getRole() {
-    return this.storage.get('user_data').then((value) => {
-      console.log('from get role ', value)
-      return value.role;
-    });
-  };
+  }; 
   getId(){
     return this.storage.get('user_data').then((value) => {
       return value.user_id;
     });
   }
-  getAddress(){
-    return this.storage.get('user_data').then((value) => {
-      return value.address;
-    });
-  }
+
   // return a promise
   hasLoggedIn() {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {

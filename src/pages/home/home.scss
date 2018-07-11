@@ -61,6 +61,8 @@ page-home {
       background: url(../assets/icon/heart.svg) no-repeat;
     }
     .categories-card {
+      position: relative; 
+      overflow: hidden;
       border-radius: 10px;
       width: 74px !important;
       height: 60px !important;

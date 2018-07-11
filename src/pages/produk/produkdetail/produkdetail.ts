@@ -20,6 +20,9 @@ export class ProdukdetailPage {
   BASE_URL = 'http://setapakbogor.site/';
   userLoggedIn: any;
   loading:any;
+  headers = new Headers({ 
+    'Content-Type': 'application/json'});
+  options = new RequestOptions({ headers: this.headers});
 
   idProduk: any;
   currentUserId: any;  
@@ -35,9 +38,7 @@ export class ProdukdetailPage {
   averageReview :any;
   jumlahReview:any;
   jumlahDiskusi:any;
-  headers = new Headers({ 
-    'Content-Type': 'application/json'});
-  options = new RequestOptions({ headers: this.headers});
+ 
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -49,6 +50,7 @@ export class ProdukdetailPage {
       this.idProduk = this.navParams.data;
       
   }
+  
   ionViewWillEnter() {    
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'

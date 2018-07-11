@@ -34,7 +34,8 @@
 </div>
 <div text-center>   
   <h4 text-center>Categories</h4>
-      <ion-card (click)="navigateToSearchHomestay()" class="categories-card">             
+      <ion-card m-ripple-effect tappable (click)="navigateToSearchHomestay()" class="categories-card">
+        <div class="button-effect"></div>             
           <ion-row>                
               <ion-col text-center >
                   <img class ="center" src="assets/imgs/logo/home-icon-silhouette.png"  />
@@ -42,7 +43,7 @@
                </ion-col>            
           </ion-row>                 
       </ion-card>
-      <ion-card  (click)="navigateToSearchProduk()" class="categories-card">        
+      <ion-card  tappable (click)="navigateToSearchProduk()" class="categories-card">        
           <ion-row >
               <ion-col text-center>
                   <img class ="center" src="assets/imgs/logo/box.png"  />                  
@@ -50,7 +51,7 @@
                </ion-col>               
           </ion-row>
       </ion-card>
-      <ion-card (click)="navigateToSearchJasa()" class="categories-card">        
+      <ion-card tappable (click)="navigateToSearchJasa()" class="categories-card">        
           <ion-row >
               <ion-col text-center>
                   <img class ="center" src="assets/imgs/logo/conversation.png"  />
