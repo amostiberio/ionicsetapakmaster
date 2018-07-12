@@ -38,6 +38,7 @@ export class TransaksiprodukPage {
     public loadCtrl: LoadingController) {
       this.transaction_id = this.navParams.data.transactionId
       //console.log(this.transaction_id)
+      
   }
 
   ionViewDidLoad() {
@@ -118,9 +119,35 @@ export class TransaksiprodukPage {
 
   }
  
-  konfirmasiTransaksi(){
-
+  konfirmasiTransaksi(transaction_id){
+    this.loading = this.loadCtrl.create({
+      content: 'Tunggu sebentar...'
+    });
+   
+    this.alertService.presentAlertWithCallback('Konfirmasi Transaksi Selesai',
+        'Anda yakin transaksi sudah selesai?').then((yes) => {
+          if (yes) {
+            this.loading.present();
+            let input = JSON.stringify({      
+              token: this.token
+            }); 
+            this.http.post(this.userData.BASE_URL+"api/transaksiBarang/user/konfirmasi/"+transaction_id,input,this.options).subscribe(data => {
+              this.loading.dismiss();
+              let response = data.json();       
+              if(response.status == 200) {
+                this.navCtrl.popToRoot()
+                this.showAlert(response.message); 
+              }else{
+                this.showAlert(response.message); 
+              }
+            }, err => { 
+                this.loading.dismiss();
+                this.showError(err);
+            });                                        
+          }
+        });           
   }
+  
   cancelTransaksi(transaction_status){
     if(transaction_status > 0){
       this.showAlert("Transaksi sudah berjalan atau diproses");
