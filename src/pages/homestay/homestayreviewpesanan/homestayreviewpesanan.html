@@ -21,7 +21,7 @@
                       <ion-avatar item-start>
                         <img src="{{BASE_URL+datahomestay?.mainphoto}}" class="avatarhomestay">
                       </ion-avatar>
-                      <h6><b color="primary">{{datahomestay.nama_homestay}}</b></h6> 
+                      <h6><b color="primary">{{datahomestay?.nama_homestay}}</b></h6> 
                       <a class ="smallfont" color="primary">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
                     </ion-item>                                        
               </ion-row>
@@ -74,12 +74,12 @@
               </ion-row>                        
                 <ion-row>                                       
                     <ion-col>
-                      <a class="textfont">{{user.nama}}</a>
+                      <a class="textfont">{{user?.nama}}</a>
                     </ion-col>
                   </ion-row>
                   <ion-row>
                     <ion-col>
-                      <a class="textfont">{{user.nohp}}</a>
+                      <a class="textfont">{{user?.nohp}}</a>
                     </ion-col>                  
                    </ion-row>
             </ion-grid>                  
@@ -95,10 +95,10 @@
               </ion-row>           
               <ion-row>                   
                   <ion-col>
-                    <a class ="textfont">{{datahomestay.nama_homestay}}</a>
+                    <a class ="textfont">{{datahomestay?.nama_homestay}}</a>
                   </ion-col>
                   <ion-col >
-                      <a item-end class ="textfont">{{datahomestay.harga_perhari | currency:'IDR ':true}}</a>
+                      <a item-end class ="textfont">{{datahomestay?.harga_perhari | currency:'IDR ':true}}</a>
                   </ion-col>                
               </ion-row>
               <ion-row>

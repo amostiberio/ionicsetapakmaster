@@ -60,7 +60,7 @@
     <div [ngSwitch]="myBooking">
       <ion-list *ngSwitchCase="'homestay'" padding>
         <ion-card  class ="full-card" *ngFor="let data of dataTransaksiHomestay">
-            <button ion-item>                     
+            <button ion-item (click)="transaksiHomestay(data?.transaction_id)">                     
                   <ion-avatar item-start>
                     <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
                   </ion-avatar>
@@ -96,8 +96,7 @@
       </ion-list>
       <ion-list *ngSwitchCase="'produk'" padding>
           <ion-card  class ="full-card" *ngFor="let data of dataTransaksiProduk">
-              <button ion-item>              
-              
+              <button ion-item  (click)="transaksiProduk(data?.transaction_id)">             
                   <ion-avatar item-start>
                     <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
                   </ion-avatar>
@@ -134,8 +133,7 @@
       </ion-list>
       <ion-list *ngSwitchCase="'jasa'" padding>
           <ion-card class ="full-card" *ngFor="let data of dataTransaksiJasa">
-              <button ion-item>            
-              
+              <button ion-item (click)="transaksiJasa(data?.transaction_id)">            
                   <ion-avatar item-start>
                     <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
                   </ion-avatar>

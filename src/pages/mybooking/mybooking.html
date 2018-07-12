@@ -71,7 +71,7 @@
   <div [ngSwitch]="myBooking">
     <ion-list *ngSwitchCase="'homestay'" padding>
       <ion-card  class ="full-card" *ngFor="let data of dataTransaksiHomestay">
-          <button ion-item>                     
+          <button ion-item (click)="transaksiHomestay(data?.transaction_id)" >                     
                 <ion-avatar item-start>
                   <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
                 </ion-avatar>
@@ -107,9 +107,8 @@
     </ion-list>
     <ion-list *ngSwitchCase="'produk'" padding>
         <ion-card  class ="full-card" *ngFor="let data of dataTransaksiProduk">
-            <button ion-item>              
-            
-                <ion-avatar item-start>
+            <button ion-item (click)="transaksiProduk(data?.transaction_id)">                         
+                <ion-avatar item-start >
                   <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
                 </ion-avatar>
                 <h6 class="fontketcard paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
@@ -118,10 +117,9 @@
                 <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 3 || data?.transaction_status == 4" class="fontketcard">Barang sudah dikirim</h6>                   
-                <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
+                <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Barang sampai tujuan</h6>                   
                 <h6 text-wrap *ngIf="data?.transaction_status == 6" class="fontketcard">Transaksi selesai</h6>                                        
-            </button>                                        
-                                
+            </button>                                                                     
         </ion-card>
         <ion-card class="full-card"  *ngIf="dataTransaksiProduk == 0"> 
             <ion-row>
@@ -145,8 +143,7 @@
     </ion-list>
     <ion-list *ngSwitchCase="'jasa'" padding>
         <ion-card class ="full-card" *ngFor="let data of dataTransaksiJasa">
-            <button ion-item>            
-            
+            <button ion-item (click)="transaksiJasa(data?.transaction_id)">          
                 <ion-avatar item-start>
                   <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
                 </ion-avatar>

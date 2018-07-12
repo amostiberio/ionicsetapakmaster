@@ -214,4 +214,14 @@ export class MybookingPage {
     });
     toast.present();
   }
+  transaksiHomestay(id){
+    this.app.getRootNav().push('TransaksihomestayPage',{transactionId: id}); 
+  }
+  transaksiProduk(id){
+    this.app.getRootNav().push('TransaksiprodukPage',{transactionId: id}); 
+  }
+  transaksiJasa(id){
+    this.app.getRootNav().push('TransaksijasaPage',{transactionId: id}); 
+  }
+
 }

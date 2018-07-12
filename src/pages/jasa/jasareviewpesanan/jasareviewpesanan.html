@@ -26,7 +26,7 @@
                     <ion-avatar item-start>
                       <img src="{{BASE_URL+datajasa?.mainphoto}}" class="avatarhomestay">
                     </ion-avatar>
-                    <h6><b color="primary">{{datajasa.nama_jasa}}</b></h6> 
+                    <h6><b color="primary">{{datajasa?.nama_jasa}}</b></h6> 
                     <a class ="smallfont" color="primary">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
                   </ion-item>                                        
             </ion-row>
@@ -36,7 +36,7 @@
         <ion-grid>           
             <ion-row>
                 <ion-col col-8>
-                  <a class ="smallfont" color="primary">Check In</a>
+                  <a class ="smallfont" color="primary">Booking Date</a>
                 </ion-col>                
                 <ion-col col-4>
                   <a class ="smallfont" color="primary">Duration</a>
@@ -63,12 +63,12 @@
             </ion-row>                        
               <ion-row>                                       
                   <ion-col>
-                    <a class="textfont">{{user.nama}}</a>
+                    <a class="textfont">{{user?.nama}}</a>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <a class="textfont">{{user.nohp}}</a>
+                    <a class="textfont">{{user?.nohp}}</a>
                   </ion-col>                  
                  </ion-row>
           </ion-grid>                  
@@ -84,10 +84,10 @@
             </ion-row>           
             <ion-row>                   
                 <ion-col>
-                  <a class ="textfont">{{datajasa.nama_jasa}}</a>
+                  <a class ="textfont">{{datajasa?.nama_jasa}}</a>
                 </ion-col>
                 <ion-col>
-                    <a item-end class ="textfont">{{datajasa.harga_jasa | currency:'IDR ':true}}</a>
+                    <a item-end class ="textfont">{{datajasa?.harga_jasa | currency:'IDR ':true}}</a>
                 </ion-col>                
             </ion-row>
             <ion-row>
@@ -95,7 +95,7 @@
                   <a class ="textfont">Duration</a>
                 </ion-col>
                 <ion-col>
-                    <a item-end class ="textfont">1 times</a>
+                    <a item-end class ="textfont">1 time(s)</a>
                 </ion-col>                
             </ion-row>                           
           </ion-grid>                  
