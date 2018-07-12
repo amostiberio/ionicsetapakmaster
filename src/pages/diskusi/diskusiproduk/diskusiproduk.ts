@@ -132,7 +132,11 @@ export class DiskusiprodukPage {
   }
   
 addDiskusi(){
-  this.app.getRootNav().push('TambahdiskusiPage',{idproduk: this.idProduk, tipeproduk: this.tipeProduk, userid:this.currentUserId}); 
+  if(this.userLoggedIn == true ){    
+    this.app.getRootNav().push('TambahdiskusiPage',{idproduk: this.idProduk, tipeproduk: this.tipeProduk, userid:this.currentUserId}); 
+  }else{     
+    this.showAlert("Harus Login Terlebih Dahulu");       
+  }  
 }
 navCommentProduk(datadiskusi){
   this.app.getRootNav().push('CommentprodukPage',{datadiskusi: datadiskusi, tipeproduk: this.tipeProduk, userpemanduid : this.userPemanduId}); 

@@ -24,9 +24,9 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card *ngFor="let data of dataProduk" tappable>
+    <ion-card *ngFor="let data of dataProduk" (click)="produkDetail(data.barang_id)" tappable>
         <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
-        <img src="{{BASE_URL+data?.mainphoto}}" (click)="produkDetail(data.barang_id)"/>
+        <img src="{{BASE_URL+data?.mainphoto}}" />
         <ion-card-content>
             <h2>            
               <b>{{data?.nama_barang}}</b>            
@@ -50,27 +50,6 @@
             </h6>            
                 <ion-icon name="pin" class="mapsizefont"></ion-icon>
                 <ion-icon class="mapsizefont" *ngFor="let alamat of data?.dataAlamatCategory" ><h6>{{alamat?.kabupaten}} </h6></ion-icon>            
-        </ion-card-content>
-        <!-- <ion-row no-padding>
-          <ion-col>
-            <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
-              <ion-icon name='star'></ion-icon>
-              Favorite
-            </button>
-          </ion-col>
-          <ion-col text-center>
-            <button ion-button clear small color="danger" icon-left (click)="listen(card)">
-              <ion-icon name='musical-notes'></ion-icon>
-              Listen
-            </button>
-          </ion-col>
-          <ion-col text-right>
-            <button ion-button clear small color="danger" icon-left (click)="share(card)">
-              <ion-icon name='share-alt'></ion-icon>
-              Share
-            </button>
-          </ion-col>
-        </ion-row> -->
-      </ion-card>
-      
+        </ion-card-content>        
+      </ion-card>      
 </ion-content>

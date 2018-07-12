@@ -148,33 +148,37 @@ export class CommentprodukPage {
   }
 
   addComment(){
-    if(this.enterIsiComment != null && this.enterIsiComment != ''){     
-   
-      let input = JSON.stringify({
-        diskusi_id : this.dataDiskusi.diskusi_id,
-        user_id : this.currentUserId,        
-        isi_comment: this.enterIsiComment
-      });
-      console.log(input)
-      this.http.post(this.userData.BASE_URL+"api/comment/create",input,this.options).subscribe(data => {
-        let response = data.json();       
-        if(response.status == 200) {
-            this.app.getRootNav().push('CommentprodukPage',{datadiskusi: this.dataDiskusi, userpemanduid:this.userPemanduId, tipeproduk :this.tipeproduk}).then(()=>{
-            //let index = 4;
-            const index = this.navCtrl.getActive().index-1;
-            this.navCtrl.remove(index); 
-            //remove page sebelumnya,
-            //bisabuat fungsi filter juga
-            this.showAlert(response.message); 
-          });   
-        }else{
-            this.showAlert(response.message); 
-        }
-      }, err => { 
-          this.loading.dismiss();
-          this.showError(err);
-      });  
-    }     
+    if(this.userLoggedIn == true ){    
+      if(this.enterIsiComment != null && this.enterIsiComment != ''){   
+        let input = JSON.stringify({
+          diskusi_id : this.dataDiskusi.diskusi_id,
+          user_id : this.currentUserId,        
+          isi_comment: this.enterIsiComment
+        });
+        console.log(input)
+        this.http.post(this.userData.BASE_URL+"api/comment/create",input,this.options).subscribe(data => {
+          let response = data.json();       
+          if(response.status == 200) {
+              this.app.getRootNav().push('CommentprodukPage',{datadiskusi: this.dataDiskusi, userpemanduid:this.userPemanduId, tipeproduk :this.tipeproduk}).then(()=>{
+              //let index = 4;
+              const index = this.navCtrl.getActive().index-1;
+              this.navCtrl.remove(index); 
+              //remove page sebelumnya,
+              //bisabuat fungsi filter juga
+              this.showAlert(response.message); 
+            });   
+          }else{
+              this.showAlert(response.message); 
+          }
+        }, err => { 
+            this.loading.dismiss();
+            this.showError(err);
+        });  
+      }
+    }else{     
+      this.showAlert("Harus Login Terlebih Dahulu");       
+    }
+         
   }
   
   showError(err: any){  

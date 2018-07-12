@@ -121,6 +121,7 @@ export class ProdukreviewpesananPage {
       jumlah_barang:this.jumlahBarang,
       alamatpengiriman : this.alamatpengiriman,
       paket_pengiriman: this.tarifKode,
+      noteswisatawan :this.notes,
       token: this.token
     });
     console.log(input);         
@@ -130,8 +131,9 @@ export class ProdukreviewpesananPage {
       if(response.status == 200) {
         this.alertService.presentAlertOnlyConfirm('Order Selesai',
         'Informasi Order ada di menu My Booking').then((yes) => {
-          if (yes) {          
-            this.app.getRootNav().setRoot('TabsPage');                  
+          if (yes) {    
+            this.navCtrl.popToRoot()       
+            //this.app.getRootNav().setRoot(TabsPage);                  
           }
         });        
       }else{
@@ -142,6 +144,10 @@ export class ProdukreviewpesananPage {
         this.showError(err);
     });
     
+  }
+
+  coba(){
+    this.navCtrl.popToRoot() 
   }
   showError(err: any){  
     err.status==0? 

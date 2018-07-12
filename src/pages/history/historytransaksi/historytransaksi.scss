@@ -1,4 +1,10 @@
-page-mybooking {
+page-historytransaksi {
+    .navbartitle {        
+        display: block;
+        line-height: .7em;
+        font-size: 18px;
+        margin: 5px 0;
+      }
     .full-card {        
         margin: 0px !important;    
         width: 100% !important;
@@ -35,7 +41,6 @@ page-mybooking {
         color: grey;
         
       }
-
       .textnotransaksi{
         padding-top:5px;
         font-size :12px;      
@@ -66,5 +71,4 @@ page-mybooking {
         padding: 0 10px;
 
     }
-    
 }

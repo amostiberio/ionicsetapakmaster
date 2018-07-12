@@ -1,30 +1,30 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, App, LoadingController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../../providers/user-data';
 
 @IonicPage()
 @Component({
-  selector: 'page-mybooking',
-  templateUrl: 'mybooking.html',
+  selector: 'page-historytransaksi',
+  templateUrl: 'historytransaksi.html',
 })
-export class MybookingPage {
-  //deklarasi umum
-  BASE_URL = 'http://setapakbogor.site/';
-  userLoggedIn: any;
-  loading:any;
-  headers = new Headers({ 
-    'Content-Type': 'application/json'});
-  options = new RequestOptions({ headers: this.headers});
+export class HistorytransaksiPage {
 
-  myBooking: string ;
-  currentUserId:any;
-  token:any;
-  segment: String='homestay';
-  dataTransaksiHomestay: any = [];
-  dataTransaksiProduk: any = [];
-  dataTransaksiJasa: any = [];
+//deklarasi umum
+BASE_URL = 'http://setapakbogor.site/';
+userLoggedIn: any;
+loading:any;
+headers = new Headers({ 
+  'Content-Type': 'application/json'});
+options = new RequestOptions({ headers: this.headers});
 
+myBooking: string ;
+currentUserId:any;
+token:any;
+segment: String='homestay';
+dataTransaksiHomestay: any = [];
+dataTransaksiProduk: any = [];
+dataTransaksiJasa: any = [];
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public http: Http,    
@@ -35,7 +35,7 @@ export class MybookingPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MybookingPage');
+    console.log('ionViewDidLoad HistorytransaksiPage');
   }
 
   ionViewWillEnter() {    
@@ -50,7 +50,8 @@ export class MybookingPage {
 
   getReadyData(){
     return new Promise((resolve) => {      
-            this.myBooking = "homestaynotloggin";
+            //this.myBooking = "homestaynotloggin";
+            this.myBooking = "homestay";
             this.userData.hasLoggedIn().then((value)=>{
             this.userLoggedIn = value;
             if(this.userLoggedIn == true){
@@ -87,7 +88,7 @@ export class MybookingPage {
     let input = JSON.stringify({     
       token: token,
     });    
-    this.http.post(this.userData.BASE_URL+"api/transaksiHomestay/user/transaksiaktif",input,this.options).subscribe(data => {
+    this.http.post(this.userData.BASE_URL+"api/transaksiHomestay/user/history",input,this.options).subscribe(data => {
       let response = data.json();
       //console.log(data.json());
       if(response.status==200) {
@@ -122,7 +123,7 @@ export class MybookingPage {
     let input = JSON.stringify({     
       token: token,
     });    
-    this.http.post(this.userData.BASE_URL+"api/transaksiBarang/user/transaksiaktif",input,this.options).subscribe(data => {
+    this.http.post(this.userData.BASE_URL+"api/transaksiBarang/user/history",input,this.options).subscribe(data => {
       let response = data.json();
       //console.log(data.json());
       if(response.status==200) {
@@ -156,7 +157,7 @@ export class MybookingPage {
     let input = JSON.stringify({     
       token: token,
     });    
-    this.http.post(this.userData.BASE_URL+"api/transaksiJasa/user/transaksiaktif",input,this.options).subscribe(data => {
+    this.http.post(this.userData.BASE_URL+"api/transaksiJasa/user/history",input,this.options).subscribe(data => {
       let response = data.json();
       //console.log(data.json());
       if(response.status==200) {
@@ -197,7 +198,6 @@ export class MybookingPage {
     //this.navCtrl.push('LoginPage')
     this.app.getRootNav().push('LoginPage')
   }
-
   navigateToSignupPage(): void {
     //this.navCtrl.push('SignupPage') // tab keliatan
     this.app.getRootNav().push('SignupPage') // tab gak keliatan

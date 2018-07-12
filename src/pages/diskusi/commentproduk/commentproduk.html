@@ -36,7 +36,7 @@
             </ion-row>                          
     </ion-card>
     <ion-card class ="full-card-homenamecard">                    
-            <ion-row class="nopaddingleft">             
+            <ion-row class="nopaddingleft">                           
                 <ion-item>
                     <ion-avatar item-start>
                       <img src="{{BASE_URL+dataDiskusi?.photo_user}}">
@@ -91,8 +91,7 @@
 </ion-content>
 
 <ion-footer color="primary">
-    <ion-toolbar >
-        
+    <ion-toolbar *ngIf="userLoggedIn == true">        
           <ion-input (input)="onSearch($event)"  placeholder="Tulis Komentar Anda"></ion-input>     
           <ion-buttons end>
               <button ion-button icon-only (click)="addComment()">
@@ -100,4 +99,12 @@
               </button>
           </ion-buttons>
     </ion-toolbar>
+    <ion-toolbar *ngIf="userLoggedIn == false">        
+        <ion-input (input)="onSearch($event)"  placeholder="Harus Login Terlebih Dahulu" disabled></ion-input>     
+        <ion-buttons end>
+            <button ion-button icon-only (click)="addComment()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+  </ion-toolbar>
 </ion-footer>
