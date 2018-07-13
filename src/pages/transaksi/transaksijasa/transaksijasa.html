@@ -121,7 +121,7 @@
         <button *ngIf="dataTransaksi?.transaction_status == 3" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="konfirmasiTransaksi(dataTransaksi?.transaction_id)" tappable >
             Konfirmasi Transaksi Selesai
         </button>
-        <button ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status)" tappable >
+        <button ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status, dataTransaksi?.transaction_id)" tappable >
             Batalkan Transaksi
         </button>   
   </div>

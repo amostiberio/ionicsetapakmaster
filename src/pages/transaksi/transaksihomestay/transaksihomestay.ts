@@ -140,11 +140,36 @@ export class TransaksihomestayPage {
         });           
   }
   
-  cancelTransaksi(transaction_status){
+  cancelTransaksi(transaction_status,transaction_id){
     if(transaction_status > 0){
-      this.showAlert("Transaksi sudah berjalan atau diproses");
+      this.showAlert("Transaksi telah berjalan atau telah diproses");
     }else{
-      this.showAlert("Cancel");
+      this.loading = this.loadCtrl.create({
+        content: 'Tunggu sebentar...'
+      });
+      console.log(transaction_id)  
+      this.alertService.presentAlertWithCallback('Cancel Transaksi',
+          'Anda yakin ingin cancel transaksi ini?').then((yes) => {
+            if (yes) {
+              this.loading.present();
+              let input = JSON.stringify({      
+                token: this.token
+              }); 
+              this.http.post(this.userData.BASE_URL+"api/transaksiHomestay/user/cancel/"+transaction_id,input,this.options).subscribe(data => {
+                this.loading.dismiss();
+                let response = data.json();       
+                if(response.status == 200) {
+                  this.navCtrl.popToRoot()
+                  this.showAlert(response.message); 
+                }else{
+                  this.showAlert(response.message); 
+                }
+              }, err => { 
+                  this.loading.dismiss();
+                  this.showError(err);
+              });                                        
+            }
+          }); 
     }
   }
   showError(err: any){  
