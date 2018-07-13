@@ -5,7 +5,7 @@ import { UserData } from '../../../providers/user-data';
 import { AuthHttp } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 import { Http,Headers, RequestOptions } from '@angular/http';
-
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 /**
@@ -21,13 +21,33 @@ import { Http,Headers, RequestOptions } from '@angular/http';
   templateUrl: 'editprofile.html',
 })
 export class EditprofilePage {
+  
   user: {user_id?: string, nama?: string, email?: string, alamat?: string, nohp?: string, userphoto?:string} = {};
   token: string;
   base64Image: string;
   submitted = false;
   temp: any;
   loading: any;
-  
+  base64String:any;
+  optionsTake: CameraOptions = {    
+    destinationType: this.Camera.DestinationType.DATA_URL,    
+    targetWidth: 600,
+    targetHeight: 600
+  }
+  optionsGalery: CameraOptions = {    
+    destinationType: this.Camera.DestinationType.DATA_URL,
+    sourceType     : this.Camera.PictureSourceType.PHOTOLIBRARY,
+    targetWidth: 600,
+    targetHeight: 600
+  }
+
+  headers = new Headers({ 
+    'Content-Type': 'application/json'});
+  options = new RequestOptions({ headers: this.headers});
+
+  image = document.getElementById('myImage');
+
+
   constructor(
     public navCtrl: NavController, 
   	public navParams: NavParams,
@@ -36,6 +56,8 @@ export class EditprofilePage {
   	public loadCtrl: LoadingController,
     public authHttp: AuthHttp,
     public actionSheetCtrl: ActionSheetController,
+    public Camera: Camera,
+    public http: Http
     ) {
   }
   ionViewDidLoad() {
@@ -57,27 +79,28 @@ export class EditprofilePage {
   }
   
   takePicture(){
-    // Camera.getPicture({
-    //     destinationType: Camera.DestinationType.DATA_URL,
-    //     targetWidth: 600,
-    //     targetHeight: 600
-    // }).then((UserPhoto) => {
-    //   this.base64Image = UserPhoto;
-    //   this.postUpdatePicture();
-    //   }, (err) => {
-    // });
+    console.log('masuk')
+    this.Camera.getPicture(this.optionsTake).then((imageData) => {
+      this.base64String = "data:image/jpeg;base64," + imageData;
+      this.base64Image = imageData;
+      //console.log(this.base64Image)      
+      this.postUpdatePicture(this.user.user_id);
+      
+     }, (err) => {
+      // Handle error
+     });    
   }
   getPhotoFromGallery(){
-    // Camera.getPicture({
-    //     destinationType: Camera.DestinationType.DATA_URL,
-    //     sourceType     : Camera.PictureSourceType.PHOTOLIBRARY,
-    //     targetWidth: 600,
-    //     targetHeight: 600
-    // }).then((UserPhoto) => {
-    //   this.base64Image = UserPhoto;
-    //   this.postUpdatePicture();
-    //   }, (err) => {
-    // });
+    console.log('masuk')
+
+    this.Camera.getPicture(this.optionsGalery).then((imageData) => {
+      this.base64String = "data:image/jpeg;base64," + imageData;
+      this.base64Image = imageData; 
+      //console.log(this.base64Image)     
+      this.postUpdatePicture(this.user.user_id);
+     }, (err) => {
+      // Handle error
+     });
   }
 
   updatePicture() {
@@ -103,29 +126,58 @@ export class EditprofilePage {
     actionSheet.present();
   }
 
-  postUpdatePicture(){
+  postUpdatePicture(userid){
     this.loading = this.loadCtrl.create({
         content: 'Uploading image...'
     });
     this.loading.present();
     let param = JSON.stringify({
-      user_id : this.user.user_id,
-      UserPhoto: this.base64Image
-    });
-    this.authHttp.post(this.userData.BASE_URL+'api/user/upload/userphoto',param).subscribe(res => {
+       base64Image: this.base64String
+    });  
+    this.http.post(this.userData.BASE_URL+'api/user/upload/uploadfotouser/'+userid,param,this.options).subscribe(res => {
       this.loading.dismiss();
       let response = res.json();
-      if(response.status==200) {
-        this.userData.updateProfilePict(response.picture);
-        this.user.userphoto = response.picture;
-        this.showAlert("Berhasil mengubah foto profile"); 
-      }         
+      if(response.status==200) { 
+        console.log(response.data)       
+        this.showAlert(response.message); 
+      }
+      console.log(response.data)         
     }, err => { 
         this.loading.dismiss();
         this.showError(err);
     });
+
+    // this.http.post(this.userData.BASE_URL+'api/user/upload/userphoto/'+userid,param,this.options).subscribe(res => {
+    //   this.loading.dismiss();
+    //   let response = res.json();
+    //   if(response.status==200) {
+    //     //this.userData.updateProfilePict(response.picture);
+    //     //this.user.userphoto = response.picture;
+    //     //this.showAlert("Berhasil mengubah foto profile"); 
+    //     this.showAlert(response.message); 
+    //   }         
+    // }, err => { 
+    //     this.loading.dismiss();
+    //     this.showError(err);
+    // });
+
+    // this.http.post(this.userData.BASE_URL+"api/user/upload/userphoto/"+this.user.user_id,param).subscribe(data => {
+    //   this.loading.dismiss();
+    //   let response = data.json();       
+    //   if(response.status == 200) {
+    //     this.showAlert(response.message); 
+    //   }else{
+    //       this.showAlert(response.message); 
+    //   }
+    // }, err => { 
+    //     this.loading.dismiss();
+    //     this.showError(err);
+    // });
     
   }
+
+
+  
 
   // headers = new Headers({ 
   //   'Content-Type': 'application/json',

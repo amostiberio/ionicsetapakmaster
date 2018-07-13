@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpModule, RequestOptions } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -12,7 +12,6 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { FileOpener } from '@ionic-native/file-opener';
 import { Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
-
 import { MyApp } from './app.component';
 
 //General
@@ -31,19 +30,22 @@ import { UserData } from '../providers/user-data';
 import { AlertService } from '../providers/util/alert.service';
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
 import { HomestayData } from '../providers/homestay-data/homestay-data';
 
 //component module
 
 //set the auth http for API
+
 export function getAuthHttp(http, Storage) {
   return new AuthHttp(new AuthConfig({
     headerPrefix: "",
-    noJwtError: true,
+    noJwtError: true,   
     globalHeaders: [{'Content-Type': 'application/json'}],
     tokenGetter: (() => {return Storage.get('token')}),
   }), http);
 }
+
 @NgModule({
   declarations: [
     MyApp,
@@ -82,6 +84,7 @@ export function getAuthHttp(http, Storage) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserData,
     AlertService,
+    Camera,
     Transfer,  
     FileChooser,
     FileOpener,  
