@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, App, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, App, LoadingController, ActionSheetController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { NgForm } from '@angular/forms';
 import { AlertService } from '../../../providers/util/alert.service';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 
 /**
@@ -36,14 +38,30 @@ export class TransaksihomestayPage {
   idAlamatCategory :any;
   dataAlamatCategory :any;
 
+  base64Image: string;
+  base64String:any;
+  optionsTake: CameraOptions = {    
+    destinationType: this.Camera.DestinationType.DATA_URL,    
+    targetWidth: 1080,
+    targetHeight: 1080
+  }
+  optionsGalery: CameraOptions = {    
+    destinationType: this.Camera.DestinationType.DATA_URL,
+    sourceType     : this.Camera.PictureSourceType.PHOTOLIBRARY,
+    targetWidth: 1080,
+    targetHeight: 1080
+  }
+  
   constructor(public navCtrl: NavController,
     public alertService: AlertService, 
     public navParams: NavParams,
     public http: Http,    
     public userData: UserData,
     public toastCtrl : ToastController,
+    public actionSheetCtrl: ActionSheetController,
     public app:App,
-    public loadCtrl: LoadingController) {
+    public loadCtrl: LoadingController,
+    public Camera: Camera,) {
     this.transaction_id = this.navParams.data.transactionId
   }
 
@@ -108,9 +126,76 @@ export class TransaksihomestayPage {
    });
   }
 
-  uploadBuktiPembayaran(){
+  uploadBuktiPembayaran(){    
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Pilihan',
+      buttons: [
+        {
+          text: 'Ambil Gambar',
+          role: 'ambilGambar',
+          handler: () => {
+            this.takePicture();
+          }
+        },
+        {
+          text: 'Pilih Dari Galleri',
+          role: 'gallery',
+          handler: () => {
+            this.getPhotoFromGallery();
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+}
 
-  }
+takePicture(){
+  console.log('masuk')
+  this.Camera.getPicture(this.optionsTake).then((imageData) => {
+    this.base64String = "data:image/jpeg;base64," + imageData;
+    this.base64Image = imageData;      
+    //console.log(this.base64Image)      
+    this.postUpdatePicture(this.transaction_id);
+    
+   }, (err) => {
+    // Handle error
+   });    
+}
+getPhotoFromGallery(){
+  console.log('masuk')
+  this.Camera.getPicture(this.optionsGalery).then((imageData) => {
+    this.base64String = "data:image/jpeg;base64," + imageData;
+    this.base64Image = imageData;       
+    //console.log(this.base64Image)     
+    this.postUpdatePicture(this.transaction_id);
+   }, (err) => {
+    // Handle error
+   });
+}
+
+postUpdatePicture(transactionid){
+  this.loading = this.loadCtrl.create({
+      content: 'Uploading image...'
+  });
+  this.loading.present();
+  let param = JSON.stringify({
+     transaction_id: transactionid,
+     picture: this.base64String,
+     token :this.token       
+  });  
+  this.http.post(this.userData.BASE_URL+'api/user/upload/buktipembayaran/homestay',param,this.options).subscribe(res => {
+    this.loading.dismiss();
+    let response = res.json();
+    if(response.status==200) {        
+      this.navCtrl.popToRoot()          
+      this.showAlert(response.message); 
+    }
+    console.log(response.data)         
+  }, err => { 
+      this.loading.dismiss();
+      this.showError(err);
+  });
+}
  
   konfirmasiTransaksi(transaction_id){
     this.loading = this.loadCtrl.create({

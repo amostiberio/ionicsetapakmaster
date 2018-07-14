@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, ActionSheetController, App } from 'ionic-angular';
 import { UserData } from '../../../providers/user-data';
 import { AuthHttp } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
@@ -26,6 +26,8 @@ export class EditprofilePage {
   token: string;
   base64Image: string;
   submitted = false;
+  BASE_URL = 'http://setapakbogor.site/';     
+
   temp: any;
   loading: any;
   base64String:any;
@@ -57,11 +59,13 @@ export class EditprofilePage {
     public authHttp: AuthHttp,
     public actionSheetCtrl: ActionSheetController,
     public Camera: Camera,
-    public http: Http
+    public http: Http,
+    public app: App
     ) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditprofilePage');
+    
   }
 
   ionViewWillEnter(){
@@ -76,15 +80,17 @@ export class EditprofilePage {
       this.token = token;
     });
     this.profpict();
+
   }
   
   takePicture(){
     console.log('masuk')
     this.Camera.getPicture(this.optionsTake).then((imageData) => {
       this.base64String = "data:image/jpeg;base64," + imageData;
-      this.base64Image = imageData;
+      this.base64Image = imageData;      
       //console.log(this.base64Image)      
-      this.postUpdatePicture(this.user.user_id);
+      this.postUpdatePicture();
+      this.profpict();
       
      }, (err) => {
       // Handle error
@@ -92,12 +98,12 @@ export class EditprofilePage {
   }
   getPhotoFromGallery(){
     console.log('masuk')
-
     this.Camera.getPicture(this.optionsGalery).then((imageData) => {
       this.base64String = "data:image/jpeg;base64," + imageData;
-      this.base64Image = imageData; 
+      this.base64Image = imageData;       
       //console.log(this.base64Image)     
-      this.postUpdatePicture(this.user.user_id);
+      this.postUpdatePicture();
+      this.profpict();
      }, (err) => {
       // Handle error
      });
@@ -126,19 +132,21 @@ export class EditprofilePage {
     actionSheet.present();
   }
 
-  postUpdatePicture(userid){
+  postUpdatePicture(){
     this.loading = this.loadCtrl.create({
         content: 'Uploading image...'
     });
     this.loading.present();
     let param = JSON.stringify({
-       base64Image: this.base64String
+       picture: this.base64String,
+       token :this.token       
     });  
-    this.http.post(this.userData.BASE_URL+'api/user/upload/uploadfotouser/'+userid,param,this.options).subscribe(res => {
+    this.http.post(this.userData.BASE_URL+'api/user/upload/userphoto',param,this.options).subscribe(res => {
       this.loading.dismiss();
       let response = res.json();
-      if(response.status==200) { 
-        console.log(response.data)       
+      if(response.status==200) {        
+        this.userData.updateProfilePict(response.photo);
+        this.profpict()       
         this.showAlert(response.message); 
       }
       console.log(response.data)         
@@ -146,45 +154,8 @@ export class EditprofilePage {
         this.loading.dismiss();
         this.showError(err);
     });
-
-    // this.http.post(this.userData.BASE_URL+'api/user/upload/userphoto/'+userid,param,this.options).subscribe(res => {
-    //   this.loading.dismiss();
-    //   let response = res.json();
-    //   if(response.status==200) {
-    //     //this.userData.updateProfilePict(response.picture);
-    //     //this.user.userphoto = response.picture;
-    //     //this.showAlert("Berhasil mengubah foto profile"); 
-    //     this.showAlert(response.message); 
-    //   }         
-    // }, err => { 
-    //     this.loading.dismiss();
-    //     this.showError(err);
-    // });
-
-    // this.http.post(this.userData.BASE_URL+"api/user/upload/userphoto/"+this.user.user_id,param).subscribe(data => {
-    //   this.loading.dismiss();
-    //   let response = data.json();       
-    //   if(response.status == 200) {
-    //     this.showAlert(response.message); 
-    //   }else{
-    //       this.showAlert(response.message); 
-    //   }
-    // }, err => { 
-    //     this.loading.dismiss();
-    //     this.showError(err);
-    // });
-    
   }
 
-
-  
-
-  // headers = new Headers({ 
-  //   'Content-Type': 'application/json',
-  //   'authorization': this.token});
-  // options = new RequestOptions({ headers: this.headers});
-
- 
   onUpdate(form: NgForm) {
     this.submitted = true;
     let loading = this.loadCtrl.create({
