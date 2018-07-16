@@ -35,6 +35,7 @@ export class TransaksijasaPage {
   dataPemandu :any;
   idAlamatCategory :any;
   dataAlamatCategory :any;
+  reviewExist:any;
 
   base64Image: string;
   base64String:any;
@@ -103,7 +104,8 @@ export class TransaksijasaPage {
       if(response.status==200) {
         this.dataTransaksi = response.data
         //console.log(this.dataTransaksi)
-        this.getDataJasa(this.dataTransaksi.jasa_id)        
+        this.getDataJasa(this.dataTransaksi.jasa_id)
+        this.checkReviewExist(this.dataTransaksi.jasa_id,this.dataTransaksi.transaction_id)         
       }
    }, err => { 
       this.showError(err);
@@ -255,6 +257,32 @@ postUpdatePicture(transactionid){
           });   
     }
   }
+  addReview(transaction_id){
+    this.app.getRootNav().push('AddreviewPage',{id:this.dataTransaksi.jasa_id, tipeproduk: 'Jasa', idTransaction:this.dataTransaksi.transaction_id })
+  }
+
+  checkReviewExist(id,transaction_id){ 
+    let param = JSON.stringify({
+       produk_id: id,
+       tipe_produk: 'Jasa', 
+       transaction_id: transaction_id   
+    });  
+    this.http.post(this.userData.BASE_URL+'api/review/getreview',param,this.options).subscribe(res => {
+      this.loading.dismiss();
+      let response = res.json();
+      if(response.status==200) {        
+        this.reviewExist = true
+        console.log('coba',this.reviewExist) 
+      }else{
+        this.reviewExist = false 
+        console.log(this.reviewExist) 
+      }
+    }, err => { 
+        this.loading.dismiss();
+        this.showError(err);
+    });
+  }
+
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

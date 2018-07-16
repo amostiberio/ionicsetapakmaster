@@ -37,7 +37,7 @@ export class TransaksihomestayPage {
   dataPemandu :any;
   idAlamatCategory :any;
   dataAlamatCategory :any;
-
+  reviewExist:any;
   base64Image: string;
   base64String:any;
   optionsTake: CameraOptions = {    
@@ -81,7 +81,7 @@ export class TransaksihomestayPage {
 
   getReadyData(){
     return new Promise((resolve) => {        
-            this.getTransaksiHomestay(this.transaction_id)
+            this.getTransaksiHomestay(this.transaction_id)            
             //this.getAlamatCategory(this.idAlamatCategory);
             this.userData.getData().then((value)=>{
             this.user.nama = value.nama;
@@ -92,6 +92,7 @@ export class TransaksihomestayPage {
           this.userData.getToken().then((token) => {
             this.token = token;
           });
+          
           //this.hitungTotalPrice();
           //this.getDataProduk(this.datahomestay.homestay_id);    
           resolve(true);
@@ -104,12 +105,12 @@ export class TransaksihomestayPage {
       if(response.status==200) {
         this.dataTransaksi = response.data
         console.log(this.dataTransaksi)
-        this.getDataHomestay(this.dataTransaksi.homestay_id)        
+        this.getDataHomestay(this.dataTransaksi.homestay_id)
+        this.checkReviewExist(this.dataTransaksi.homestay_id,this.dataTransaksi.transaction_id)       
       }
    }, err => { 
       this.showError(err);
-   });
-    
+   });    
   }
 
   getDataHomestay(idHomestay){    
@@ -196,6 +197,28 @@ postUpdatePicture(transactionid){
       this.showError(err);
   });
 }
+
+checkReviewExist(id,transaction_id){ 
+  let param = JSON.stringify({
+     produk_id: id,
+     tipe_produk: 'Homestay', 
+     transaction_id: transaction_id   
+  });  
+  this.http.post(this.userData.BASE_URL+'api/review/getreview',param,this.options).subscribe(res => {
+    this.loading.dismiss();
+    let response = res.json();
+    if(response.status==200) {        
+      this.reviewExist = true
+      console.log(this.reviewExist) 
+    }else{
+      this.reviewExist = false 
+      console.log(this.reviewExist) 
+    }
+  }, err => { 
+      this.loading.dismiss();
+      this.showError(err);
+  });
+}
  
   konfirmasiTransaksi(transaction_id){
     this.loading = this.loadCtrl.create({
@@ -256,6 +279,9 @@ postUpdatePicture(transactionid){
             }
           }); 
     }
+  }
+  addReview(transaction_id){
+    this.app.getRootNav().push('AddreviewPage',{id:this.dataTransaksi.homestay_id, tipeproduk: 'Homestay', idTransaction:this.dataTransaksi.transaction_id })
   }
   showError(err: any){  
     err.status==0? 

@@ -29,6 +29,7 @@ export class TransaksiprodukPage {
   dataPemandu :any;
   idAlamatCategory :any;
   dataAlamatCategory :any;
+  reviewExist:any;
 
   base64Image: string;
   base64String:any;
@@ -98,7 +99,9 @@ export class TransaksiprodukPage {
       let response = data.json();
       if(response.status==200) {
         this.dataTransaksi = response.data
-        this.getDataProduk(this.dataTransaksi.barang_id)        
+        this.getDataProduk(this.dataTransaksi.barang_id)      
+        this.checkReviewExist(this.dataTransaksi.barang_id,this.dataTransaksi.transaction_id)        
+  
       }
    }, err => { 
       this.showError(err);
@@ -119,6 +122,28 @@ export class TransaksiprodukPage {
    }, err => { 
       this.showError(err);
    });
+  }
+
+  checkReviewExist(id,transaction_id){ 
+    let param = JSON.stringify({
+       produk_id: id,
+       tipe_produk: 'Produk', 
+       transaction_id: transaction_id   
+    });  
+    this.http.post(this.userData.BASE_URL+'api/review/getreview',param,this.options).subscribe(res => {
+      this.loading.dismiss();
+      let response = res.json();
+      if(response.status==200) {        
+        this.reviewExist = true
+        console.log('coba',this.reviewExist) 
+      }else{
+        this.reviewExist = false 
+        console.log(this.reviewExist) 
+      }
+    }, err => { 
+        this.loading.dismiss();
+        this.showError(err);
+    });
   }
 
   getAlamatCategory(idAlamat){    
@@ -267,6 +292,9 @@ postUpdatePicture(transactionid){
     }
   }
 
+  addReview(transaction_id){
+    this.app.getRootNav().push('AddreviewPage',{id:this.dataTransaksi.barang_id, tipeproduk: 'Produk', idTransaction:this.dataTransaksi.transaction_id })
+  }
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):
