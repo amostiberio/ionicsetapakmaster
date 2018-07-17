@@ -1,9 +1,4 @@
-<!--
-  Generated template for the AllartikelPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header >
 
   <ion-navbar color= "navbar">
@@ -11,15 +6,14 @@
       <span class="firstline">All Artikel</span> 
       </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-item *ngFor="let data of dataArtikel">
+  <button ion-item *ngFor="let data of dataArtikel" (tap)="viewArtikel(data?.id)">
       <ion-thumbnail item-left class="item-ribbon">
           <span class="ribbon cruzeiro" *ngIf ="checkDate(data?.created_at)">
-            <span>New Article</span>
+            <span>Artikel Baru</span>
           </span>
           <img  src="{{BASE_URL+data?.picture}}">
         </ion-thumbnail>

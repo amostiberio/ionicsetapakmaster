@@ -16,6 +16,8 @@ export class HomePage {
   loading:any;
   dataArtikel: any;
   jumlahArtikel :any;
+  dataEvent: any;
+  jumlahEvent :any;
   BASE_URL = 'http://setapakbogor.site/'; 
   headers = new Headers({ 
     'Content-Type': 'application/json'});
@@ -73,7 +75,8 @@ export class HomePage {
   getReadyData(){
     return new Promise((resolve) => {        
         this.checkLoggin();  
-        this.getArtikel();           
+        this.getArtikel(); 
+        this.getEvent();          
          resolve(true);
     });
   }
@@ -104,6 +107,23 @@ export class HomePage {
 	       this.showError(err);
 	    });
   }
+
+  getEvent(){   
+    this.http.get(this.userData.BASE_URL+"api/event/newest",this.options).subscribe(data => {
+         let response = data.json();
+         console.log('event',response)
+         //  console.log(response.data)
+	       if(response.status==200) {
+           this.dataEvent = response.data;
+           this.jumlahEvent = response.jumlah           
+	       }else if (response.status == 204){
+          this.jumlahEvent = response.jumlah           
+         }
+	    }, err => { 
+	       this.showError(err);
+	    });
+  }
+
   navigateToLoginPage2(): void {  
     this.app.getRootNav().push('LoginPage')
   }
@@ -128,6 +148,15 @@ export class HomePage {
 
   viewAllArtikel(){
     this.app.getRootNav().push('AllartikelPage')
+  }
+
+  viewEvent(id){
+    this.app.getRootNav().push('VieweventPage',{eventid:id})
+    //this.app.getRootNav().push('ArtikelPage',{artikelid:id})
+  }
+
+  viewAllEvent(){
+    this.app.getRootNav().push('AlleventPage')
   }
   showError(err: any){  
     err.status==0? 

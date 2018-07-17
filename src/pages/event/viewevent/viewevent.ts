@@ -4,13 +4,12 @@ import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 
 
-
 @IonicPage()
 @Component({
-  selector: 'page-viewartikel',
-  templateUrl: 'viewartikel.html',
+  selector: 'page-viewevent',
+  templateUrl: 'viewevent.html',
 })
-export class ViewartikelPage {
+export class VieweventPage {
   userLoggedIn: any;
   loading:any;
   BASE_URL = 'http://setapakbogor.site/'; 
@@ -18,26 +17,28 @@ export class ViewartikelPage {
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
   
-  idArtikel :any; 
-  dataArtikel:any;
+  idEvent :any; 
+  dataEvent:any;
   dataComments:any;
   enterIsiComment:any;
   currentUserId:any;
   token:any;
+  dataAlamatCategory:any;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public http: Http,    
     public userData: UserData,
     public toastCtrl : ToastController,
     public app:App,
-    public loadCtrl: LoadingController) {      
-      this.idArtikel = this.navParams.data.artikelid
+    public loadCtrl: LoadingController) {
+      this.idEvent = this.navParams.data.eventid
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ViewartikelPage');
+    console.log('ionViewDidLoad VieweventPage');
   }
-  
+
   ionViewWillEnter(){      
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
@@ -51,8 +52,8 @@ export class ViewartikelPage {
 
   getReadyData(){
     return new Promise((resolve) => { 
-          this.getArtikel(this.idArtikel);         
-          this.getArtikelComments(this.idArtikel);          
+          this.getEvent(this.idEvent);         
+          this.getEventComments(this.idEvent);          
           this.userData.hasLoggedIn().then((value)=>{
             this.userLoggedIn = value;
             if(this.userLoggedIn == true)  {
@@ -69,20 +70,34 @@ export class ViewartikelPage {
   }
 
 
-getArtikel(idArtikel){   
-    this.http.get(this.userData.BASE_URL+"api/artikel/"+idArtikel,this.options).subscribe(data => {
+  getEvent(idEvent){   
+    this.http.get(this.userData.BASE_URL+"api/event/"+idEvent,this.options).subscribe(data => {
          let response = data.json();
          console.log(response.data)
 	       if(response.status==200) {
-           this.dataArtikel = response.data;              
+           this.dataEvent = response.data;
+           this.getAlamatCategory(this.dataEvent.alamatcategory_id)              
 	       }
 	    }, err => { 
 	       this.showError(err);
 	    });
   }
 
-  getArtikelComments(idArtikel){   
-    this.http.get(this.userData.BASE_URL+"api/artikel/comments/"+idArtikel,this.options).subscribe(data => {
+  getAlamatCategory(idAlamatCategory){   
+    this.http.get(this.userData.BASE_URL+"api/alamat/category/"+idAlamatCategory,this.options).subscribe(data => {
+         let response = data.json();
+         console.log(response.data)
+	       if(response.status==200) {
+           this.dataAlamatCategory = response.data[0];                       
+         }
+	    }, err => { 
+	       this.showError(err);
+	    });
+  }
+
+
+  getEventComments(idEvent){   
+    this.http.get(this.userData.BASE_URL+"api/event/comments/"+idEvent,this.options).subscribe(data => {
          let response = data.json();        
 	       if(response.status==200) {
            this.dataComments = response.data;
@@ -121,12 +136,12 @@ getArtikel(idArtikel){
     if(this.userLoggedIn == true ){    
       if(this.enterIsiComment != null && this.enterIsiComment != ''){   
         let input = JSON.stringify({
-          artikel_id : this.idArtikel,      
+          event_id : this.idEvent,      
           isi_comment: this.enterIsiComment,
           token:this.token
         });
         console.log(input)
-        this.http.post(this.userData.BASE_URL+"api/artikel/comments/create",input,this.options).subscribe(data => {
+        this.http.post(this.userData.BASE_URL+"api/event/comments/create",input,this.options).subscribe(data => {
           this.loading.dismiss();
           let response = data.json();  
           //console.log(response)     
@@ -150,6 +165,9 @@ getArtikel(idArtikel){
     }
    }
 
+   openWebView(link){
+      window.open(link,'_system', 'location=yes');
+   }
    showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):
@@ -162,5 +180,4 @@ getArtikel(idArtikel){
     });
     toast.present();
   }
-
 }
