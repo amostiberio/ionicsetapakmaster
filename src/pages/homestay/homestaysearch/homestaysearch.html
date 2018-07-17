@@ -41,15 +41,22 @@
             <ion-option *ngFor="let data of kabupaten" value="{{data.kabupaten}}">{{data.kabupaten}}</ion-option>
           </ion-select>
       </ion-item>    -->   
-      <ion-item> 
+      <!-- <ion-item> 
         <ion-label stacked color="primary">Pilih kecamatan </ion-label>
         <ion-select [(ngModel)]="pilihKecamatan" [disabled]="!kecamatan" (ionChange)="changeKecamatan(pilihKecamatan)" name="kecamatan" placeholder="Pilih Kecamatan" required  >
           <ion-option *ngFor="let data of kecamatan" value="{{data.kecamatan}}">{{data.kecamatan}}</ion-option>
         </ion-select>
-      </ion-item>
-      <div padding-left [hidden]="searchForm.valid || submitted == false">
+      </ion-item> -->
+      
+      <!-- <div padding-left [hidden]="searchForm.valid || submitted == false">
           <h6 ion-text color="danger" *ngIf="!searchForm.valid" >Wajib Memilih Daerah Homestay</h6>
-      </div>
+      </div> -->
+      <ion-item> 
+        <ion-label stacked color="primary">Pilih Tujuan Tempat Wisata</ion-label>
+        <ion-select [(ngModel)]="pilihWisata" [disabled]="!dataWisata" (ionChange)="changeWisata(pilihWisata)" name="wisata" placeholder="Pilih Tujuan Tempat Wisata" >
+          <ion-option *ngFor="let data of dataWisata" value="{{data.wisatacategory_id}}">{{data.nama_wisata}}</ion-option>
+        </ion-select>
+      </ion-item>
       <ion-item>
           <ion-label stacked color="primary">Rentang Harga</ion-label>
           <ion-range [(ngModel)]="knobValues" name="knobValues" dualKnobs="true" [(ngModel)]="knobValues" min="0" max="1500000" step="100000" pin="true" snaps="true" #valuesknob="ngModel"></ion-range>

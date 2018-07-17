@@ -34,6 +34,11 @@ export class HomestaysearchPage {
     lower:0
   }
   dataambil:any;
+  dataWisata:any;
+  pilihWisata: string;
+  idWisata:any;
+  idAlamatCategory:any;
+  namaWisata:any;
 
   headers = new Headers({ 
                 'Content-Type': 'application/json'});
@@ -48,7 +53,8 @@ export class HomestaysearchPage {
     public userData: UserData) {
   }
   ionViewDidLoad() {
-    this.getKecamatan();    
+    //this.getKecamatan();    
+    this.getWisata();
     console.log('ionViewDidLoad HomestaysearchPage');
   }
 
@@ -123,6 +129,28 @@ export class HomestaysearchPage {
     }
   }
 
+  getWisata(){
+    this.http.get(this.userData.BASE_URL+"api/wisata/category/all",this.options).subscribe(data => {
+      let response = data.json();
+      console.log(response.data)
+      if(response.status==200) {
+        this.dataWisata = response.data;           
+      }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+  changeWisata(wisata){
+    for(let data of this.dataWisata){
+      if(data.wisatacategory_id == wisata) {
+        this.idWisata = data.wisatacategory_id;
+        this.idAlamatCategory = data.alamatcategory_id;
+        this.namaWisata = data.nama_wisata        
+        break;
+      }
+    }
+  }
+
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):
@@ -138,28 +166,29 @@ export class HomestaysearchPage {
 
   
   // Search clicked
-  homestayResult(form: NgForm) {
+  homestayResult(form: NgForm) {   
     this.submitted = true;
     this.loading = this.loadCtrl.create({
         content: 'Tunggu sebentar...'
     });
-
     if (form.valid) {
       this.loading.present();
       let input = JSON.stringify({
-        provinsi: this.namaProvinsi,
-        kabupaten: this.namaKabupaten,
-        kecamatan: this.namaKecamatan,
+        wisatacategory_id:this.idWisata,
+        alamatcategory_id:this.idAlamatCategory,
         upper: this.knobValues.upper,
         lower: this.knobValues.lower
       });
+      //console.log(input)
       this.http.post(this.userData.BASE_URL+"api/homestay/search",input,this.options).subscribe(data => {
         this.loading.dismiss();
-        let response = data.json();       
-         if(response.status==200) {          
-          this.app.getRootNav().push('HomestayresultPage',{datahomestay: response.data, provinsi: this.namaProvinsi, kabupaten: this.namaKabupaten, kecamatan: this.namaKecamatan});
-         
-
+        let response = data.json();            
+         if(response.status==200) {
+           if(response.alamatCategory){
+            this.app.getRootNav().push('HomestayresultPage',{datahomestay: response.data,namawisata: this.namaWisata, provinsi :response.alamatCategory.provinsi, kabupaten :response.alamatCategory.kabupaten, kecamatan :response.alamatCategory.kecamatan});      
+           }else{
+            this.app.getRootNav().push('HomestayresultPage',{datahomestay: response.data, provinsi :null, kabupaten :null, kecamatan :null});      
+           }               
         }
         this.showAlert(response.message);
      }, err => { 

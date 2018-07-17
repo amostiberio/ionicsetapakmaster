@@ -67,10 +67,7 @@ export class HomePage {
       this.loading.present()
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
-    });
-
-    this.checkLoggin();  
-    this.getArtikel();  
+    });    
   }
 
   getReadyData(){
@@ -125,11 +122,12 @@ export class HomePage {
   }
   
   viewArtikel(id){
-    this.app.getRootNav().push('ArtikelPage',{artikelid:id})
+    this.app.getRootNav().push('ViewartikelPage',{artikelid:id})
+    //this.app.getRootNav().push('ArtikelPage',{artikelid:id})
   }
 
   viewAllArtikel(){
-    console.log('semua')
+    this.app.getRootNav().push('AllartikelPage')
   }
   showError(err: any){  
     err.status==0? 

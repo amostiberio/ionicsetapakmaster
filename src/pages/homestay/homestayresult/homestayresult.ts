@@ -20,7 +20,8 @@ export class HomestayresultPage {
   namakabupaten:any;
   namakecamatan:any;
   tipeProduk:any = 'Homestay'
-
+  namaWisata:any;
+  
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
@@ -34,10 +35,15 @@ export class HomestayresultPage {
     public app:App,
     public loadCtrl: LoadingController) {
     this.datahomestay = this.navParams.data.datahomestay;
-    this.namaprovinsi = this.navParams.data.provinsi;
-    this.namakabupaten = this.navParams.data.kabupaten;
-    this.namakecamatan = this.navParams.data.kecamatan;
+    if(this.navParams.data.provinsi){
+      this.namaprovinsi = this.navParams.data.provinsi;
+      this.namakabupaten = this.navParams.data.kabupaten;
+      this.namakecamatan = this.navParams.data.kecamatan;
+      this.namaWisata = this.navParams.data.namawisata
+    }
+    
 
+    
     //console.log('thisnavparamdata',this.navParams);
    
   }

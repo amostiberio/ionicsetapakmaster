@@ -20,6 +20,7 @@ export class JasaresultPage {
   namakabupaten:any;
   namakecamatan:any;
   tipeProduk:any = 'Jasa'
+  namaJenis:any;
 
   headers = new Headers({ 
     'Content-Type': 'application/json'});
@@ -34,9 +35,9 @@ export class JasaresultPage {
     public app:App,
     public loadCtrl: LoadingController) {      
     this.datajasa = this.navParams.data.datajasa;
-    this.namaprovinsi = this.navParams.data.provinsi;
-    this.namakabupaten = this.navParams.data.kabupaten;
-    this.namakecamatan = this.navParams.data.kecamatan;
+    if(this.navParams.data.namajenis){
+      this.namaJenis = this.navParams.data.namajenis;
+    }    
   }
 
   ionViewWillEnter() { 

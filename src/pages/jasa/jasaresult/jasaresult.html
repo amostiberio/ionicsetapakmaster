@@ -3,13 +3,11 @@
   <ion-navbar color= "navbar">
     <ion-title>
       <span class="firstline">Search Result</span>
-      <span class="twoline">{{namakecamatan}}, {{namakabupaten}}, {{namaprovinsi}}</span>
+      <span *ngIf="namaJenis != null" class="twoline">{{namaJenis}}</span>
+      <span *ngIf="namaJenis == null" class="twoline">All Jasa</span>
    </ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 
 <ion-content padding>
   <ion-card *ngFor="let data of datajasa" (click)="jasadetail(data.jasa_id)" tappable>

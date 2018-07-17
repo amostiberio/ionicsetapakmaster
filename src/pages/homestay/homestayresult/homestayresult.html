@@ -9,8 +9,11 @@
   <ion-navbar color= "navbar">
     <ion-title>
       <span class="firstline">Search Result</span>
-      <span class="twoline">{{namakecamatan}}, {{namakabupaten}}, {{namaprovinsi}}</span>
-   </ion-title>
+      <span text-wrap *ngIf="namaWisata != null" class="twoline">Homestay dekat {{namaWisata}}</span>
+      <span *ngIf="namakecamatan != null ||namakabupaten != null ||namaprovinsi != null " class="twoline">{{namakecamatan}}, {{namakabupaten}}, {{namaprovinsi}}</span>
+      <span *ngIf="namakecamatan == null && namakabupaten == null && namaprovinsi == null " class="twoline">All Homestay</span>
+
+    </ion-title>
   </ion-navbar>
 
 </ion-header>

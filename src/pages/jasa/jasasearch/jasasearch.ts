@@ -34,6 +34,11 @@ export class JasasearchPage {
   }
   dataambil:any;
 
+  dataJenisCategory:any;
+  pilihJenis:any;
+  idJenis:any;
+  namaJenis:any;
+
   headers = new Headers({ 
                 'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
@@ -49,7 +54,8 @@ export class JasasearchPage {
   }
 
   ionViewDidLoad() {
-    this.getKecamatan();    
+    this.getKecamatan();
+    this.getJenis();
     console.log('ionViewDidLoad JasasearchPage');
   }
   ionViewWillEnter() {    
@@ -73,6 +79,28 @@ export class JasasearchPage {
     for(let data of this.kecamatan){
       if(data.kecamatan == kecamatan) {
         this.namaKecamatan = data.kecamatan;
+        break;
+      }
+    }
+  }
+  
+  getJenis(){
+    this.http.get(this.userData.BASE_URL+"api/jenisjasa/category/all",this.options).subscribe(data => {
+      let response = data.json();
+      console.log(response.data)
+      if(response.status==200) {
+        this.dataJenisCategory = response.data;           
+      }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+  changeJenis(jenis){
+    for(let data of this.dataJenisCategory){
+      if(data.jeniscategory_id == jenis) {
+        this.idJenis = data.jeniscategory_id;
+        this.namaJenis = data.nama_jeniscategory;  
+        console.log(this.idJenis,this.namaJenis)      
         break;
       }
     }
@@ -102,17 +130,20 @@ export class JasasearchPage {
     if (form.valid) {
       this.loading.present();
       let input = JSON.stringify({
-        provinsi: this.namaProvinsi,
-        kabupaten: this.namaKabupaten,
-        kecamatan: this.namaKecamatan,
+        jeniscategory_id:this.idJenis,
+ 	      nama_jeniscategory:this.namaJenis,        
         upper: this.knobValues.upper,
         lower: this.knobValues.lower
       });
       this.http.post(this.userData.BASE_URL+"api/jasa/search",input,this.options).subscribe(data => {
         this.loading.dismiss();
         let response = data.json();       
-         if(response.status==200) {          
-          this.app.getRootNav().push('JasaresultPage',{datajasa: response.data, provinsi: this.namaProvinsi, kabupaten: this.namaKabupaten, kecamatan: this.namaKecamatan});
+         if(response.status==200) {
+           if(response.namajenis){
+            this.app.getRootNav().push('JasaresultPage',{datajasa: response.data, namajenis: response.namajenis});
+           }else{
+            this.app.getRootNav().push('JasaresultPage',{datajasa: response.data});
+           }          
          }
         this.showAlert(response.message);
      }, err => { 

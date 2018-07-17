@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, App, LoadingController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../../providers/user-data';
+
 
 
 @IonicPage()
 @Component({
-  selector: 'page-artikel',
-  templateUrl: 'artikel.html',
+  selector: 'page-viewartikel',
+  templateUrl: 'viewartikel.html',
 })
-export class ArtikelPage {
+export class ViewartikelPage {
   userLoggedIn: any;
   loading:any;
   BASE_URL = 'http://setapakbogor.site/'; 
@@ -23,20 +24,20 @@ export class ArtikelPage {
   enterIsiComment:any;
   currentUserId:any;
   token:any;
-
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public http: Http,    
     public userData: UserData,
     public toastCtrl : ToastController,
     public app:App,
-    public loadCtrl: LoadingController) {
+    public loadCtrl: LoadingController) {      
       this.idArtikel = this.navParams.data.artikelid
-    }
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ArtikelPage');
+    console.log('ionViewDidLoad ViewartikelPage');
   }
+  
   ionViewWillEnter(){      
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
@@ -82,8 +83,7 @@ getArtikel(idArtikel){
 
   getArtikelComments(idArtikel){   
     this.http.get(this.userData.BASE_URL+"api/artikel/comments/"+idArtikel,this.options).subscribe(data => {
-         let response = data.json();
-         console.log(response.data)
+         let response = data.json();        
 	       if(response.status==200) {
            this.dataComments = response.data;
            for(var i = 0 ; i<this.dataComments.length; i++){
@@ -162,4 +162,5 @@ getArtikel(idArtikel){
     });
     toast.present();
   }
+
 }
