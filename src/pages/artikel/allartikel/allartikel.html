@@ -16,5 +16,17 @@
 
 
 <ion-content padding>
-
+  <button ion-item *ngFor="let data of dataArtikel">
+      <ion-thumbnail item-left class="item-ribbon">
+          <span class="ribbon cruzeiro" *ngIf ="checkDate(data?.created_at)">
+            <span>New Article</span>
+          </span>
+          <img  src="{{BASE_URL+data?.picture}}">
+        </ion-thumbnail>
+        <div>          
+          <p color="black" text-wrap><b>{{data?.title}}</b></p>
+        </div>               
+  </button>  
+      
+    
 </ion-content>

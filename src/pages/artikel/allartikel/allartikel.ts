@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, App, LoadingController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
-
+import moment from 'moment';
 
 
 @IonicPage()
@@ -18,6 +18,8 @@ export class AllartikelPage {
   BASE_URL = 'http://setapakbogor.site/'; 
   headers = new Headers({ 
     'Content-Type': 'application/json'});
+  today :any =  new Date().toISOString();
+  inputDate = new Date("7/18/2018");
 
   options = new RequestOptions({ headers: this.headers});
   constructor(public navCtrl: NavController, 
@@ -46,7 +48,7 @@ export class AllartikelPage {
 
   getReadyData(){
     return new Promise((resolve) => {        
-        this.getArtikel();           
+        this.getArtikel(); 
          resolve(true);
     });
   }
@@ -57,7 +59,8 @@ export class AllartikelPage {
          //  console.log(response.data)
 	       if(response.status==200) {
            this.dataArtikel = response.data;
-           this.jumlahArtikel = response.jumlah           
+           this.jumlahArtikel = response.jumlah
+           
 	       }else if (response.status == 204){
           this.jumlahArtikel = response.jumlah           
          }
@@ -65,6 +68,15 @@ export class AllartikelPage {
 	    }, err => { 
 	       this.showError(err);
 	    });
+  }
+  checkDate(created_at){
+    let jumlah_hari = moment.duration(moment(this.today, "YYYY-MM-DD").diff(moment(created_at, "YYYY-MM-DD"))).asDays()
+    //console.log(jumlah_hari)
+    if(jumlah_hari <= 1 && jumlah_hari >= 0){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   showError(err: any){  
