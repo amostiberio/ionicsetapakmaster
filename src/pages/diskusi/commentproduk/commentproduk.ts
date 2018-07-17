@@ -143,7 +143,7 @@ export class CommentprodukPage {
    });
   }
 
-  onSearch(event){
+  onInput(event){
    this.enterIsiComment = event.target.value    
   }
 

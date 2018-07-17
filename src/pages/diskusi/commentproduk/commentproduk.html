@@ -59,7 +59,6 @@
             </ion-row>                       
     </ion-card>
 </div>
-
 <ion-item class="full-card-commentcard">
     <ion-col class="jumlah">
         <span ion-text color="primary"><strong>Comments</strong></span>                                         
@@ -92,7 +91,7 @@
 
 <ion-footer color="primary">
     <ion-toolbar *ngIf="userLoggedIn == true">        
-          <ion-input (input)="onSearch($event)"  placeholder="Tulis Komentar Anda"></ion-input>     
+          <ion-input (input)="onInput($event)"  placeholder="Tulis Komentar Anda"></ion-input>     
           <ion-buttons end>
               <button ion-button icon-only (click)="addComment()">
                 <ion-icon name="add"></ion-icon>
@@ -100,7 +99,7 @@
           </ion-buttons>
     </ion-toolbar>
     <ion-toolbar *ngIf="userLoggedIn == false">        
-        <ion-input (input)="onSearch($event)"  placeholder="Harus Login Terlebih Dahulu" disabled></ion-input>     
+        <ion-input (input)="onInput($event)"  placeholder="Harus Login Terlebih Dahulu" disabled></ion-input>     
         <ion-buttons end>
             <button ion-button icon-only (click)="addComment()">
               <ion-icon name="add"></ion-icon>

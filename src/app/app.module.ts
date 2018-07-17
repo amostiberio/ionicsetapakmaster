@@ -32,6 +32,7 @@ import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { HomestayData } from '../providers/homestay-data/homestay-data';
+// import { IonMarqueeModule } from 'ionic-marquee';
 
 //component module
 
@@ -56,6 +57,7 @@ export function getAuthHttp(http, Storage) {
     TabsPage,
     ProfileAccountPage,
     PopoverdiskusiPage,
+    // IonMarqueeModule
     
   ],
   imports: [
@@ -64,7 +66,8 @@ export function getAuthHttp(http, Storage) {
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),    
     IonicStorageModule.forRoot(),    
-    FormsModule
+    FormsModule,
+    // IonMarqueeModule
   ],
 
   bootstrap: [IonicApp],

@@ -62,7 +62,19 @@
 </div>
 <h4 text-center>Artikel</h4>
 <ion-scroll scrollX style="min-height:150px !important;">
-                <ion-card class="myCard">
+                <ion-card *ngFor="let data of (dataArtikel ? dataArtikel.slice(0,4): []); let i = index" class="myCard" (click)="viewArtikel(data?.id)">
+                        <img class="image-full" src="{{BASE_URL+data?.picture}}"/>
+                        <div class="myOverlay">
+                                <div class="card-title">{{data?.title}}</div>
+                        </div>
+                </ion-card>
+                <ion-card class="myCard" (click)="viewAllArtikel()">
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-4.jpg"/>
+                        <div class="myOverlaySeeMore">                                        
+                                <div class="text-card-title">See More Artikel</div>
+                        </div>
+                </ion-card>
+                <!-- <ion-card class="myCard">
                         <img class="image-full" src="assets/imgs/images/Wisata-Bogor-1.jpg"/>
                         <div class="myOverlay">
                                 <div class="card-title">Curug Cibaliung</div>
@@ -85,7 +97,7 @@
                         <div class="myOverlaySeeMore">                                        
                                 <div class="text-card-title">See More Artikel</div>
                         </div>
-                </ion-card>        
+                </ion-card>         -->
 </ion-scroll>
 <h4 text-center>Populer</h4>
 <ion-scroll scrollX style="min-height:150px !important;">
