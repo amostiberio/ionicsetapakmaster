@@ -268,17 +268,17 @@ postUpdatePicture(transactionid){
        transaction_id: transaction_id   
     });  
     this.http.post(this.userData.BASE_URL+'api/review/getreview',param,this.options).subscribe(res => {
-      this.loading.dismiss();
+      //this.loading.dismiss();
       let response = res.json();
       if(response.status==200) {        
         this.reviewExist = true
-        console.log('coba',this.reviewExist) 
+        //console.log('coba',this.reviewExist) 
       }else{
         this.reviewExist = false 
-        console.log(this.reviewExist) 
+        //console.log(this.reviewExist) 
       }
     }, err => { 
-        this.loading.dismiss();
+        //this.loading.dismiss();
         this.showError(err);
     });
   }

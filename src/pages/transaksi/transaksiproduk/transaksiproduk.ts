@@ -131,7 +131,7 @@ export class TransaksiprodukPage {
        transaction_id: transaction_id   
     });  
     this.http.post(this.userData.BASE_URL+'api/review/getreview',param,this.options).subscribe(res => {
-      this.loading.dismiss();
+      //this.loading.dismiss();
       let response = res.json();
       if(response.status==200) {        
         this.reviewExist = true
@@ -141,7 +141,7 @@ export class TransaksiprodukPage {
         console.log(this.reviewExist) 
       }
     }, err => { 
-        this.loading.dismiss();
+        //this.loading.dismiss();
         this.showError(err);
     });
   }
