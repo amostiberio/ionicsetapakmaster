@@ -95,6 +95,17 @@ export class ProfileAccountPage {
     
   }
 
+  doRefresh(refresher){
+    setTimeout(() => {
+      refresher.complete();
+      this.getName();
+      this.getEmail();
+      this.getNohp();
+      this.profpict(); 
+      //     
+    }, 1000);
+  }
+
   editProfile(){
     this.app.getRootNav().push('EditprofilePage')
   }

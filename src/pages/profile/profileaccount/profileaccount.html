@@ -6,6 +6,9 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher> 
     <!-- <div class="center">
             <ion-list-header class="headerprofile"  align-items-center>
               <ion-row class="center">

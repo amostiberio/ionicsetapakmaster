@@ -82,6 +82,24 @@ dataTransaksiJasa: any = [];
       this.getTransaksiJasa(this.token);
     }  
   }
+  
+  doRefresh(refresher){
+    setTimeout(() => {
+      refresher.complete();
+      if(this.segment == 'homestay'){
+        //reset lazy load atribut            
+        this.getTransaksiHomestay(this.token);
+      }
+      else if(this.segment == 'produk'){
+        //reset lazy load atribut
+        this.getTransaksiProduk(this.token);
+      }
+      else if(this.segment == 'jasa'){
+        //reset lazy load atribut
+        this.getTransaksiJasa(this.token);
+      }      
+    }, 1000);
+  }
 
   getTransaksiHomestay(token){
     //console.log(token)

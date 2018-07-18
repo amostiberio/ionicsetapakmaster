@@ -188,7 +188,13 @@ export class EditprofilePage {
 
     }
   }
-
+  doRefresh(refresher){
+    setTimeout(() => {
+      refresher.complete();      
+      this.profpict(); 
+      //     
+    }, 1000);
+  }
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):
