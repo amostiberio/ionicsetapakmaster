@@ -18,6 +18,7 @@ export class HomePage {
   jumlahArtikel :any;
   dataEvent: any;
   jumlahEvent :any;
+  done:any;
   BASE_URL = 'http://setapakbogor.site/'; 
   headers = new Headers({ 
     'Content-Type': 'application/json'});
@@ -66,9 +67,10 @@ export class HomePage {
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
-      this.loading.present()
+      //this.loading.present()
       this.getReadyData().then((x) => {
-        if (x) this.loading.dismiss();
+        // if (x) this.loading.dismiss();
+          if (x) this.done = true;
     });    
   }
 
