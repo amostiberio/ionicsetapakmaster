@@ -18,9 +18,13 @@
     <div>
         <ion-card class="full-card">          
                 <button ion-item >
-                    <ion-icon class="iconbutton" color= "navbar" name="md-cash" item-left *ngIf="dataTransaksi?.transaction_status <= 2"></ion-icon>          
-                    <ion-icon class="iconbutton" color= "navbar" name="md-time" item-left *ngIf="dataTransaksi?.transaction_status == 3 || dataTransaksi?.transaction_status == 4"></ion-icon>          
-                    <ion-icon class="iconbutton" color= "navbar" name="md-checkmark-circle-outline" item-left *ngIf="dataTransaksi?.transaction_status == 5 || dataTransaksi?.transaction_status == 6"></ion-icon>                   <h6 class="keterangantextlisttransaksi">Status</h6>      
+                    <ion-avatar item-start>
+                            <img *ngIf="dataTransaksi?.transaction_status <= 1" class ="notround" src="assets/imgs/logo/payment.png">
+                            <img *ngIf="dataTransaksi?.transaction_status == 2" class ="notround" src="assets/imgs/logo/paymentdone.png">
+                            <img *ngIf="dataTransaksi?.transaction_status == 3 || dataTransaksi?.transaction_status == 4" class ="notround" src="assets/imgs/logo/trekking.png">            
+                            <img *ngIf="dataTransaksi?.transaction_status == 5" class ="notround" src="assets/imgs/logo/handshake.png">          
+                    </ion-avatar>                      
+                    <h6 class="keterangantextlisttransaksi">Status</h6>      
                     <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 0"><b>Belum Konfirmasi Pembayaran</b></h5>
                     <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 1"><b>Menunggu Verifikasi Pembayaran</b></h5>
                     <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 2"><b>Pembayaran telah diverifikasi</b></h5>
