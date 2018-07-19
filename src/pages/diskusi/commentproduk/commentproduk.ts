@@ -65,7 +65,8 @@ export class CommentprodukPage {
   }
 
   getReadyData(){
-    return new Promise((resolve) => {        
+    return new Promise((resolve) => {
+          this.getDataUserDiskusi(this.dataDiskusi.user_id)        
           this.getDataComment(this.dataDiskusi.diskusi_id);          
           this.userData.hasLoggedIn().then((value)=>{
             this.userLoggedIn = value;
@@ -92,7 +93,9 @@ export class CommentprodukPage {
         let response = data.json();                
         if(response.status==200) {                   
            this.dataComment = response.data
-           console.log('data',this.dataComment)
+           for(var i = 0 ; i<this.dataComment.length; i++){
+            this.getDataUserComments(this.dataComment[i].user_id,i)            
+           } 
         }else if(response.status == 204){ //jumlah diskusi 0
            
         }
@@ -101,6 +104,7 @@ export class CommentprodukPage {
      });      
   }
 
+  
   getDataProduk(idBarang){    
     this.http.get(this.userData.BASE_URL+"api/barang/"+idBarang,this.options).subscribe(data => {
       let response = data.json();
@@ -147,6 +151,28 @@ export class CommentprodukPage {
    this.enterIsiComment = event.target.value    
   }
 
+  getDataUserComments(user_id,i){
+    this.http.get(this.userData.BASE_URL+"api/user/profile/"+user_id,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(response.data)
+      if(response.status==200) {
+        this.dataComment[i].dataUser = response.data;                     
+      }
+   }, err => { 
+      this.showError(err);
+  });
+}
+  getDataUserDiskusi(user_id){
+    this.http.get(this.userData.BASE_URL+"api/user/profile/"+user_id,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(response.data)
+      if(response.status==200) {
+        this.dataDiskusi.dataUser = response.data;                     
+      }
+  }, err => { 
+      this.showError(err);
+  });
+  }
   addComment(){
     if(this.userLoggedIn == true ){    
       if(this.enterIsiComment != null && this.enterIsiComment != ''){   

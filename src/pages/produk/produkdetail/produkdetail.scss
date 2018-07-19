@@ -11,9 +11,7 @@ page-produkdetail {
         font-size: 13px;
         margin: 5px 0;
     }
-    .centerlogobuttonword {        
-      font-size: 13px;
-    }
+    
 
     .firstlinenamecard {        
         display: block;
@@ -32,6 +30,9 @@ page-produkdetail {
       margin-left: auto;
       margin-right: auto;
       width: 20%;
+    }
+    .centerlogobuttonword {        
+      font-size: 13px;
     }
     .centerlogo{   
       position: relative;
@@ -100,5 +101,19 @@ page-produkdetail {
         li {
           margin-bottom: 1rem;
         }
+      }
+
+      .infoslogo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+      }
+      .infostext{        
+        font-size: 11px;
+      }
+      .infosmargin{
+        margin-top:2px !important;
+        margin-bottom:2px !important;
       }
 }

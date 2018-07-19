@@ -26,14 +26,14 @@
                 <ion-row>             
                     <ion-item>
                         <ion-avatar item-start >
-                          <img src="{{BASE_URL+diskusi?.photo_user}}">
+                          <img src="{{BASE_URL+diskusi?.dataUser?.photo}}">
                         </ion-avatar>
                         <ion-row *ngIf = "userPemanduId == diskusi?.user_id">
                             <ion-col class="paddingbottomzero" col-3>   
                                 <h6 class="pemandu"><b>Pemandu</b></h6>             
                             </ion-col>
                             <ion-col class="paddingbottomzero"  col-6>   
-                                <h5><b>{{(diskusi?.nama_user.length>14)? (diskusi?.nama_user | slice:0:14)+'..':(diskusi?.nama_user) }}</b></h5>
+                                <h5><b>{{(diskusi?.dataUser?.nama.length>14)? (diskusi?.dataUser?.nama | slice:0:14)+'..':(diskusi?.dataUser?.nama) }}</b></h5>
                               </ion-col>                             
                               <ion-col class="paddingbottomzero" (click)="presentPopover($event,diskusi?.diskusi_id)">   
                                   <ion-icon *ngIf ="currentUserId == diskusi?.user_id" color="navbar" class="moreicon" name="more" ></ion-icon>
@@ -44,7 +44,7 @@
                               <h6 class="wisatawan"><b>Wisatawan</b></h6>             
                           </ion-col>
                           <ion-col class="paddingbottomzero"  col-6>   
-                            <h5><b>{{(diskusi?.nama_user.length>14)? (diskusi?.nama_user | slice:0:14)+'..':(diskusi?.nama_user) }}</b></h5>
+                            <h5><b>{{(diskusi?.dataUser?.nama.length>14)? (diskusi?.dataUser?.nama | slice:0:14)+'..':(diskusi?.dataUser?.nama) }}</b></h5>
                           </ion-col>  
                           <ion-col class="paddingbottomzero">   
                               <ion-icon *ngIf ="currentUserId == diskusi?.user_id"  color="navbar" class="moreicon" name="more" (click)="presentPopover($event,diskusi?.diskusi_id)"></ion-icon>

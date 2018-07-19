@@ -108,7 +108,8 @@ export class HomestayreviewpesananPage {
       check_out: this.checkout,
       total_harga:this.totalharga,
       token: this.token
-    });          
+    });        
+    console.log(input)  
     this.http.post(this.userData.BASE_URL+"api/transaksiHomestay/user/pesanHomestay/"+this.datahomestay.homestay_id,input,this.options).subscribe(data => {
       this.loading.dismiss();
       let response = data.json();       

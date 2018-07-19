@@ -140,7 +140,7 @@ export class HomePage {
   }
   openmyaccount(): void {
     //this.navCtrl.push('LoginPage')
-    this.navCtrl.parent.select(3)
+    this.navCtrl.parent.select(2)
   }
   
   viewArtikel(id){

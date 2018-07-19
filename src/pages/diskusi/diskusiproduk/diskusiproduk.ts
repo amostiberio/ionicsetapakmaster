@@ -96,6 +96,9 @@ export class DiskusiprodukPage {
         if(response.status==200) {
            this.jumlahdiskusi = response.jumlah          
            this.dataDiskusi = response.data
+           for(var i = 0 ; i<this.dataDiskusi.length; i++){
+            this.getDataUserDiskusi(this.dataDiskusi[i].user_id,i)            
+           } 
            //console.log('data',this.jumlahdiskusi,this.dataDiskusi)
         }else if(response.status == 204){ //jumlah diskusi 0
           this.jumlahdiskusi = response.jumlah
@@ -109,6 +112,9 @@ export class DiskusiprodukPage {
         if(response.status==200){
            this.jumlahdiskusi = response.jumlah          
            this.dataDiskusi = response.data
+           for(var i = 0 ; i<this.dataDiskusi.length; i++){
+            this.getDataUserDiskusi(this.dataDiskusi[i].user_id,i)            
+           } 
         }else if(response.status == 204){ //jumlah diskusi 0
           this.jumlahdiskusi = response.jumlah
         }
@@ -120,17 +126,30 @@ export class DiskusiprodukPage {
         let response = data.json();                
         if(response.status==200) {
            this.jumlahdiskusi = response.jumlah          
-           this.dataDiskusi = response.data           
+           this.dataDiskusi = response.data 
+           for(var i = 0 ; i<this.dataDiskusi.length; i++){
+            this.getDataUserDiskusi(this.dataDiskusi[i].user_id,i)            
+           }           
           }else if(response.status == 204){ //jumlah diskusi 0
            this.jumlahdiskusi = response.jumlah
         }
      }, err => { 
         this.showError(err);
      });
-    }
-    
+    }    
   }
-  
+
+getDataUserDiskusi(user_id,i){
+    this.http.get(this.userData.BASE_URL+"api/user/profile/"+user_id,this.options).subscribe(data => {
+      let response = data.json();
+      console.log(response.data)
+      if(response.status==200) {
+        this.dataDiskusi[i].dataUser = response.data;                     
+      }
+   }, err => { 
+      this.showError(err);
+  });
+}  
 addDiskusi(){
   if(this.userLoggedIn == true ){    
     this.app.getRootNav().push('TambahdiskusiPage',{idproduk: this.idProduk, tipeproduk: this.tipeProduk, userid:this.currentUserId}); 

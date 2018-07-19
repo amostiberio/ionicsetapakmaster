@@ -94,6 +94,7 @@ export class JasareviewpesananPage {
       total_harga :this.totalharga,
       token: this.token
     });          
+    console.log(input)
     this.http.post(this.userData.BASE_URL+"api/transaksiJasa/user/pesanJasa/"+this.datajasa.jasa_id,input,this.options).subscribe(data => {
       this.loading.dismiss();
       let response = data.json();       

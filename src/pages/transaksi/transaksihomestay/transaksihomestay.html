@@ -131,6 +131,9 @@
       </ion-card>
   </div>
   <div padding>
+        <button *ngIf="dataTransaksi?.transaction_status == 0 || dataTransaksi?.transaction_status == 1" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="caraPembayaran()" tappable >
+                Cara Pembayaran
+            </button>
         <button *ngIf="dataTransaksi?.transaction_status == 0 || dataTransaksi?.transaction_status == 1" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="uploadBuktiPembayaran()" tappable >
             Upload Bukti Pembayaran
         </button>

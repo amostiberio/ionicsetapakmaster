@@ -108,7 +108,7 @@ export class UserData {
   getProfilePict() {
     return this.storage.get('user_data').then((value) => {
       //return this.BASE_URL + value.photo.slice( 1 );
-      return this.BASE_URL + value.photo;
+      return value.photo;
     });
   };
   

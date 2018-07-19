@@ -71,28 +71,48 @@
       <ion-card class ="full-card">
           <ion-grid padding-left>
               <ion-row>                                        
-                 <h2 ion-text color="dark"> <b>Fasilitas</b></h2>
+                  <h2 ion-text color="dark"> <b>Detail Produk</b></h2>
+               </ion-row>
+              <ion-row class ="infosmargin"> 
+                <ion-col text-center>
+                    <img class ="infoslogo" src="assets/imgs/logo/warehouse.png"  /> 
+                    <a class="infostext" ><b>Jumlah Stok</b></a>         
+                    <a class="infostext" ><b>{{newDataProduk?.kuantitas}}</b></a>             
+                </ion-col>
+                <ion-col text-center (click)="navDiskusiprodukPage()" >
+                    <img class ="infoslogo" src="assets/imgs/logo/balance.png"  /> 
+                    <a class="infostext"><b>Berat</b></a>              
+                    <a class="infostext"><b>{{newDataProduk?.berat_gram}}gr</b></a>       
+                </ion-col>  
+                <ion-col text-center (click)="navDiskusiprodukPage()" >
+                    <img class ="infoslogo" src="assets/imgs/logo/delivery.png"  /> 
+                    <a class="infostext"><b>Pengiriman</b></a>        
+                    <a class="infostext"><b>JNE</b></a>           
+                </ion-col>                                                    
               </ion-row>
-              <!-- <ion-row>              
-                  <ul class="highlight" >
-                      <li *ngIf="dataFasilitas?.ac == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
-                        <span ion-text color="navbar">Pendingin Ruangan AC</span>
-                      </li>
-                      <li *ngIf="dataFasilitas?.parking == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
-                        <span ion-text color="navbar">Tempat Parkir</span>
-                      </li>
-                      <li *ngIf="dataFasilitas?.bathroom == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
-                        <span ion-text color="navbar">Bathroom</span>
-                      </li> 
-                      <li *ngIf="dataFasilitas?.bedroom == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
-                        <span ion-text color="navbar">Ruang Tidur</span>
-                      </li>
-                      <li *ngIf="dataFasilitas?.wifi == 'yes'"><ion-icon name="checkmark" color="secondary"></ion-icon>
-                        <span ion-text color="navbar">Koneksi Wifi</span>
-                      </li> 
-                  </ul>                  
-              </ion-row> -->
-            </ion-grid>                 
+              <!-- <ion-row  class ="infosmargin">                  
+                <ion-col text-center>
+                    <a class="infostext" ><b>Stok</b></a>                   
+                </ion-col> 
+                <ion-col text-center (click)="navDiskusiprodukPage()">
+                    <a class="infostext"><b>Berat</b></a>                  
+                </ion-col>  
+                <ion-col text-center (click)="navDiskusiprodukPage()">
+                    <a class="infostext"><b>Pengiriman</b></a>                  
+                </ion-col>                                                                    
+              </ion-row>
+              <ion-row  class ="infosmargin">                 
+                  <ion-col text-center (click)="navReviewPage()">
+                      <a class="infostext" ><b>{{newDataProduk?.kuantitas}}</b></a>                   
+                  </ion-col> 
+                  <ion-col text-center (click)="navDiskusiprodukPage()">
+                      <a class="infostext"><b>{{newDataProduk?.berat_gram}}gr</b></a>                  
+                  </ion-col>
+                  <ion-col text-center (click)="navDiskusiprodukPage()">
+                      <a class="infostext"><b>JNE</b></a>                  
+                  </ion-col>                                                                       
+                </ion-row> -->
+            </ion-grid>               
       </ion-card>
   </div>
   
@@ -118,7 +138,8 @@
               <ion-row>             
                   <ion-item>
                       <ion-avatar item-start>
-                        <img src="{{BASE_URL+dataPemandu?.photo}}">
+                        <img *ngIf="dataPemandu?.photo" src="{{BASE_URL+dataPemandu?.photo}}">
+                        <img *ngIf="!dataPemandu?.photo" src="assets/imgs/logo/usericon.png">
                       </ion-avatar>
                       <h5 (click)='navProfileCompany()'><b>{{dataPemandu?.nama_company}}</b></h5>
                       <h6>{{dataPemandu?.deskripsi}}</h6>                   

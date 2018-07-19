@@ -127,6 +127,10 @@ export class TransaksihomestayPage {
    });
   }
 
+  caraPembayaran(){
+    this.app.getRootNav().push('TransaksipembayaranPage',{datatransaksi :this.dataTransaksi,})
+  }
+
   uploadBuktiPembayaran(){    
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Pilihan',

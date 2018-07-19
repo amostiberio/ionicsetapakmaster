@@ -282,7 +282,9 @@ postUpdatePicture(transactionid){
         this.showError(err);
     });
   }
-
+  caraPembayaran(){
+    this.app.getRootNav().push('TransaksipembayaranPage',{datatransaksi :this.dataTransaksi,})
+  }
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

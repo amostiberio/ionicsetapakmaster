@@ -295,6 +295,9 @@ postUpdatePicture(transactionid){
   addReview(transaction_id){
     this.app.getRootNav().push('AddreviewPage',{id:this.dataTransaksi.barang_id, tipeproduk: 'Produk', idTransaction:this.dataTransaksi.transaction_id })
   }
+  caraPembayaran(){
+    this.app.getRootNav().push('TransaksipembayaranPage',{datatransaksi :this.dataTransaksi})
+  }
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

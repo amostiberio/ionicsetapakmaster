@@ -16,6 +16,7 @@ export class ProfileAccountPage {
   email: string;
   nohp: string;
   urlprofpict : string;
+  BASE_URL = 'http://setapakbogor.site/';
 
   HAS_LOGGED_IN = 'hasLoggedIn';
   constructor(public navCtrl: NavController, 
@@ -44,7 +45,8 @@ export class ProfileAccountPage {
   }
   profpict() {
     this.userData.getProfilePict().then((profpict) => {
-      this.urlprofpict = profpict;    
+      this.urlprofpict = profpict;
+      console.log('profpict',this.urlprofpict)   
     });
   }
 

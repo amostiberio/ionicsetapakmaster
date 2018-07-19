@@ -103,7 +103,8 @@
             <ion-row>             
                 <ion-item text-wrap>
                     <ion-avatar item-start>
-                      <img src="{{BASE_URL+dataPemandu?.photo}}">
+                        <img *ngIf="dataPemandu?.photo" src="{{BASE_URL+dataPemandu?.photo}}">
+                        <img *ngIf="!dataPemandu?.photo" src="assets/imgs/logo/usericon.png">
                     </ion-avatar>
                     <ion-row>                                        
                         <h5 (click)='navProfileCompany()'><b>{{dataPemandu?.nama_company}}</b></h5>

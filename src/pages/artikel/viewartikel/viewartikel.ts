@@ -105,7 +105,7 @@ getArtikel(idArtikel){
       }
    }, err => { 
       this.showError(err);
-   });
+  });
 
   }
    onInput(event){
