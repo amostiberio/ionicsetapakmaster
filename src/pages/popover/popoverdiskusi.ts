@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, NavController, App, ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { UserData } from '../../providers/user-data';
-import { LoginPage } from '../login/login';
 import { AlertService } from '../../providers/util/alert.service';
 import { Http,Headers,RequestOptions } from '@angular/http';
 
