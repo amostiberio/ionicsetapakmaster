@@ -310,5 +310,8 @@ postUpdatePicture(transactionid){
     });
     toast.present();
   }
-
+  
+  produkDetail(data){
+    this.app.getRootNav().push('ProdukdetailPage', data)
+  }
 }

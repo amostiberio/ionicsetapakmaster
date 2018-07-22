@@ -286,6 +286,9 @@ checkReviewExist(id,transaction_id){
   addReview(transaction_id){
     this.app.getRootNav().push('AddreviewPage',{id:this.dataTransaksi.homestay_id, tipeproduk: 'Homestay', idTransaction:this.dataTransaksi.transaction_id })
   }
+  homestaydetail(data) {   
+    this.app.getRootNav().push('HomestaydetailPage',data);
+  }
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

@@ -23,7 +23,7 @@
                                   <img src="{{BASE_URL+databarang?.mainphoto}}" class="avatarhomestay">
                                 </ion-avatar>
                                 <h6><b color="primary">{{databarang?.nama_barang}}</b></h6> 
-                                <a class *ngFor="let data of dataAlamatCategory" class="smallfont" color="primary"> {{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                
+                                <a *ngFor="let data of dataAlamatCategory" class="alamat" color="primary"> {{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                
                               </ion-item>                                        
                         </ion-row>
                       </ion-grid>                  

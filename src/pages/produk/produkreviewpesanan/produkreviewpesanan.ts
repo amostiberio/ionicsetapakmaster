@@ -50,6 +50,9 @@ export class ProdukreviewpesananPage {
       this.jumlahBarang = this.navParams.data.jumlah;
       this.alamatpengiriman = this.navParams.data.alamatpengiriman;
       this.notes = this.navParams.data.notes;
+      if(this.notes==null){
+        this.notes="";
+      }
       this.tarifKode  = this.navParams.data.tarifkode;
   } 
 

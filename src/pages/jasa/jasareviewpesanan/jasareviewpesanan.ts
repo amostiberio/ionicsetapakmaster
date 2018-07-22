@@ -28,7 +28,8 @@ export class JasareviewpesananPage {
   datajasa:any;
   diffdays:any;
   totalharga:any;
-  
+  notes:any;
+
   constructor(public navCtrl: NavController,
     public alertService: AlertService, 
     public navParams: NavParams,
@@ -39,6 +40,10 @@ export class JasareviewpesananPage {
     public loadCtrl: LoadingController) {
       this.tanggalbooking = this.navParams.data.tanggalbooking;      
       this.datajasa = this.navParams.data.datajasa
+      this.notes = this.navParams.data.noteswisatawan
+      if(this.notes==null){
+        this.notes="";
+      }
   }
 
   
@@ -92,6 +97,7 @@ export class JasareviewpesananPage {
     let input = JSON.stringify({
       tanggal_booking: this.tanggalbooking,
       total_harga :this.totalharga,
+      noteswisatawan:this.notes,
       token: this.token
     });          
     console.log(input)

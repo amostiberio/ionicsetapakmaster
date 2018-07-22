@@ -108,6 +108,7 @@ export class HomestayresultPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomestayresultPage');
   }
+  
   homestaydetail(data) {   
     this.app.getRootNav().push('HomestaydetailPage',data);
   }

@@ -213,7 +213,8 @@ export class MybookingPage {
 
   navigateToLoginPage(): void {
     //this.navCtrl.push('LoginPage')
-    this.app.getRootNav().push('LoginPage')
+    this.navCtrl.parent.select(2)
+    //this.app.getRootNav().push('LoginPage')
   }
 
   navigateToSignupPage(): void {

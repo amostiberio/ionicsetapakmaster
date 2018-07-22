@@ -43,11 +43,11 @@
                     </ion-avatar>                   
                     <ion-row *ngIf = "userPemanduId == dataDiskusi?.user_id">                     
                             <h5 class="pemandu"><b>Pemandu</b></h5>                            
-                            <h5><b>{{(dataDiskusi?.nama_user.length>25)? (dataDiskusi?.dataUser?.nama | slice:0:18)+'..':(dataDiskusi?.dataUser?.nama) }}</b></h5>
+                            <h5><b>{{(dataDiskusi?.dataUser?.nama.length>18)? (dataDiskusi?.dataUser?.nama | slice:0:18)+'..':(dataDiskusi?.dataUser?.nama) }}</b></h5>
                     </ion-row> 
                     <ion-row *ngIf = "userPemanduId != dataDiskusi?.user_id">      
                           <h5 class="wisatawan"><b>Wisatawan</b></h5>             
-                          <h5><b>{{(dataDiskusi?.dataUser?.nama.length>25)? (dataDiskusi?.dataUser?.nama | slice:0:18)+'..':(dataDiskusi?.dataUser?.nama) }}</b></h5>
+                          <h5><b>{{(dataDiskusi?.dataUser?.nama.length>18)? (dataDiskusi?.dataUser?.nama | slice:0:18)+'..':(dataDiskusi?.dataUser?.nama) }}</b></h5>
                     </ion-row>                  
                      <ion-row>
                           <h6>{{(dataDiskusi?.isi_diskusi.length>30)? (dataDiskusi?.isi_diskusi | slice:0:30)+'..':(dataDiskusi?.isi_diskusi) }}</h6>  

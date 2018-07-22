@@ -18,7 +18,8 @@ export class HomestaypesanPage {
 
   dataAlamatCategory: any;
   datahomestay:any;
-  idAlamatCategory:any; 
+  idAlamatCategory:any;
+  formpesan: {notes?: string} = {}; 
   today:any = new Date();
   tommorrow:any = new Date(Date.now() + (1 * 24 * 60 * 60 * 1000)).toISOString();
   minDateCI: string = this.today.toISOString();
@@ -76,7 +77,9 @@ export class HomestaypesanPage {
   }
 
   
-  continuePesan() {
+  continuePesan(form: NgForm) {
+  this.submitted = true;
+  if (form.valid) {
     if(this.selectedDateCheckIn == null || this.selectedDateCheckOut == null ){
       this.showAlert("Isi Check In dan Check Out");   
     }else if(this.selectedDateCheckIn == this.selectedDateCheckOut){
@@ -84,9 +87,9 @@ export class HomestaypesanPage {
     }else if (this.selectedDateCheckIn > this.selectedDateCheckOut){
       this.showAlert("Tanggal Check Out tidak boleh sebelum Check In");
     }else{
-      this.app.getRootNav().push('HomestayreviewpesananPage',{checkin: this.selectedDateCheckIn, checkout:this.selectedDateCheckOut, token: this.token, datahomestay:this.datahomestay});
+      this.app.getRootNav().push('HomestayreviewpesananPage',{checkin: this.selectedDateCheckIn, checkout:this.selectedDateCheckOut, token: this.token, datahomestay:this.datahomestay,notes : this.formpesan.notes});
     }
-      
+  }    
   }
 
   showError(err: any){  

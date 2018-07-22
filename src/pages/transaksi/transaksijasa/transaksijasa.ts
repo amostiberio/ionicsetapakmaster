@@ -297,5 +297,8 @@ postUpdatePicture(transactionid){
     });
     toast.present();
   }
-
+  
+  jasadetail(idJasa) {   
+    this.app.getRootNav().push('JasadetailPage',idJasa);
+  }
 }

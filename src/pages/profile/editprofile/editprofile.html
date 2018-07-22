@@ -26,9 +26,9 @@
     </ion-refresher> 
     <div padding-top text-center>
          <div class="profilePict">
-            <img class="profpic" src="assets/imgs/logo/usericon.png" *ngIf="!user?.userphoto">
-            <!-- <img class="profpic" [src]="base64String" *ngIf="base64Image">  -->
-            <img class="profpic" [src]="user?.userphoto"(click)="updatePicture()"  *ngIf="user?.userphoto">
+            
+            <img class="profpic" src="assets/imgs/logo/usericon.png"  (click)="updatePicture()"  *ngIf="!user?.userphoto">
+            <img class="profpic" [src]="user?.userphoto" (click)="updatePicture()"  *ngIf="user?.userphoto">
           <h6 (click)="updatePicture()">Ubah foto profile</h6>          
 
         </div> 

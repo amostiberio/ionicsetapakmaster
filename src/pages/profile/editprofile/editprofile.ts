@@ -27,7 +27,7 @@ export class EditprofilePage {
   base64Image: string;
   submitted = false;
   BASE_URL = 'http://setapakbogor.site/';     
-
+  
   temp: any;
   loading: any;
   base64String:any;
@@ -210,7 +210,7 @@ export class EditprofilePage {
 
   profpict() {
     this.userData.getProfilePict().then((profpict) => {
-      this.user.userphoto = profpict;    
+      this.user.userphoto = this.BASE_URL + profpict;    
     });
   }
 }

@@ -25,15 +25,20 @@
                       <img src="{{BASE_URL+datahomestay?.mainphoto}}" class="avatarhomestay">
                     </ion-avatar>
                     <h6><b color="primary">{{datahomestay?.nama_homestay}}</b></h6> 
-                    <a class ="smallfont" color="primary">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
+                    <a class ="alamat" color="primary">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
                   </ion-item>                                        
             </ion-row>
           </ion-grid>                  
     </ion-card>
     
-    <ion-card class ="full-card">       
+    <ion-card class ="full-card">   
+   
         <ion-grid> 
-            <h6 class="labelfont">Tanggal Pemesanan</h6>                           
+            <ion-row>
+                <ion-col>
+                    <span ion-text color="primary"><strong>Tanggal Pemesanan</strong></span>
+                </ion-col>
+            </ion-row>                                    
             <ion-row>
               <ion-col>
                   <ion-item no-padding> 
@@ -48,7 +53,21 @@
                   </ion-item>                      
               </ion-col>                                                  
             </ion-row>
-          </ion-grid>                  
+          <form #pesanForm="ngForm" novalidate>    
+            <ion-row>
+                    <ion-col>
+                        <span ion-text color="primary"><strong>Notes</strong></span>
+                    </ion-col>
+            </ion-row>                                      
+            <ion-row>
+                    <ion-item>
+                            <ion-label stacked color="primary"></ion-label>
+                            <ion-input [(ngModel)]="formpesan.notes" placeholder = "Notes untuk penjual" name="notes" type="text" #notes="ngModel">
+                            </ion-input>
+                   </ion-item> 
+            </ion-row>
+            </form>                
+          </ion-grid> 
     </ion-card>
     <ion-card class ="full-card-info">
         <ion-grid>                            
@@ -59,7 +78,7 @@
           </ion-grid>                  
     </ion-card>
 </div> 
-<button ion-button icon-start block no-margin color="primary" class="round" (click)="continuePesan()" tappable >
+<button ion-button icon-start block no-margin color="primary" class="round" (click)="continuePesan(pesanForm)" tappable >
   Continue
 </button>
 </ion-content>

@@ -30,7 +30,7 @@ export class HomestayreviewpesananPage {
   datahomestay:any;
   diffdays:any;
   totalharga:any;
-  
+  notes:any = "";
   constructor(public navCtrl: NavController,
     public alertService: AlertService, 
     public navParams: NavParams,
@@ -42,6 +42,10 @@ export class HomestayreviewpesananPage {
       this.checkin = this.navParams.data.checkin;
       this.checkout = this.navParams.data.checkout;
       this.datahomestay = this.navParams.data.datahomestay
+      this.notes =this.navParams.data.notes
+      if(this.notes==null){
+        this.notes="";
+      }
   }
   
   ionViewWillEnter() {  
@@ -107,6 +111,7 @@ export class HomestayreviewpesananPage {
       check_in: this.checkin,
       check_out: this.checkout,
       total_harga:this.totalharga,
+      noteswisatawan :this.notes,
       token: this.token
     });        
     console.log(input)  

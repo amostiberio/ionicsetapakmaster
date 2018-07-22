@@ -9,7 +9,8 @@
   <ion-navbar color= "navbar">
     <ion-title>
       <span class="firstline">Search Result</span>
-      <span text-wrap *ngIf="namaWisata != null" class="twoline">Homestay dekat {{namaWisata}}</span>
+      <span text-wrap *ngIf="namaWisata != null && namaWisata.length <= 20" class="twoline">Homestay dekat {{namaWisata}}</span>
+      <span text-wrap *ngIf="namaWisata != null && namaWisata.length > 20" class="twoline">Homestay dekat {{namaWisata.substr(0,20)}}...</span>
       <span *ngIf="namakecamatan != null ||namakabupaten != null ||namaprovinsi != null " class="twoline">{{namakecamatan}}, {{namakabupaten}}, {{namaprovinsi}}</span>
       <span *ngIf="namakecamatan == null && namakabupaten == null && namaprovinsi == null " class="twoline">All Homestay</span>
 

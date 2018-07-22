@@ -57,6 +57,7 @@ export class SignupPage {
            loading.dismiss();
            let response = data.json();           
            this.showAlert(response.message);
+           this.navCtrl.pop();
         }, err => { 
            loading.dismiss();
            this.showError(err);

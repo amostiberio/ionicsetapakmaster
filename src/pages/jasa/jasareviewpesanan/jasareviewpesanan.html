@@ -27,7 +27,7 @@
                       <img src="{{BASE_URL+datajasa?.mainphoto}}" class="avatarhomestay">
                     </ion-avatar>
                     <h6><b color="primary">{{datajasa?.nama_jasa}}</b></h6> 
-                    <a class ="smallfont" color="primary">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
+                    <a class ="alamat" color="primary">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
                   </ion-item>                                        
             </ion-row>
           </ion-grid>                  
@@ -44,11 +44,21 @@
               </ion-row>
               <ion-row>
                   <ion-col col-8>
-                      <ion-datetime class="" no-padding displayFormat="DDDD, DD MMM YYYY" [(ngModel)]="tanggalbooking" disabled></ion-datetime>
+                      <a class="textfont">{{tanggalbooking | date: "EEE, dd MMM yyyy"}}</a> 
                   </ion-col>                  
                   <ion-col col-4>
-                    <a class="colordisabled">1 Times</a>
+                    <a class="textfont">1 Times</a>
                   </ion-col>
+                </ion-row>
+                 <ion-row>
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Notes</a>         
+                    </ion-col>                                
+                </ion-row>
+                <ion-row>    
+                    <ion-col>
+                            <a class="textfont">{{notes}}</a>
+                    </ion-col>                                                                  
                 </ion-row>                
           </ion-grid>                  
     </ion-card>
@@ -58,7 +68,7 @@
         <ion-grid> 
             <ion-row>
                 <ion-col>
-                    <h6 class="labelfont">Pemesan Jasa</h6>         
+                    <a class ="smallfont" color="primary">Pemesan Jasa</a>      
                   </ion-col> 
             </ion-row>                        
               <ion-row>                                       
@@ -79,7 +89,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col>
-                    <h6 class="labelfont">Detail Harga</h6>         
+                    <a class ="smallfont" color="primary">Detail Harga</a>   
                   </ion-col> 
             </ion-row>           
             <ion-row>                   
@@ -87,7 +97,7 @@
                   <a class ="textfont">{{datajasa?.nama_jasa}}</a>
                 </ion-col>
                 <ion-col>
-                    <a item-end class ="textfont">{{datajasa?.harga_jasa | currency:'IDR ':true}}</a>
+                    <a float-right item-end class ="textfont">{{datajasa?.harga_jasa | currency:'IDR ':true}}</a>
                 </ion-col>                
             </ion-row>
             <ion-row>
@@ -95,7 +105,7 @@
                   <a class ="textfont">Duration</a>
                 </ion-col>
                 <ion-col>
-                    <a item-end class ="textfont">1 time(s)</a>
+                    <a float-right item-end class ="textfont">1 time(s)</a>
                 </ion-col>                
             </ion-row>                           
           </ion-grid>                  
@@ -109,7 +119,7 @@
                   <a class ="textfont">Total</a>
                 </ion-col>
                 <ion-col align-self-end>
-                    <a item-end class ="textfont">{{totalharga | currency:'IDR ':true}}</a>
+                    <a float-right item-end class ="textfont">{{totalharga | currency:'IDR ':true}}</a>
                 </ion-col>                
             </ion-row>              
           </ion-grid>                  

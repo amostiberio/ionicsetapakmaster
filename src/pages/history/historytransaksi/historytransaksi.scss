@@ -27,8 +27,12 @@ page-historytransaksi {
       }
       .fontketcard{
         font-size :13px;
+        color: #488aff;
+      }
+      .tanggal{
+        font-size :13px;
         color: grey;
-    }
+      }
       .textbooking{
           font-size: 15px;
       }
@@ -69,6 +73,8 @@ page-historytransaksi {
         width: 85px;
         float:right;
         padding: 0 10px;
-
+    }
+    .photoavatar{
+      border-radius:0% !important;
     }
 }

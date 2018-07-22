@@ -22,7 +22,7 @@
                         <img src="{{BASE_URL+dataBarang?.mainphoto}}" class="avatarhomestay">
                       </ion-avatar>
                       <h6><b color="primary">{{dataBarang?.nama_barang}}</b></h6> 
-                      <a class *ngFor="let data of dataAlamatCategory" class="smallfont" color="primary"> {{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                
+                      <a  class ="alamat" class *ngFor="let data of dataAlamatCategory" class="smallfont"> {{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                
                     </ion-item>                                        
               </ion-row>
             </ion-grid>                  
@@ -30,12 +30,12 @@
       <ion-card class ="full-card-homenamecard-padding-left">
            <ion-grid>           
                 <ion-row>
-                  <ion-col>
-                      <span ion-text color="primary"><strong>Penjual</strong></span>
-                  </ion-col>
-                  <ion-col>
-                      <span ion-text color="primary"><strong>Kurir Pengiriman</strong></span>
-                  </ion-col>                 
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Penjual</a>
+                    </ion-col>
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Kurir Pengiriman</a>
+                    </ion-col>                                  
                 </ion-row>
                 <ion-row class="padding-bottom-col">
                     <ion-col>
@@ -47,8 +47,8 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <span ion-text color="primary"><strong>Alamat Pengiriman</strong></span>                     
-                    </ion-col>                                   
+                        <a class ="smallfont" color="primary">Alamat Pengiriman</a>
+                    </ion-col>                                                     
                   </ion-row>
                   <ion-row class="padding-bottom-col">
                       <ion-col>
@@ -57,8 +57,8 @@
                   </ion-row>
                   <ion-row>
                     <ion-col>
-                        <span ion-text color="primary"><strong>Notes</strong></span>           
-                    </ion-col>                                
+                        <a class ="smallfont" color="primary">Notes</a>
+                    </ion-col>                                                
                 </ion-row>
                   <ion-row class="padding-bottom-col">
                     <ion-col>
@@ -72,9 +72,9 @@
       <ion-card class ="full-card-homenamecard-padding-left">
           <ion-grid> 
               <ion-row>
-              <ion-col>
-                      <span ion-text color="primary"><strong>Pemesan Homestay</strong></span>                                         
-              </ion-col> 
+                <ion-col>
+                    <a class ="smallfont" color="primary">Pemesan Homestay</a>
+                </ion-col>         
               </ion-row>                        
                 <ion-row>                                       
                     <ion-col>
@@ -93,16 +93,16 @@
       <ion-card class ="full-card-homenamecard">
           <ion-grid>
               <ion-row>
-                      <ion-col class="jumlah">
-                              <span ion-text color="primary"><strong>Detail Biaya</strong></span>                                         
-                      </ion-col> 
+                  <ion-col class="jumlah">
+                    <a class ="smallfont" color="primary">Detail Biaya</a>
+                </ion-col>                       
               </ion-row>
               <ion-row>                   
                   <ion-col padding-left>
                     <a class ="textfont">Jumlah Unit</a>
                   </ion-col>
                   <ion-col >
-                      <a item-end class ="textfont">{{jumlahBarang}}({{this.jumlahBarang * this.dataBarang?.berat_gram/1000}} kg)</a>
+                      <a float-right item-end class ="textfont">{{jumlahBarang}}({{this.jumlahBarang * this.dataBarang?.berat_gram/1000}} kg)</a>
                   </ion-col>                
               </ion-row>           
               <ion-row>                   
@@ -110,7 +110,7 @@
                     <a class ="textfont">Total Harga Produk</a>
                   </ion-col>
                   <ion-col >
-                      <a item-end class ="textfont">{{totalHargaProduk | currency:'IDR ':true}}</a>
+                      <a float-right item-end class ="textfont">{{totalHargaProduk | currency:'IDR ':true}}</a>
                   </ion-col>                
               </ion-row>
               <ion-row>
@@ -118,7 +118,7 @@
                     <a class ="textfont">Biaya Kirim</a>
                   </ion-col>
                   <ion-col align-self-end>
-                      <a item-end class ="textfont">{{totalHargaOngkir | currency:'IDR ':true}}</a>
+                      <a float-right item-end class ="textfont">{{totalHargaOngkir | currency:'IDR ':true}}</a>
                   </ion-col>                
               </ion-row>                           
             </ion-grid>                  
@@ -132,7 +132,7 @@
                     <a class ="textfont">Total</a>
                   </ion-col>
                   <ion-col align-self-end>
-                      <a item-end class ="textfont">{{totalHargaAkhir | currency:'IDR ':true}}</a>
+                      <a float-right item-end class ="textfont">{{totalHargaAkhir | currency:'IDR ':true}}</a>
                   </ion-col>                
               </ion-row>              
             </ion-grid>                  

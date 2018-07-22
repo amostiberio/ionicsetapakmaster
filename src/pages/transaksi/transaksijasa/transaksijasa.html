@@ -49,17 +49,17 @@
                             <a class="textfont">{{dataTransaksi?.tanggal_booking | date: "EEEE, dd MMM yyyy"}}</a>                 
                           </ion-col>                              
                           <ion-col >
-                            <a class="colordisabled">1 time(s)</a>
+                            <a class="textfont">1 time(s)</a>
                           </ion-col>
                         </ion-row> 
-                      <!-- <ion-row>
+                       <ion-row>
                           <ion-col>
                             <a class ="smallfont" color="primary">Notes</a>
                           </ion-col>                            
-                      </ion-row>   -->
+                      </ion-row>
                         <ion-row>
                             <ion-col>
-                              <a class ="smallfont" color="primary"></a>
+                              <a class="textfont">{{dataTransaksi?.noteswisatawan}}</a>
                             </ion-col>                           
                         </ion-row>                         
                   </ion-grid>                  
@@ -68,7 +68,7 @@
      
 <div padding>
         <ion-card class ="full-card-homenamecard">
-            <button ion-item>
+            <button ion-item (click)=jasadetail(dataJasa?.jasa_id)>
                         <ion-avatar  item-start>
                           <img src="{{BASE_URL+dataJasa?.mainphoto}}" class="avatarhomestay">
                         </ion-avatar>
@@ -81,9 +81,9 @@
       <ion-card class ="full-card-homenamecard-padding-left">
           <ion-grid>
               <ion-row>
-                  <ion-col>
-                      <h6 class="labelfont">Detail Harga</h6>         
-                    </ion-col> 
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Notes</a>
+                    </ion-col>       
               </ion-row>           
               <ion-row>                   
                   <ion-col>

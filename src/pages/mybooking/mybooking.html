@@ -3,7 +3,7 @@
 <ion-header >
   <ion-navbar no-border-bottom color= "navbar" no-shadow>
     <ion-title>
-      <img alt="logo" height="30px"   src="assets/imgs/logoSetapak.png" >
+      <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
     </ion-title>
     
   </ion-navbar>
@@ -78,10 +78,10 @@
       <ion-card  class ="full-card" *ngFor="let data of dataTransaksiHomestay">
           <button ion-item (click)="transaksiHomestay(data?.transaction_id)" >                     
                 <ion-avatar item-start>
-                    <img *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
-                    <img *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png">                    
+                    <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png">                   
                 </ion-avatar>
-                <h6 class="fontketcard paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
+                <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
                 <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
@@ -115,9 +115,10 @@
         <ion-card  class ="full-card" *ngFor="let data of dataTransaksiProduk">
             <button ion-item (click)="transaksiProduk(data?.transaction_id)">                         
                 <ion-avatar item-start >
-                  <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png"> 
                 </ion-avatar>
-                <h6 class="fontketcard paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
+                <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
                 <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
@@ -151,9 +152,10 @@
         <ion-card class ="full-card" *ngFor="let data of dataTransaksiJasa">
             <button ion-item (click)="transaksiJasa(data?.transaction_id)">          
                 <ion-avatar item-start>
-                  <img src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png"> 
                 </ion-avatar>
-                <h6 class="fontketcard paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
+                <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
                 <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>

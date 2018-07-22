@@ -75,7 +75,7 @@
 			</ion-item>
 				<div [hidden]="confirmpassword.valid || submitted == false" padding-left>
           <p ion-text color="danger" *ngIf="!user.confirmpassword">Konfirmasi Password harus diisi</p>
-					<p ion-text color="danger" *ngIf="user.confirmpassword">Password minimal 6 karakter</p>			
+					<p ion-text color="danger" *ngIf="user.confirmpassword">Password minimal 8 karakter</p>			
 				</div>				
 				<div padding-left>
 					<p ion-text color="danger" *ngIf="user.password != user.confirmpassword">Password tidak match</p>

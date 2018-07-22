@@ -57,8 +57,9 @@ export class MyaccountPage {
         if(response.status == 200) {             
            this.userData.login(response.data);
            this.userData.setToken(response.token);   
-           this.navCtrl.setRoot(TabsPage); //mulai dari awal tabspagenya
-           this.navCtrl.popToRoot(); //ngilangin history back page yang numpuk
+           //this.navCtrl.setRoot(TabsPage); //mulai dari awal tabspagenya
+           //this.navCtrl.popToRoot(); //ngilangin history back page yang numpuk
+           this.app.getRootNav().setRoot(TabsPage);
           this.showAlert(response.message);
         } else {           
           this.showAlert(response.message);

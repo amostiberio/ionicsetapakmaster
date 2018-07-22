@@ -22,6 +22,8 @@ export class JasapesanPage {
   datajasa:any;
   idAlamatCategory:any; 
   today:any = new Date();
+  formpesan: {notes?: string} = {}; 
+
   tommorrow:any = new Date(Date.now() + (1 * 24 * 60 * 60 * 1000));
   minDateCI: string = this.tommorrow.toISOString();
   maxDateCI: string = '2020-12-31'
@@ -74,13 +76,15 @@ export class JasapesanPage {
   }
 
 
-  continuePesan() {
+  continuePesan(form: NgForm) {
+  this.submitted = true;
+  if (form.valid) {
     if(this.selectedDateCheckIn == null){
       this.showAlert("Pilih Jadwal Pemesanan");   
     }else{
-      this.app.getRootNav().push('JasareviewpesananPage',{tanggalbooking: this.selectedDateCheckIn, token: this.token, datajasa:this.datajasa});
+      this.app.getRootNav().push('JasareviewpesananPage',{tanggalbooking: this.selectedDateCheckIn, token: this.token, datajasa:this.datajasa,noteswisatawan:this.formpesan.notes});
     }
-      
+  }       
   }
 
   showError(err: any){  
