@@ -41,6 +41,7 @@ export class UserData {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.storage.set('user_data', data);
     this.idUser = data.user_id;
+    console.log("ini user ID", this.idUser);
     console.log('id user setted ', data.user_id);
     this.events.publish('user:login');
   };

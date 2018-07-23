@@ -36,6 +36,7 @@ export class ProfileAccountPage {
     this.getEmail();
     this.getNohp();
     this.profpict();
+    this.getId();
   }
 
   getName() {
@@ -49,7 +50,11 @@ export class ProfileAccountPage {
       console.log('profpict',this.urlprofpict)   
     });
   }
-
+  getId(){
+    this.userData.getId().then((id) => {
+      console.log('this user id by emiel',id);
+    });
+  }
   getEmail() {
     this.userData.getEmail().then((email) => {
       this.email = email;
