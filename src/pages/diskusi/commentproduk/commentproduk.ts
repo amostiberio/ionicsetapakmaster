@@ -206,7 +206,29 @@ export class CommentprodukPage {
     }
          
   }
-  
+
+  doRefresh(refresher){
+    setTimeout(() => {
+      refresher.complete();
+      this.getDataUserDiskusi(this.dataDiskusi.user_id)        
+          this.getDataComment(this.dataDiskusi.diskusi_id);          
+          this.userData.hasLoggedIn().then((value)=>{
+            this.userLoggedIn = value;
+            if(this.userLoggedIn == true)  {
+              this.userData.getId().then((value) => {
+                this.currentUserId = value;
+              });
+            }   
+          });
+          if(this.tipeproduk == 'Produk'){
+            this.getDataProduk(this.dataDiskusi.produk_id);
+            }else if(this.tipeproduk == 'Homestay'){
+              this.getDataHomestay(this.dataDiskusi.produk_id);
+            }else if(this.tipeproduk == 'Jasa'){
+              this.getDataJasa(this.dataDiskusi.produk_id);
+            }
+    }, 1000);
+  }
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

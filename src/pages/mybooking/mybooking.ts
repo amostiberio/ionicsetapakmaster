@@ -36,9 +36,6 @@ export class MybookingPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MybookingPage');
-  }
-
-  ionViewWillEnter() {    
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
@@ -46,6 +43,10 @@ export class MybookingPage {
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     });
+  }
+
+  ionViewWillEnter() {    
+    
   }
 
   getReadyData(){
@@ -73,13 +74,21 @@ export class MybookingPage {
     //console.log('segment yang dipilih ', value);
     this.segment = value;
     //req api
-    if(this.segment == 'homestay' && this.dataTransaksiHomestay.length == 0){
+    if(this.segment == 'homestay'){
       this.getTransaksiHomestay(this.token);
-    }else if(this.segment == 'produk' && this.dataTransaksiProduk.length == 0){
+    }else if(this.segment == 'produk'){
       this.getTransaksiProduk(this.token);
-    }else if(this.segment =='jasa' && this.dataTransaksiJasa.length == 0){
+    }else if(this.segment =='jasa'){
       this.getTransaksiJasa(this.token);
     }  
+
+    // if(this.segment == 'homestay' && this.dataTransaksiHomestay.length == 0){
+    //   this.getTransaksiHomestay(this.token);
+    // }else if(this.segment == 'produk' && this.dataTransaksiProduk.length == 0){
+    //   this.getTransaksiProduk(this.token);
+    // }else if(this.segment =='jasa' && this.dataTransaksiJasa.length == 0){
+    //   this.getTransaksiJasa(this.token);
+    // }  
   }
 
   doRefresh(refresher){

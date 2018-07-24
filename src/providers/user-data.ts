@@ -118,6 +118,7 @@ export class UserData {
       return value;
     });
   }; 
+  
   getId(){
     return this.storage.get('user_data').then((value) => {
       return value.user_id;

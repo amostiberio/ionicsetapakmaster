@@ -9,28 +9,27 @@
     <ion-navbar  color="primary">
       <ion-title >
         <span class="firstline">Diskusi {{tipeproduk}}</span>
-      </ion-title>
-      <!-- <ion-buttons end>
-          <button ion-button icon-only color="white" (click)="addDiskusi()">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-buttons> -->
+      </ion-title>      
     </ion-navbar>  
   </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+</ion-refresher> 
   <div>
     <ion-card class ="full-card-homenamecard">                  
             <ion-row >             
                 <ion-item>
                     <ion-avatar item-start>
-                      <img src="{{BASE_URL+photoProduk}}" class="avatarhomestay">
+
+                      <img *ngIf= "photoProduk" src="{{BASE_URL+photoProduk}}" class="avatarhomestay">
+                      <img *ngIf= "!photoProduk" src="assets/imgs/logo/usericon.png" class="avatarhomestay">
                     </ion-avatar>
                     <ion-row>
                         <ion-col>
                             <h6><b color="primary">Untuk {{namaProduk}}</b></h6> 
-                        </ion-col>
-                        
+                        </ion-col>                        
                     </ion-row>                    
                   </ion-item>                                        
             </ion-row>                          
@@ -39,7 +38,8 @@
             <ion-row class="nopaddingleft">                           
                 <ion-item>
                     <ion-avatar item-start>
-                      <img src="{{BASE_URL+dataDiskusi?.dataUser?.photo}}">
+                        <img *ngIf= "dataDiskusi?.dataUser?.photo" src="{{BASE_URL+dataDiskusi?.dataUser?.photo}}">
+                        <img *ngIf= "!dataDiskusi?.dataUser?.photo" src="assets/imgs/logo/usericon.png">
                     </ion-avatar>                   
                     <ion-row *ngIf = "userPemanduId == dataDiskusi?.user_id">                     
                             <h5 class="pemandu"><b>Pemandu</b></h5>                            

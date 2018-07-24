@@ -25,10 +25,13 @@
                         <img *ngIf="dataTransaksi?.transaction_status == 4" class ="notround" src="assets/imgs/logo/check-out.png">                      
                         <img *ngIf="dataTransaksi?.transaction_status == 5" class ="notround" src="assets/imgs/logo/handshake.png">          
                 </ion-avatar>                  
-                <h6 class="keterangantextlisttransaksi">Status</h6>      
+                <h6 class="keterangantextlisttransaksi">Status</h6> 
+                              
+                       
                 <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 0"><b>Belum Konfirmasi Pembayaran</b></h5>
                 <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 1"><b>Menunggu Verifikasi Pembayaran</b></h5>
                 <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 2"><b>Pembayaran telah diverifikasi</b></h5>
+                <a text-wrap *ngIf="dataTransaksi?.transaction_status == 2" class="noteinfotransaksi">Menunggu Proses Pemakaian Homestay</a>                             
                 <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 3"><b>Penggunaan Homestay sedang berjalan</b></h5>                   
                 <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 4"><b>Penggunaan Homestay telah selesai</b></h5>                   
                 <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 5"><b>Transaksi selesai</b></h5>
@@ -89,7 +92,7 @@
                         <ion-avatar  item-start>
                           <img src="{{BASE_URL+dataHomestay?.mainphoto}}" class="avatarhomestay">
                         </ion-avatar>
-                        <h6><b color="primary">{{dataHomestay?.nama_homestay}}</b></h6> 
+                        <h6 class="padding1px" ><b class="padding1px" color="primary">{{dataHomestay?.nama_homestay}}</b></h6> 
                         <a class class="alamat" color="primary"> {{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
             </button>                 
         </ion-card>
@@ -146,10 +149,10 @@
         <button *ngIf="dataTransaksi?.transaction_status == 3" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="konfirmasiTransaksi(dataTransaksi?.transaction_id)" tappable >
             Konfirmasi Transaksi Selesai
         </button>
-        <button *ngIf="dataTransaksi?.transaction_status == 5 && reviewExist != true " ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="addReview(dataTransaksi?.transaction_id)" tappable >
+        <button *ngIf="dataTransaksi?.transaction_status >= 4 && reviewExist != true " ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="addReview(dataTransaksi?.transaction_id)" tappable >
             Tambah Review
         </button>
-        <button ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status,dataTransaksi?.transaction_id)" tappable >
+        <button *ngIf="dataTransaksi?.transaction_status == 0" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status,dataTransaksi?.transaction_id)" tappable >
             Batalkan Transaksi
         </button>   
   </div>

@@ -40,8 +40,7 @@ export class SignupPage {
     this.submitted = true;
     let loading = this.loadCtrl.create({
         content: 'Tunggu sebentar...'
-    });
-    
+    });  
     if (form.valid) {
       loading.present();
       let input = JSON.stringify({ 
@@ -65,6 +64,7 @@ export class SignupPage {
         });
     }
   }
+
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):
@@ -77,6 +77,7 @@ export class SignupPage {
     });
     toast.present();
   }
+
   onLogin(){
     this.app.getRootNav().push('LoginPage') // tab gak keliatan
   }

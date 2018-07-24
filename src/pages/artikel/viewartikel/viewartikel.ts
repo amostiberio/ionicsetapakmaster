@@ -130,8 +130,15 @@ getArtikel(idArtikel){
           this.loading.dismiss();
           let response = data.json();  
           //console.log(response)     
-          if(response.status == 200) {            
-            this.showAlert(response.message);  
+          if(response.status == 200) { 
+            this.app.getRootNav().push('ViewartikelPage',{artikelid:this.idArtikel}).then(()=>{
+              //let index = 4;
+              const index = this.navCtrl.getActive().index-1;
+              this.navCtrl.remove(index); 
+              //remove page sebelumnya,
+              //bisabuat fungsi filter juga
+              this.showAlert(response.message); 
+            });     
           }else{
             this.showAlert(response.message); 
           }

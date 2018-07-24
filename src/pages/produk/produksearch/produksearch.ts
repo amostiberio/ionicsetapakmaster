@@ -45,10 +45,6 @@ export class ProduksearchPage {
   }
 
   ionViewDidLoad() {
-    
-  }
-  
-  ionViewWillEnter() { 
     console.log('ionViewDidLoad ProduksearchPage');
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
@@ -57,7 +53,10 @@ export class ProduksearchPage {
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     }); 
-    
+  }
+  
+  ionViewWillEnter() {     
+   this.isSearchbarOpened = false;
   }
   
   getReadyData(){
@@ -75,15 +74,11 @@ export class ProduksearchPage {
     this.http.post(this.userData.BASE_URL+"api/barang/search",input,this.options).subscribe(data => {
       let response = data.json();       
       if(response.status==200) {          
-        this.dataProduk = response.data;
-        //get all data yang terkait
+        this.dataProduk = response.data;        
         for(var i = 0;i<this.dataProduk.length;i++){           
           this.getDataProduk(this.dataProduk[i].barang_id,i)
-          this.getAverageReview(this.dataProduk[i].barang_id,i)          
-          
-        }
-        
-        
+          this.getAverageReview(this.dataProduk[i].barang_id,i)        
+        }        
       }
       this.showAlert(response.message);
    }, err => { 
@@ -146,8 +141,14 @@ onSearch(event){
   if(this.searchkey != null && this.searchkey != ''){
     this.app.getRootNav().push('ProduksearchPage',{searchkey: this.searchkey}).then(()=>{
       //let index = 1;
-      const index = this.navCtrl.getActive().index-1;      
-      this.navCtrl.remove(index); 
+      const index = this.navCtrl.getActive().index;
+      const indexbefore = this.navCtrl.getActive().index-1;      
+      console.log('index',index)  
+      console.log('indexbefore',indexbefore) 
+      if(indexbefore >= 2){
+        this.navCtrl.remove(indexbefore); 
+      }   
+      //this.navCtrl.remove(index); 
       //remove page sebelumnya,
       //bisabuat fungsi filter juga
     });

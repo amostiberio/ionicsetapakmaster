@@ -28,6 +28,7 @@
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 0"><b>Belum Konfirmasi Pembayaran</b></h5>
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 1"><b>Menunggu Verifikasi Pembayaran</b></h5>
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 2"><b>Pembayaran telah diverifikasi</b></h5>
+          <a text-wrap *ngIf="dataTransaksi?.transaction_status == 2" class="noteinfotransaksi">Menunggu Proses Pengiriman Barang</a>                             
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 3 || dataTransaksi?.transaction_status == 4"><b>Barang sudah dikirim</b></h5>                   
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 5"><b>Barang sampai tujuan</b></h5>                   
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 6"><b>Transaksi selesai</b></h5>
@@ -82,12 +83,9 @@
    <ion-card class ="full-card-homenamecard-padding-left" *ngIf="dataTransaksi?.transaction_status >= 3">
       <ion-grid>           
            <ion-row>
-                <ion-col>
-                    <a class ="smallfont" color="primary">Nomor Resi</a>   
-                </ion-col> 
-             <ion-col>
-                 <span ion-text color="primary"><strong>Nomor Resi</strong></span>
-             </ion-col>                             
+            <ion-col>
+                <a class ="smallfont" color="primary">Nomor Resi</a>   
+            </ion-col>                                
            </ion-row>
            <ion-row class="padding-bottom-col">
                <ion-col>
@@ -103,7 +101,7 @@
             <ion-avatar  item-start>
               <img src="{{BASE_URL+dataProduk?.mainphoto}}" class="avatarhomestay">
             </ion-avatar>
-            <h6><b color="primary">{{dataProduk?.nama_barang}}</b></h6> 
+            <h6 class="padding1px" ><b  color="primary">{{dataProduk?.nama_barang}}</b></h6> 
             <a class *ngFor="let data of dataAlamatCategory" class="alamat" color="primary"> {{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                
         </button>                                                         
     </ion-card>
@@ -159,7 +157,7 @@
   </div>
   <div padding>
         <button *ngIf="dataTransaksi?.transaction_status == 0 || dataTransaksi?.transaction_status == 1" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="caraPembayaran()" tappable >
-                Cara Pembayaran
+            Cara Pembayaran
         </button>
         <button *ngIf="dataTransaksi?.transaction_status == 0 || dataTransaksi?.transaction_status == 1" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="uploadBuktiPembayaran()" tappable >
             Upload Bukti Pembayaran
@@ -167,10 +165,10 @@
         <button *ngIf="dataTransaksi?.transaction_status == 4" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="konfirmasiTransaksi(dataTransaksi?.transaction_id)" tappable >
             Konfirmasi Transaksi Selesai
         </button>
-        <button *ngIf="dataTransaksi?.transaction_status == 6 && reviewExist != true" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="addReview(dataTransaksi?.transaction_id)" tappable >
+        <button *ngIf="dataTransaksi?.transaction_status >= 5 && reviewExist != true" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="addReview(dataTransaksi?.transaction_id)" tappable >
             Tambah Review
         </button>
-        <button ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status, dataTransaksi?.transaction_id)" tappable >
+        <button *ngIf="dataTransaksi?.transaction_status == 0"  ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status, dataTransaksi?.transaction_id)" tappable >
             Batalkan Transaksi
         </button>   
   </div>

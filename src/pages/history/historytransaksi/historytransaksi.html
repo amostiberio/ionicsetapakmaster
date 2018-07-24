@@ -51,15 +51,13 @@
                   </div>
               </ion-segment-button>
           </ion-segment>
-        </ng-template> 
-  
+        </ng-template>
     </ion-toolbar>
-  </ion-header>
-  
+  </ion-header>  
   <ion-content>
         <ion-refresher (ionRefresh)="doRefresh($event)">
                 <ion-refresher-content></ion-refresher-content>
-            </ion-refresher> 
+        </ion-refresher> 
     <div [ngSwitch]="myBooking">
       <ion-list *ngSwitchCase="'homestay'" padding>
         <ion-card  class ="full-card" *ngFor="let data of dataTransaksiHomestay">
@@ -111,7 +109,7 @@
                   <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
                   <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
                   <h6 text-wrap *ngIf="data?.transaction_status == 3 || data?.transaction_status == 4" class="fontketcard">Barang sudah dikirim</h6>                   
-                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Barang sampai tujuan</h6>                   
                   <h6 text-wrap *ngIf="data?.transaction_status == 6" class="fontketcard">Transaksi selesai</h6>                                        
               </button>                                        
                                   
@@ -148,8 +146,8 @@
                   <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
                   <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
                   <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
-                  <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
-                  <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Jasa sedang berjalan</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Jasa telah selesai</h6>                   
                   <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                        
               </button>                                        
                                    

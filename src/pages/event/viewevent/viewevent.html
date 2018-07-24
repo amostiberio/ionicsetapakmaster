@@ -98,7 +98,8 @@
                     <ion-row class="nopaddingleft">             
                         <ion-item>
                             <ion-avatar item-start>
-                              <img src="{{BASE_URL+data?.dataUser?.photo}}">
+                              <img *ngIf="data?.dataUser?.photo" src="{{BASE_URL+data?.dataUser?.photo}}">
+                              <img *ngIf="!data?.dataUser?.photo" src="assets/imgs/logo/usericon.png">
                             </ion-avatar>                                             
                            <ion-row>      
                                   <h5 class="wisatawan"><b>Wisatawan</b></h5>             

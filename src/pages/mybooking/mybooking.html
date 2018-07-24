@@ -119,7 +119,7 @@
                     <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png"> 
                 </ion-avatar>
                 <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
-                <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
+                <h6 class="textbooking" text-wrap><b>Beli di : {{data?.dataPemandu?.nama_company}}</b></h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
@@ -160,8 +160,8 @@
                 <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
-                <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
-                <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
+                <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Jasa sedang berjalan</h6>                   
+                <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Jasa telah selesai</h6>                   
                 <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                        
             </button>                                        
                                  

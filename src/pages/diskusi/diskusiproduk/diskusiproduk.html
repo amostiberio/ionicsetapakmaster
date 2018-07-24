@@ -18,13 +18,17 @@
   </ion-header>
   
 <ion-content >  
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content></ion-refresher-content>
+        </ion-refresher> 
     <div padding>
         <ion-card class ="full-card" *ngFor= "let diskusi of dataDiskusi ; let i=index"  (click)="navCommentProduk(diskusi)" >           
             <ion-grid >                
                 <ion-row>             
                     <ion-item>
                         <ion-avatar item-start >
-                          <img src="{{BASE_URL+diskusi?.dataUser?.photo}}">
+                          <img *ngIf= "diskusi?.dataUser?.photo" src="{{BASE_URL+diskusi?.dataUser?.photo}}">
+                          <img *ngIf= "!diskusi?.dataUser?.photo" src="assets/imgs/logo/usericon.png">
                         </ion-avatar>
                         <ion-row *ngIf = "userPemanduId == diskusi?.user_id">
                             <ion-col class="paddingbottomzero" col-3>   

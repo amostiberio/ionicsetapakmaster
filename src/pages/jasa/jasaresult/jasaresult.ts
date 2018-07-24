@@ -39,9 +39,8 @@ export class JasaresultPage {
       this.namaJenis = this.navParams.data.namajenis;
     }    
   }
-
-  ionViewWillEnter() { 
-    console.log('ionViewDidLoad ProduksearchPage');
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad JasaresultPage');
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
@@ -49,7 +48,9 @@ export class JasaresultPage {
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     }); 
-    
+  }
+  ionViewWillEnter() { 
+
   }
   
   getReadyData(){
@@ -109,9 +110,7 @@ export class JasaresultPage {
     });
     toast.present();
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad JasaresultPage');
-  }
+ 
   jasadetail(idJasa) {   
     this.app.getRootNav().push('JasadetailPage',idJasa);
   }

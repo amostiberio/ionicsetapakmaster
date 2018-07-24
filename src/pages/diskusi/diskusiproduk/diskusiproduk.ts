@@ -171,6 +171,24 @@ presentPopover(myEvent,diskusi_id) {
     ev: myEvent
   });
 }
+
+doRefresh(refresher){
+  setTimeout(() => {
+    refresher.complete();
+      this.getDataDiskusi(this.idProduk);          
+      this.userData.hasLoggedIn().then((value)=>{
+        this.userLoggedIn = value;
+        if(this.userLoggedIn == true)  {
+          this.userData.getId().then((value) => {
+            this.currentUserId = value;
+          });
+          this.userData.getToken().then((value) => {
+            this.token = value;
+          });
+        }   
+      });
+  }, 1000);
+}
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

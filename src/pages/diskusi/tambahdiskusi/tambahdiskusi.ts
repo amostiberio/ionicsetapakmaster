@@ -111,18 +111,17 @@ export class TambahdiskusiPage {
     let loading = this.loadCtrl.create({
         content: 'Tunggu sebentar...'
     });
+    
     if (form.valid) {
-    	
+          	
       let input = JSON.stringify({
         user_id : this.currentUserId,
         produk_id : this.idproduk,
         tipe_produk : this.tipeproduk,
         isi_diskusi: this.isiDiskusi
-      });
-      
+      });      
       console.log(input);
       this.http.post(this.userData.BASE_URL+"api/diskusi/create",input,this.options).subscribe(data => {
-        
         let response = data.json();       
         if(response.status == 200) {
             this.navCtrl.pop();

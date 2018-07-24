@@ -47,9 +47,8 @@ export class HomestayresultPage {
     //console.log('thisnavparamdata',this.navParams);
    
   }
-  
-  ionViewWillEnter() { 
-    console.log('ionViewDidLoad ProduksearchPage');
+  ionViewDidLoad(){
+    console.log('ionViewDidLoad HomestayresultPage');
     this.loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
       });
@@ -57,6 +56,8 @@ export class HomestayresultPage {
       this.getReadyData().then((x) => {
         if (x) this.loading.dismiss();
     }); 
+  }
+  ionViewWillEnter() {     
     
   }
   
@@ -105,9 +106,6 @@ export class HomestayresultPage {
    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomestayresultPage');
-  }
   
   homestaydetail(data) {   
     this.app.getRootNav().push('HomestaydetailPage',data);

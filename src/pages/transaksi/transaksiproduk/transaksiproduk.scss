@@ -55,12 +55,17 @@ page-transaksiproduk {
     .smallfont {      
         font-size: 12px;
     }
+    .padding1px{
+        margin-top:  !important;
+    }
     .logosegment{        
         width: 15%;
       }
       .avatarhomestay {
           border-radius:15% !important;
+          
         }
+        
         .buttontransaksi{
             margin :7.5px 0 !important;
         }
@@ -75,5 +80,12 @@ page-transaksiproduk {
         .alamat{
             font-size: 13px;
             color:grey !important;
+        }
+        .noteinfotransaksi {        
+            display: block;
+            line-height: 1em;
+            font-size: 13px;
+            margin: 7px 0;
+            color: #9c9c9a;
         }
     }
