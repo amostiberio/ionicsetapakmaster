@@ -123,8 +123,8 @@ export class MybookingPage {
             this.getDataHomestay(this.dataTransaksiHomestay[i].homestay_id,i)            
          }
          //console.log(this.dataTransaksiHomestay)
-      }else if(response.status==204) {
-        console.log('data kosong');
+      }else if(response.status==204) {        
+          this.dataTransaksiHomestay= null;        
      }
    }, err => { 
       this.showError(err);
@@ -159,7 +159,7 @@ export class MybookingPage {
          }
          console.log(this.dataTransaksiProduk)
       }else if(response.status==204) {
-        console.log('data kosong');
+        this.dataTransaksiProduk= null;
      }
    }, err => { 
       this.showError(err);
@@ -193,7 +193,7 @@ export class MybookingPage {
          }
          console.log(this.dataTransaksiJasa)
       }else if(response.status==204) {
-        console.log('data kosong');
+        this.dataTransaksiJasa= null;
      }
    }, err => { 
       this.showError(err);

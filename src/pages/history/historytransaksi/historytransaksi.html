@@ -76,7 +76,7 @@
                   <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
                </button>                  
           </ion-card>
-          <ion-card class="full-card"  *ngIf="dataTransaksiHomestay.length == 0"> 
+          <ion-card class="full-card"  *ngIf="!dataTransaksiHomestay"> 
               <ion-row>
                   <h5 padding-left padding-top class="textlisttransaksi"><b>Belum ada transaksi selesai</b></h5>         
               </ion-row>
@@ -114,7 +114,7 @@
               </button>                                        
                                   
           </ion-card>
-          <ion-card class="full-card"  *ngIf="dataTransaksiProduk == 0"> 
+          <ion-card class="full-card"  *ngIf="!dataTransaksiProduk"> 
               <ion-row>
                   <h5 padding-left padding-top class="textlisttransaksi"><b>Belum ada transaksi selesai</b></h5>            
               </ion-row>
@@ -152,7 +152,7 @@
               </button>                                        
                                    
           </ion-card>    
-          <ion-card class="full-card"  *ngIf="dataTransaksiJasa == 0"> 
+          <ion-card class="full-card"  *ngIf="!dataTransaksiJasa"> 
               <ion-row>
                   <h5 padding-left padding-top class="textlisttransaksi"><b>Belum ada transaksi selesai</b></h5>            
               </ion-row>

@@ -74,8 +74,8 @@
         </ion-refresher> 
         
   <div [ngSwitch]="myBooking">
-    <ion-list *ngSwitchCase="'homestay'" padding>
-      <ion-card  class ="full-card" *ngFor="let data of dataTransaksiHomestay">
+    <ion-list *ngSwitchCase="'homestay'" padding >
+      <ion-card  class ="full-card" *ngFor="let data of dataTransaksiHomestay" >
           <button ion-item (click)="transaksiHomestay(data?.transaction_id)" >                     
                 <ion-avatar item-start>
                     <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
@@ -91,7 +91,7 @@
                 <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
              </button>                  
         </ion-card>
-        <ion-card class="full-card"  *ngIf="dataTransaksiHomestay.length == 0"> 
+        <ion-card class="full-card"  *ngIf="!dataTransaksiHomestay"> 
             <ion-row>
                 <h5 padding-left padding-top class="textlisttransaksi"><b>Tidak ada transaksi aktif</b></h5>         
             </ion-row>
@@ -128,7 +128,7 @@
                 <h6 text-wrap *ngIf="data?.transaction_status == 6" class="fontketcard">Transaksi selesai</h6>                                        
             </button>                                                                     
         </ion-card>
-        <ion-card class="full-card"  *ngIf="dataTransaksiProduk == 0"> 
+        <ion-card class="full-card"  *ngIf="!dataTransaksiProduk"> 
             <ion-row>
                 <h5 padding-left padding-top class="textlisttransaksi"><b>Tidak ada transaksi aktif</b></h5>            
             </ion-row>
@@ -166,7 +166,7 @@
             </button>                                        
                                  
         </ion-card>    
-        <ion-card class="full-card"  *ngIf="dataTransaksiJasa == 0"> 
+        <ion-card class="full-card"  *ngIf="!dataTransaksiJasa"> 
             <ion-row>
                 <h5 padding-left padding-top class="textlisttransaksi"><b>Tidak ada transaksi aktif</b></h5>            
             </ion-row>

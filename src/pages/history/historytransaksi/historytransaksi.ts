@@ -125,7 +125,7 @@ dataTransaksiJasa: any = [];
          }
          //console.log(this.dataTransaksiHomestay)
       }else if(response.status==204) {
-        console.log('data kosong');
+        this.dataTransaksiHomestay= null;
      }
    }, err => { 
       this.showError(err);
@@ -160,7 +160,7 @@ dataTransaksiJasa: any = [];
          }
          console.log(this.dataTransaksiProduk)
       }else if(response.status==204) {
-        console.log('data kosong');
+        this.dataTransaksiProduk= null;
      }
    }, err => { 
       this.showError(err);
@@ -194,7 +194,7 @@ dataTransaksiJasa: any = [];
          }
          console.log(this.dataTransaksiJasa)
       }else if(response.status==204) {
-        console.log('data kosong');
+        this.dataTransaksiJasa= null;
      }
    }, err => { 
       this.showError(err);
