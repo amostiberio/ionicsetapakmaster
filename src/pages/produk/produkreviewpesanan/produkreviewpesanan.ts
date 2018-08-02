@@ -35,6 +35,8 @@ export class ProdukreviewpesananPage {
   totalHargaAkhir:any;
   totalHargaProduk:any;
   tarifKode:any; 
+  kodeUnik:any;
+
   constructor(public navCtrl: NavController,
     public alertService: AlertService, 
     public navParams: NavParams,
@@ -54,6 +56,7 @@ export class ProdukreviewpesananPage {
         this.notes="";
       }
       this.tarifKode  = this.navParams.data.tarifkode;
+      
   } 
 
   ionViewDidLoad() {
@@ -82,7 +85,9 @@ export class ProdukreviewpesananPage {
           this.userData.getToken().then((token) => {
             this.token = token;
           });
-          this.hitungTotalPrice();
+          this.kodeUnik=this.getRandomIntInclusive(100,999);
+          this.hitungTotalPrice();          
+          //console.log('random number',this.randNumber)
           //this.getDataProduk(this.datahomestay.homestay_id);    
           resolve(true);
     });
@@ -109,7 +114,7 @@ export class ProdukreviewpesananPage {
       this.hargaOngkir = this.dataTarif.reg
     }
     this.totalHargaOngkir = this.hargaOngkir * this.totalberat
-    this.totalHargaAkhir = this.totalHargaProduk + this.totalHargaOngkir
+    this.totalHargaAkhir = this.totalHargaProduk + this.totalHargaOngkir + this.kodeUnik
     // this.totalHargaAkhir =  this.totalHargaProduk +  this.totalHargaOngkir
     //console.log('totalhargaongkir',this.totalHargaOngkir)
   }
@@ -152,6 +157,11 @@ export class ProdukreviewpesananPage {
   coba(){
     this.navCtrl.popToRoot() 
   }
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  } 
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

@@ -32,6 +32,11 @@
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 3 || dataTransaksi?.transaction_status == 4"><b>Barang sudah dikirim</b></h5>                   
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 5"><b>Barang sampai tujuan</b></h5>                   
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 6"><b>Transaksi selesai</b></h5>
+          <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 7"><b>Transaksi dibatalkan oleh anda</b></h5>
+          <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 8"><b>Transaksi dibatalkan oleh pemandu</b></h5>
+          <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 9"><b>Transaksi dibatalkan oleh admin</b></h5>
+          <a text-wrap *ngIf="dataTransaksi?.transaction_status == 9" class="noteinfotransaksi">Transaksi melewati batas waktu pembayaran</a>                             
+
         </button>         
     </ion-card>
     <ion-card class ="full-card-homenamecard-padding-left">

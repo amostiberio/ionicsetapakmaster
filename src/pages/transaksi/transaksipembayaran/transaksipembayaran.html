@@ -20,22 +20,40 @@
    <h6 text-justify text-wrap>
           <a class="text">Transfer pembayaran dapat dilakukan ke nomor rekening: </a>    
   </h6>
-  <ion-row>
-    <ion-col class="flex-col">
-      <img class="mandirilogo" src="assets/imgs/logo/Mandiri.png">
-    </ion-col>
-    <ion-col class="flex-col">
-        <h2 text-wrap>
-            {{nomorRekeningMandiri}}                  
-        </h2>
-      </ion-col>
-  </ion-row>
-  <ion-row>
-      <h6 text-justify text-wrap>
-              <a class="text">a/n Setapak Company Cabang Kab. Bogor </a>    
-      </h6>
-  </ion-row>
-
+<ion-grid *ngFor="let data of dataBank">
+    <ion-row>
+        <ion-col class="flex-col">
+          <img class="mandirilogo" src="{{BASE_ADMIN_URL+data?.photo}}">
+        </ion-col>
+        <ion-col class="flex-col">
+            <h2 text-wrap>
+                {{data?.no_rekening}}                  
+            </h2>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <h6 text-justify text-wrap>
+                  <a class="text">a/n {{data?.nama}}</a>    
+          </h6>
+      </ion-row>
+</ion-grid>
+  
+<!-- 
+    <ion-row>
+        <ion-col class="flex-col">
+          <img class="mandirilogo" src="assets/imgs/logo/Mandiri.png">
+        </ion-col>
+        <ion-col class="flex-col">
+            <h2 text-wrap>
+                {{nomorRekeningMandiri}}                  
+            </h2>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <h6 text-justify text-wrap>
+                  <a class="text">a/n Setapak Company Cabang Kab. Bogor </a>    
+          </h6>
+      </ion-row>
   <ion-row>
       <ion-col class="flex-col">
         <img class="bnilogo" src="assets/imgs/logo/BNI.png">
@@ -66,7 +84,7 @@
           <h6 text-justify text-wrap>
                   <a class="text">a/n Setapak Company Cabang Kab. Bogor </a>    
           </h6>
-      </ion-row>
+      </ion-row> -->
 </ion-card>
 
 <ion-card class ="full-card-info" padding>         

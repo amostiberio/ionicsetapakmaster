@@ -29,6 +29,7 @@ export class JasareviewpesananPage {
   diffdays:any;
   totalharga:any;
   notes:any;
+  kodeUnik:any;
 
   constructor(public navCtrl: NavController,
     public alertService: AlertService, 
@@ -73,7 +74,8 @@ export class JasareviewpesananPage {
           this.userData.getToken().then((token) => {
             this.token = token;
           });
-          this.totalharga = this.datajasa.harga_jasa         
+          this.kodeUnik = this.getRandomIntInclusive(100,999);
+          this.totalharga = this.datajasa.harga_jasa + this.kodeUnik      
           resolve(true);
     });
   }
@@ -120,7 +122,11 @@ export class JasareviewpesananPage {
     });  
     
   }
-
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  } 
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

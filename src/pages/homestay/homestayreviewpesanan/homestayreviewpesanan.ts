@@ -31,6 +31,7 @@ export class HomestayreviewpesananPage {
   diffdays:any;
   totalharga:any;
   notes:any = "";
+  kodeUnik:any;
   constructor(public navCtrl: NavController,
     public alertService: AlertService, 
     public navParams: NavParams,
@@ -74,8 +75,9 @@ export class HomestayreviewpesananPage {
           this.userData.getToken().then((token) => {
             this.token = token;
           });
+          this.kodeUnik=this.getRandomIntInclusive(100,999);
           this.diffdays = moment.duration(moment(this.checkout, "YYYY-MM-DD").diff(moment(this.checkin, "YYYY-MM-DD"))).asDays()
-          this.totalharga = this.datahomestay.harga_perhari * this.diffdays         
+          this.totalharga = this.datahomestay.harga_perhari * this.diffdays + this.kodeUnik         
           resolve(true);
     });
   }
@@ -134,6 +136,11 @@ export class HomestayreviewpesananPage {
     });  
     
   }
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  } 
   showError(err: any){  
     err.status==0? 
     this.showAlert("Tidak ada koneksi. Cek kembali sambungan Internet perangkat Anda"):

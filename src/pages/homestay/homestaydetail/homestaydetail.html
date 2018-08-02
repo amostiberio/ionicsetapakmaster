@@ -124,7 +124,8 @@
                       <img *ngIf="!dataPemandu?.photo" src="assets/imgs/logo/usericon.png">
                     </ion-avatar>
                     <h5 (click)='navProfileCompany()'><b>{{dataPemandu?.nama_company}}</b></h5>
-                    <h6>{{dataPemandu?.deskripsi}}</h6>                   
+                    <h6>{{dataPemandu?.deskripsi}}</h6>
+                    <h6>{{dataPemandu?.dataUser?.no_hp}}</h6>                                       
                   </ion-item>                                        
             </ion-row>
           </ion-grid>                  

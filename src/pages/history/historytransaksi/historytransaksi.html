@@ -73,7 +73,8 @@
                   <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
                   <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
                   <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
-                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
+                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>  
+                  <h6 text-wrap *ngIf="data?.transaction_status >= 7" class="fontketcard">Transaksi dibatalkan</h6>                                                                                   
                </button>                  
           </ion-card>
           <ion-card class="full-card"  *ngIf="!dataTransaksiHomestay"> 
@@ -110,7 +111,8 @@
                   <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
                   <h6 text-wrap *ngIf="data?.transaction_status == 3 || data?.transaction_status == 4" class="fontketcard">Barang sudah dikirim</h6>                   
                   <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Barang sampai tujuan</h6>                   
-                  <h6 text-wrap *ngIf="data?.transaction_status == 6" class="fontketcard">Transaksi selesai</h6>                                        
+                  <h6 text-wrap *ngIf="data?.transaction_status == 6" class="fontketcard">Transaksi selesai</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status >= 7" class="fontketcard">Transaksi dibatalkan</h6>                                         
               </button>                                        
                                   
           </ion-card>
@@ -148,7 +150,8 @@
                   <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
                   <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Jasa sedang berjalan</h6>                   
                   <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Jasa telah selesai</h6>                   
-                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                        
+                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>    
+                  <h6 text-wrap *ngIf="data?.transaction_status >= 7" class="fontketcard">Transaksi dibatalkan</h6>                                     
               </button>                                        
                                    
           </ion-card>    
