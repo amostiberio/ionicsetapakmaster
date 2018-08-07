@@ -23,6 +23,7 @@
                 <img *ngIf="dataTransaksi?.transaction_status == 3 || dataTransaksi?.transaction_status == 4" class ="notround" src="assets/imgs/logo/shippedtruck.png">
                 <img *ngIf="dataTransaksi?.transaction_status == 5" class ="notround" src="assets/imgs/logo/deliverydone.png">                
                 <img *ngIf="dataTransaksi?.transaction_status == 6" class ="notround" src="assets/imgs/logo/handshake.png">          
+                <img *ngIf="dataTransaksi?.transaction_status >= 7" class ="notround" src="assets/imgs/logo/transaksicancel.png">
             </ion-avatar>              
           <h6 class="keterangantextlisttransaksi">Status</h6>      
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 0"><b>Belum Konfirmasi Pembayaran</b></h5>

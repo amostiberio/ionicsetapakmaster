@@ -23,7 +23,9 @@
                         <img *ngIf="dataTransaksi?.transaction_status == 2" class ="notround" src="assets/imgs/logo/paymentdone.png">
                         <img *ngIf="dataTransaksi?.transaction_status == 3 " class ="notround" src="assets/imgs/logo/check-in.png">  
                         <img *ngIf="dataTransaksi?.transaction_status == 4" class ="notround" src="assets/imgs/logo/check-out.png">                      
-                        <img *ngIf="dataTransaksi?.transaction_status == 5" class ="notround" src="assets/imgs/logo/handshake.png">          
+                        <img *ngIf="dataTransaksi?.transaction_status == 5" class ="notround" src="assets/imgs/logo/handshake.png">   
+                        <img *ngIf="dataTransaksi?.transaction_status >= 7" class ="notround" src="assets/imgs/logo/transaksicancel.png">          
+       
                 </ion-avatar>                  
                 <h6 class="keterangantextlisttransaksi">Status</h6> 
                               
