@@ -118,12 +118,24 @@ export class TransaksiprodukPage {
          this.dataPemandu = response.dataPemandu
          this.idAlamatCategory = this.dataPemandu.alamatcategory_id; 
          this.getAlamatCategory(this.idAlamatCategory);
+         this.getDataUserPemandu(this.dataPemandu.user_id);
       }
    }, err => { 
       this.showError(err);
    });
   }
-
+  
+  getDataUserPemandu(user_id){    
+    this.http.get(this.userData.BASE_URL+"api/user/profile/"+user_id,this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status==200) {       
+         this.dataPemandu.dataUser = response.data 
+         console.log('this data pemandu',this.dataPemandu)        
+      }
+   }, err => { 
+      this.showError(err);
+   });
+  }
   checkReviewExist(id,transaction_id){ 
     let param = JSON.stringify({
        produk_id: id,

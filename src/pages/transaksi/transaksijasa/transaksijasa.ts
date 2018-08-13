@@ -120,6 +120,7 @@ export class TransaksijasaPage {
          this.dataJasa = response.dataJasa
          this.dataAlamatCategory = response.dataAlamatCategory        
          this.dataPemandu = response.dataPemandu
+         this.getDataUserPemandu(this.dataPemandu.user_id);
          console.log(response)        
       }
    }, err => { 
@@ -127,6 +128,18 @@ export class TransaksijasaPage {
    });
   }
 
+  getDataUserPemandu(user_id){    
+    this.http.get(this.userData.BASE_URL+"api/user/profile/"+user_id,this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status==200) {       
+         this.dataPemandu.dataUser = response.data 
+         console.log('this data pemandu',this.dataPemandu)        
+      }
+   }, err => { 
+      this.showError(err);
+   });
+  }
+  
   uploadBuktiPembayaran(){    
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Pilihan',

@@ -68,6 +68,22 @@
                             <ion-col>
                               <a class="textfont">{{dataTransaksi?.noteswisatawan}}</a>
                             </ion-col>                           
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <a class ="smallfont" color="primary">Kontak Pemandu</a>
+                            </ion-col>                            
+                        </ion-row> 
+                        <ion-row>
+                            <ion-col>
+                            <a class ="textfont" color="primary">{{dataPemandu?.dataUser?.no_hp}}</a>
+                            </ion-col>                               
+                            <ion-col>                                    
+                            <a href="https://wa.me/62{{dataPemandu?.dataUser?.no_hp}}"  color="green" clear>                                    
+                                <ion-icon padding-right float-right name="logo-whatsapp" color="green">                                        
+                                </ion-icon>
+                            </a>                                            
+                            </ion-col>                           
                         </ion-row>                         
                   </ion-grid>                  
             </ion-card>
@@ -80,7 +96,7 @@
                           <img src="{{BASE_URL+dataJasa?.mainphoto}}" class="avatarhomestay">
                         </ion-avatar>
                         <h6 class="padding1px" ><b  color="primary">{{dataJasa?.nama_jasa}}</b></h6> 
-                        <a class class="smallfont" color="primary"> {{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
+                        <a class class="alamat" color="primary"> {{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
             </button>                 
         </ion-card>
 </div>
@@ -89,7 +105,7 @@
           <ion-grid>
               <ion-row>
                     <ion-col>
-                        <a class ="smallfont" color="primary">Notes</a>
+                        <a class ="smallfont" color="primary">Detail Biaya</a>
                     </ion-col>       
               </ion-row>           
               <ion-row>                   

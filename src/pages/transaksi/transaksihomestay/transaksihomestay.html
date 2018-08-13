@@ -78,7 +78,7 @@
                             </ion-col>
                             <ion-col>                      
                             </ion-col>
-                          </ion-row>
+                        </ion-row>
                              <ion-row>
                                 <ion-col>
                                   <a class ="smallfont" color="primary">Notes</a>
@@ -87,6 +87,22 @@
                             <ion-row>
                                 <ion-col>
                                 <a class ="textfont" color="primary">{{dataTransaksi?.noteswisatawan}}</a>
+                                </ion-col>                           
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <a class ="smallfont" color="primary">Kontak Pemandu</a>
+                                </ion-col>                            
+                            </ion-row> 
+                            <ion-row>
+                                <ion-col>
+                                <a class ="textfont" color="primary">{{dataPemandu?.dataUser?.no_hp}}</a>
+                                </ion-col>                               
+                                <ion-col>                                    
+                                <a href="https://wa.me/62{{dataPemandu?.dataUser?.no_hp}}"  color="green" clear>                                    
+                                    <ion-icon padding-right float-right name="logo-whatsapp" color="green">                                        
+                                    </ion-icon>
+                                </a>                                            
                                 </ion-col>                           
                             </ion-row>
                   </ion-grid>                  
