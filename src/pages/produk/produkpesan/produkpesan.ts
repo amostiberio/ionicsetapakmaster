@@ -211,8 +211,10 @@ export class ProdukpesanPage {
   // plus adult when click plus button
   plusJumlah() {
     this.totalHargaOngkir = null;
-    this.jumlahBarang++;
-    this.hitungOngkirTotal();
+    if(this.jumlahBarang < this.databarang.kuantitas){
+      this.jumlahBarang++;
+      this.hitungOngkirTotal();
+    }  
   }
 
   hitungOngkirTotal(){

@@ -144,7 +144,15 @@
                   <ion-col align-self-end>
                       <a float-right class ="textfont">{{dataTransaksi?.jumlah_hari}} night(s)</a>
                   </ion-col>                
-              </ion-row>                           
+              </ion-row>
+              <ion-row>
+                    <ion-col>
+                      <a class ="textfont">Kode Unik</a>
+                    </ion-col>
+                    <ion-col align-self-end>
+                        <a float-right class ="textfont">{{dataTransaksi?.total_harga - (dataHomestay?.harga_perhari*dataTransaksi?.jumlah_hari )| currency:'IDR ':true}}</a>
+                    </ion-col>                
+                </ion-row>                             
             </ion-grid>                  
       </ion-card>
   </div>

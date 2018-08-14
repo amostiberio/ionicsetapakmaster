@@ -33,6 +33,7 @@ page-jasadetail {
         font-size: 18px;
         margin: 7px 0;
     }
+    
     .twolinenamecard {        
         display: block;
         line-height: .7em;
@@ -40,7 +41,13 @@ page-jasadetail {
         margin: 7px 0;
         color: #9c9c9a;
     }
-
+    .firstlinenamecardprice{
+      display: block;
+      line-height: .7em;
+      font-size: 15px;
+      margin: 7px 0;
+      color: #488aff!important;
+    }
     .swiper-container-horizontal>.swiper-pagination .swiper-pagination-bullet {
         margin: 0;
       }

@@ -129,6 +129,7 @@ export class ProdukreviewpesananPage {
       jumlah_barang:this.jumlahBarang,
       alamatpengiriman : this.alamatpengiriman,
       paket_pengiriman: this.tarifKode,
+      kodeunik:this.kodeUnik,
       noteswisatawan :this.notes,
       token: this.token
     });

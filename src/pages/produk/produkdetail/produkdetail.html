@@ -32,6 +32,9 @@
                 <ion-row>              
                       <a *ngFor="let data of dataAlamatCategory" class="twolinenamecard">{{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                             
                 </ion-row>
+                <ion-row>                                        
+                    <h5 class="firstlinenamecardprice"><b>{{newDataProduk?.harga | currency:'IDR ':true}}</b></h5>                            
+              </ion-row>
               </ion-grid>
       </ion-card>
   </div>

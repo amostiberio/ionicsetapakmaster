@@ -30,7 +30,9 @@
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 1"><b>Menunggu Verifikasi Pembayaran</b></h5>
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 2"><b>Pembayaran telah diverifikasi</b></h5>
           <a text-wrap *ngIf="dataTransaksi?.transaction_status == 2" class="noteinfotransaksi">Menunggu Proses Pengiriman Barang</a>                             
-          <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 3 || dataTransaksi?.transaction_status == 4"><b>Barang sudah dikirim</b></h5>                   
+          <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 3 || dataTransaksi?.transaction_status == 4"><b>Barang sudah dikirim</b></h5>
+          <a text-wrap *ngIf="dataTransaksi?.transaction_status == 3" class="noteinfotransaksi">Resi sudah ditambah</a>                                                
+          <a text-wrap *ngIf=" dataTransaksi?.transaction_status == 4" class="noteinfotransaksi">Resi valid</a>                                                
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 5"><b>Barang sampai tujuan</b></h5>                   
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 6"><b>Transaksi selesai</b></h5>
           <h5 class="textlisttransaksi" text-wrap *ngIf="dataTransaksi?.transaction_status == 7"><b>Transaksi dibatalkan oleh anda</b></h5>
@@ -149,7 +151,7 @@
                     <a class ="textfont">Total Harga Produk</a>
                   </ion-col>
                   <ion-col >
-                      <a float-right item-end class ="textfont">{{dataTransaksi?.total_harga | currency:'IDR ':true}}</a>
+                      <a float-right item-end class ="textfont">{{dataProduk?.harga | currency:'IDR ':true}}</a>
                   </ion-col>                
               </ion-row>
               <ion-row>
@@ -159,7 +161,15 @@
                   <ion-col align-self-end>
                       <a float-right item-end class ="textfont">{{dataTransaksi?.ongkos_kirim | currency:'IDR ':true}}</a>
                   </ion-col>                
-              </ion-row>                           
+              </ion-row> 
+              <ion-row>
+                    <ion-col padding-left>
+                      <a class ="textfont">Kode Unik</a>
+                    </ion-col>
+                    <ion-col align-self-end>
+                        <a float-right class ="textfont">{{dataTransaksi?.total_harga - (dataTransaksi?.ongkos_kirim + (dataProduk?.harga * dataTransaksi?.jumlah_barang ))| currency:'IDR ':true}}</a>
+                    </ion-col>                
+                </ion-row>                          
             </ion-grid>                  
       </ion-card>
   </div>

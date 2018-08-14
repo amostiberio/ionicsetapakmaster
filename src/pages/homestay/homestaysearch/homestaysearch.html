@@ -58,18 +58,18 @@
         </ion-select>
       </ion-item>
       <ion-item>
-          <ion-label stacked color="primary">Rentang Harga</ion-label>
+          <ion-label stacked color="primary">Rentang Harga per malam</ion-label>
           <ion-range [(ngModel)]="knobValues" name="knobValues" dualKnobs="true" [(ngModel)]="knobValues" min="0" max="1500000" step="100000" pin="true" snaps="true" #valuesknob="ngModel"></ion-range>
         {{knobValues.upper}}
       </ion-item>
       <ion-item>
           <ion-row>
             <ion-col>
-                <h6 class="leftflex"  leftflex stacked color="primary"> {{knobValues.lower}}</h6>
+                <h6 class="leftflex"  leftflex stacked color="primary"> {{knobValues.lower | currency:'IDR ':true}}</h6>
                
             </ion-col>
             <ion-col >
-                <h6 class="rightflex" stacked color="primary"> {{knobValues.upper}}</h6>               
+                <h6 class="rightflex" stacked color="primary"> {{knobValues.upper | currency:'IDR ':true}}</h6>               
             </ion-col>
           </ion-row>          
       </ion-item>
